@@ -58,16 +58,14 @@ function Search() {
                                             </Link>
                                         </p>
                                         <ul className="searchpddt_ul">
-                                            <li className="searchpddt_li">
-                                                <span className="searchpddt_lip1">
-                                                    KRW<span>{product.price}</span>
-                                                </span>
-                                            </li>
-                                            <li className="searchpddt_li">
-                                                <span className="searchpddt_lip2">
-                                                    KRW<span>{product.discountprice}</span>
-                                                </span>
-                                            </li>
+                                            {product.discountprice > 0 ? (
+                                                <>
+                                                    <li><span className="searchpddt_lip1"> KRW {product.price}</span></li>
+                                                    <li><span className="searchpddt_lip2">KRW {product.discountprice}</span></li>
+                                                </>
+                                            ) : (
+                                                <li><span className="searchpddt_lip2"> KRW {product.price}</span></li>
+                                            )}
                                         </ul>
                                     </div>
                                 </li>

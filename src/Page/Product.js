@@ -91,7 +91,6 @@ function Product() {
     const handleColorChange = (event) => {
         setSelectedColor(event.target.value);
     };
-    
 
     const handleAddToCart = async () => {
         if (!selectedSize || !selectedColor) {
@@ -150,9 +149,22 @@ function Product() {
                                     </div>
                                 </div>
                                 <div className="product_price">
-                                    <div style={{ marginBottom: '15px' }}><strike><span className='sstyle2'> KRW {product.price}</span></strike></div>
-                                    <div><strong><span>KRW {product.discountprice}</span></strong></div>
+                                    {product.discountprice > 0 ? (
+                                        <>
+                                            <div style={{ marginBottom: '15px' }}>
+                                                <strike><span className='sstyle2'> KRW {product.price}</span></strike>
+                                            </div>
+                                            <div>
+                                                <strong><span>KRW {product.discountprice}</span></strong>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div>
+                                            <strong><span> KRW {product.price}</span></strong>
+                                        </div>
+                                    )}
                                 </div>
+
                                 <div className="choice_option">
                                     <table className="infoarea_table">
                                         <tbody>
@@ -160,7 +172,7 @@ function Product() {
                                                 <th>사이즈</th>
                                                 <td className="size_select">
                                                     <select className="size_select_option" name="" id="" value={selectedSize} onChange={handleSizeChange}>
-                                                        <option value="">--[필수]-사이즈를 선택해주세요--</option>
+                                                        <option value="">--[필수]-옵션을 선택해주세요--</option>
                                                         {renderSizeOptions()}
                                                     </select>
                                                 </td>
@@ -169,17 +181,9 @@ function Product() {
                                                 <th>색상</th>
                                                 <td className="size_select">
                                                     <select className="size_select_option" name="" id="" value={selectedColor} onChange={handleColorChange}>
-                                                        <option value="">--[필수]-색상을 선택해주세요--</option>
+                                                        <option value="">--[필수]-옵션을 선택해주세요--</option>
                                                         {renderColorOptions()}
                                                     </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>수량</th>
-                                                <td className="size_select">
-                                                    <button className='eachopbtn'>+</button>
-                                                    <input className="each_select_option" name="" id="" value="1" onChange="" />
-                                                    <button className='eachopbtn'>-</button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -187,7 +191,11 @@ function Product() {
                                 </div>
                                 <div className="totalprice">
                                     <strong>총 상품 금액 :</strong>
-                                    <span className="total"><strong>KRW {product.discountprice}</strong></span>
+                                    <span className="total">
+                                        <strong>
+                                            KRW {product.discountprice > 0 ? product.discountprice : product.price}
+                                        </strong>
+                                    </span>
                                 </div>
                                 <div className="product_action">
                                     <div className="btn_list">

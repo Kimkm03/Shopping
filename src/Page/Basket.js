@@ -47,7 +47,7 @@ function Basket() {
             if (response.data !== -1) {
                 setCartId(response.data);
             } else {
-                alert('카트 ID를 찾을 수 없습니다.');
+                console.log('카트가 비어 있습니다.');
             }
         } catch (error) {
             console.error('카트 ID를 가져오는 중 오류 발생:', error);

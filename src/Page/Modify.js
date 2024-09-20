@@ -237,7 +237,7 @@ function Modify() {
             <Header />
             <section>
                 <div className="modify_detail">
-                    <h2 className='Modifyh2'>회원 정보 수정</h2>
+                    <h2>회원 정보 수정</h2>
                     <p className='member_access'>회원인증</p>
                     <br />
                     <table className="join_section_table1">

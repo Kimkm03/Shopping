@@ -63,8 +63,14 @@ function PANTS() {
                                             <span style={{ fontSize: '14px', color: '#5a5a5a' }}>{product.pname}</span>
                                         </p>
                                         <ul className="product_section_div_detail_ul">
-                                            <li><span className="sstyle2"> KRW {product.price}</span></li>
-                                            <li><span className="sstyle3">KRW {product.discountprice}</span></li>
+                                            {product.discountprice > 0 ? (
+                                                <>
+                                                    <li><span className="sstyle2"> KRW {product.price}</span></li>
+                                                    <li><span className="sstyle3">KRW {product.discountprice}</span></li>
+                                                </>
+                                            ) : (
+                                                <li><span className="sstyle3"> KRW {product.price}</span></li>
+                                            )}
                                         </ul>
                                     </div>
                                 </div>

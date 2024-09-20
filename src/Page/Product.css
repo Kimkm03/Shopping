@@ -145,27 +145,6 @@
     vertical-align: middle;
     outline: none;
 }
-.each_select_option{
-    width: 10%;
-    height: 34px;
-    font-size: 12px;
-    color: #000;
-    border: 1px solid #e6e6e6;
-    padding-left: 3px;
-    vertical-align: middle;
-    outline: none;
-    text-align: center;
-}
-.eachopbtn{
-    border: none;
-    width: 20px;
-    margin: 0 10px 0 10px;
-    height: 30px;
-    background-color: white;
-}
-.eachopbtn:hover{
-    background-color:#e8e8e8
-}
 .totalprice{
     margin: 0;
     padding: 34px 9px 19px;

@@ -57,8 +57,14 @@ function Best_products() {
                                         </p>
                                         <ul className="product_section_div_detail_ul">
                                             <li><span className="sstyle1">5/13일 순차배송</span></li>
-                                            <li><span className="sstyle2"> KRW {product.price.toLocaleString()}</span></li>
-                                            <li><span className="sstyle3">KRW {product.discountprice.toLocaleString()}</span></li>
+                                            {product.discountprice > 0 ? (
+                                                <>
+                                                    <li><span className="sstyle2"> KRW {product.price}</span></li>
+                                                    <li><span className="sstyle3">KRW {product.discountprice}</span></li>
+                                                </>
+                                            ) : (
+                                                <li><span className="sstyle3"> KRW {product.price}</span></li>
+                                            )}
                                         </ul>
                                     </div>
                                 </div>

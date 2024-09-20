@@ -32,7 +32,7 @@ const Login = () => {
           
           if (response.data.admintype) {
             alert(`관리자에 접속하였습니다.`);
-            navigate('/Product_mg'); // 관리자로 로그인 시 관리자 페이지로 이동
+            navigate('/Management'); // 관리자로 로그인 시 관리자 페이지로 이동
           } else {
             alert(`로그인에 성공했습니다.`);
             navigate('/main'); // 일반 사용자 로그인 시 메인 페이지로 이동

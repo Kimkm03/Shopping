@@ -92,6 +92,7 @@
 }
 .searchpddt_ul{
     padding: 0;
+    list-style: none;
 }
 .searchpddt_li{
     margin-bottom: 2px;

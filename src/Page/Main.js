@@ -9,6 +9,7 @@ import './Slide.css';
 const Main = () => {
   const [newproducts, setNewProducts] = useState([]);
   const [bestproducts, setBestProducts] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     fetchNewProducts();
@@ -32,74 +33,64 @@ const Main = () => {
       console.error('상품 정보를 불러오는 중 오류 발생:', error);
     }
   };
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? bestproducts.length - 1 : prevIndex - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === bestproducts.length - 1 ? 0 : prevIndex + 1));
+  };
 
   return (
     <div>
       <Header /> {/* Header 컴포넌트를 사용합니다. */}
       <div className="slide_section">
-        {/* 슬라이드 바 생성 */}
-        {bestproducts.map((product, index) => (
-          <input
-            key={index}
-            type="radio"
-            name="slide"
-            id={`slide${index + 1}`}
-            defaultChecked={index === 0} // 첫번째 슬라이드만 기본 체크
-          />
-        ))}
-        <div className="slidewrap">
-          <ul className="slidelist">
+            {/* 슬라이드 바 생성 */}
             {bestproducts.map((product, index) => (
-              <li className="slideitem" key={product.pname}>
-                <div className="textbox">
-                  <Link to={`/product/${product.pnum}`}>
-                    <img
-                      src={`http://localhost:8000/shopping/api/products/${product.pnum}/picture`}
-                      alt={product.pname}
-                    />
-                  </Link>
+                <input
+                    key={index}
+                    type="radio"
+                    name="slide"
+                    id={`slide${index + 1}`}
+                    checked={index === currentIndex}
+                    readOnly
+                />
+            ))}
+            <div className="slidewrap">
+                <ul className="slidelist" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                    {bestproducts.map((product, index) => (
+                        <li className="slideitem" key={product.pnum}>
+                            <div className="textbox">
+                                <Link to={`/product/${product.pnum}`}>
+                                    <img
+                                        src={`http://localhost:8000/shopping/api/products/${product.pnum}/picture`}
+                                        alt={product.pname}
+                                    />
+                                </Link>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+
+                {/* 좌우 슬라이드 버튼 생성 */}
+                <div className="slide-control">
+                    <button className="left" onClick={handlePrev}>‹</button>
+                    <button className="right" onClick={handleNext}>›</button>
                 </div>
-              </li>
-            ))}
-            
-          </ul>
 
-          {/* 좌우 슬라이드 버튼 생성 */}
-          <div className="slide-control">
-            {bestproducts.map((product, index) => (
-              <div key={index}>
-                <label htmlFor={`slide${index === 0 ? bestproducts.length : index}`} className="left"></label>
-                <label htmlFor={`slide${index === bestproducts.length - 1 ? 1 : index + 2}`} className="right"></label>
-              </div>
-            ))}
-          </div>
-
-          {/* 페이징 생성 */}
-          <ul className="slide-pagelist">
-            {bestproducts.map((product, index) => (
-              <li key={index}>
-                <label htmlFor={`slide${index + 1}`}></label>
-              </li>
-            ))}
-          </ul>
+                {/* 페이징 생성 */}
+                <ul className="slide-pagelist">
+                    {bestproducts.map((_, index) => (
+                        <li key={index}>
+                            <label htmlFor={`slide${index + 1}`}></label>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
-      </div>
 
       {/*=================================================================*/}
       <div className="all">
-        <div className=''>
-          <div className=''>
-            <h2>WEEKLY BEST</h2>
-            <p>매주 인기 상품을 만나보세요!</p>
-          </div>
-          <ul>
-            <li>
-              <div>
-                <img src='{/image/Main1.jpg' />
-              </div>
-            </li>
-          </ul>
-        </div>
         <div className="NEW_ARRIVALS">
           <div className="NEW_ARRIVALS_detail">
             <h2>NEW ARRIVALS</h2>
