@@ -1,0 +1,113 @@
+
+
+
+.search_container{
+    align-items: center;
+    max-width: 1500px;
+    margin: 80px auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+.search_title{
+    text-align: center;
+    font: 20px bold;
+    color: rgb(86, 86, 86);
+    padding-top: 80px;
+}
+.searchbar{
+    box-sizing: border-box;
+    padding-top: 80px;
+    text-align: center;
+}
+.searchinput{
+    box-sizing: border-box;
+    width: 500px;
+    height: 60px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 20px;
+    border-color: rgb(88, 88, 88);
+    padding: 20px;
+}
+.searchinfo{
+    height: 120px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.searchinfo_tx{
+    float: left;
+    color: #7d7d7d;
+}
+.searchproduct{
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 20px 0 0;
+    box-sizing: border-box;
+}
+.searchpdul{
+    column-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -50px;
+    list-style: none;
+    padding: 0;
+}
+.searchpdul_li{
+    width: calc((100% - 60px) / 4);
+    margin-bottom: 100px;
+}
+.searchpdimg{
+    margin-bottom: 10px;
+}
+.searchpda{
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+.searchpda > img{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+.searchpddt{
+    margin: 0;
+    text-align: left;
+    padding: 0;
+}
+.searchpddt_t{
+    display: block;
+    text-align: left;
+    margin: 0 0 10px;
+    font-weight: 500;
+}
+.searchpddt > p > a{
+    text-decoration: none;
+}
+.searchpddttitle{
+    font-size: 15px;
+    color: #5a5a5a;
+    font-weight: bold;
+}
+.searchpddt_ul{
+    padding: 0;
+}
+.searchpddt_li{
+    margin-bottom: 2px;
+    line-height: 16px;
+    text-align: left;
+    margin: 0 0 5px;
+    color: #000;
+    font-size: 16px;
+    list-style: none;
+}
+.searchpddt_lip1{
+    font-size: 13px;
+    color: #aaaaaa;
+    text-decoration: line-through;
+}
+.searchpddt_lip2{
+    font-size: 13px;
+    color: #333333;
+}

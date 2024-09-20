@@ -1,0 +1,25 @@
+
+
+body{
+    margin: 0;
+    padding: 0;
+}
+div{
+    margin: 0;
+    padding: 0;
+}
+
+.totalmg_subtitle{
+    padding: 20px 0 20px 0;
+}
+
+.totalmg_detail > table {
+    width: 55%;
+    align-items: center;
+    border-collapse: collapse;
+}
+.totalmg_detail > table > tbody >tr{
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}

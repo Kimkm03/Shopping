@@ -1,0 +1,105 @@
+.write_review_section {
+    align-items: center;
+    max-width: 600px;
+    margin: 80px auto;
+  }
+  
+  .stars {
+    display: inline-block;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .stars:hover {
+    color: red;
+  }
+  .review_score {
+    display: flex;
+    width: 800px;
+    height: 100px;
+    align-items: center;
+  }
+  
+  /*---------------------------------------*/
+  .form_radio_btn {
+    width: 47%;
+    height: 45px;
+    border: 1px solid #eae7e7;
+    /* border-radius: 10px; */
+  }
+  .form_radio_btn input[type='radio'] {
+    display: none;
+  }
+  
+  /* Checked */
+  .form_radio_btn input[type='radio']:checked + label {
+    background: #184da0;
+    color: #fff;
+  }
+  
+  /* Hover */
+  .form_radio_btn:hover {
+    color: #666;
+  }
+  
+  /* Disabled */
+  .form_radio_btn input[type='radio'] + label {
+    background: #f9fafc;
+    color: #666;
+  }
+  /* 영재 */
+  .toggle_zone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .form_toggle {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+  }
+  .form_toggle > .form_radio_btn {
+    overflow: hidden;
+  }
+  .form_toggle > .form_radio_btn:first-child {
+    border-radius: 10px 0 0 10px;
+  }
+  
+  .form_toggle > .form_radio_btn:last-child {
+    border-radius: 0 10px 10px 0;
+  }
+  .form_radio_btn label {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 45px;
+  }
+  
+  /*------------------------------------*/
+  
+  #review {
+    /* 리뷰 내용 */
+    width: 600px;
+    height: 150px;
+  }
+  
+  .back_btn {
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px solid grey;
+    color: black;
+    cursor: pointer;
+    float: left;
+  }
+  .next_btn {
+    padding: 10px 20px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    float: right;
+  }
+  
+  
+  

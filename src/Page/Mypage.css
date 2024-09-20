@@ -1,0 +1,97 @@
+
+
+.mypage_detail{
+    align-items: center;
+    max-width: 1100px;
+    margin: 80px auto;
+}
+.mypage_detail_title{
+    text-align: center;
+    color: rgb(81, 79, 79);
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+.rank{
+    border: 1px solid rgb(212, 211, 211);
+    height: 140px;
+    text-align: center;
+}
+.order_processingdiv{
+    padding: 100px 0;
+}
+.order_processing{
+    /*margin: 0px 100px 0px 100px;*/
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    /*border-top: 1px;*/
+    border-left: none;  
+    border-right: none;
+    border-bottom: none;
+    border-collapse: collapse;
+}
+
+.mypage_menu>tr >td{
+    text-align: center;
+}
+.order_processing > tbody > tr > td{
+    text-align: center;
+    border: none;
+    padding: 0;
+}
+.order_num{
+    font-weight: bold;
+    font-size: 20px;
+    vertical-align: bottom;
+    height: 50px;
+}
+.order_num > td{
+    font-size: 20px;
+}
+.order_text{
+    color: grey;
+    font-size: 15px;
+}
+.order_history{
+    /*margin: 0px 100px 0px 100px;*/
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    /*border-top: 1px;*/
+    border-left: none;  
+    border-right: none;
+    border-bottom: none;
+    border-collapse: collapse;
+}
+.mypage_menu{
+    border-collapse: collapse;
+}
+.tableset{
+    border: 1px solid;
+    border-color: grey;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+}
+.tableset :hover{
+    color: grey;
+}
+.menuset{
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration-line: none;
+    color:black;
+}
+
+.menuset_p{
+    font-size: 15px;
+    font-weight: normal;
+}
+.menuset2{
+    font-weight: bold;
+    font-size: 12px;
+    text-decoration-line: none;
+    color: grey;
+}

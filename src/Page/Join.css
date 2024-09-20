@@ -1,0 +1,187 @@
+.joinh2 {
+    position: relative;
+    text-align: center;
+    color: rgb(81, 79, 79);
+}
+.member_access{
+    font-weight: bold;
+}
+.join_section{
+    align-items: center;
+    max-width: 900px;
+    margin: 80px auto;
+}
+
+.basic_info{
+    font-weight: bold;
+}
+
+.need{
+    text-align: right;
+}
+
+.e{
+    width: 200;
+}
+
+
+.back {
+    margin-top: 10em;
+}
+
+.join_section_table1,
+.join_section_table2 {
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    border-left: none;  
+    border-right: none;
+    border-bottom: none;
+    border-collapse: collapse;
+}
+
+#division[type='radio'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    margin-right: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+#division[type='radio']:checked {
+    background-color: black;
+    border: 3px solid white;
+    box-shadow: 0 0 0 1.6px black;
+}
+/*
+td{
+    border: 1px solid;
+    border-color: gray;
+    border-left:none;
+    border-right: none;
+    padding: 20px;
+    font-size: 15px;
+    
+}*/
+
+.join_section_table1 > tbody > tr > td{
+    border: 1px solid;
+    border-color: gray;
+    border-left:none;
+    border-right: none;
+    padding: 20px;
+    font-size: 15px;
+}
+.join_section_table2 > tbody > tr > td{
+    border: 1px solid;
+    border-color: gray;
+    border-left:none;
+    border-right: none;
+    padding: 20px;
+    font-size: 15px;
+}
+
+.set{
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    color: rgb(151, 151, 151);
+}
+.phone {
+    height: 30px;
+    width: 100px;
+    margin: 0 5px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.cancel-button {
+    width: 49%;
+    margin: 0 10px 0 0;
+    background-color: white;
+    height: 55px;
+    font-size: 15px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #f2f2f2;
+}
+
+.submit-button {
+    width: 49%;
+    background-color: black;
+    color: white;
+    height: 55px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #333333;
+}
+
+.id_check {
+    width: 70px;
+    height: 32px;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+
+.id,
+.pw,
+.tell,
+.joinname,
+.ad,
+.email,
+.member {
+    background-color: rgb(240, 240, 240);
+    width: 200px;
+}
+
+input[type='email'] {
+    width: 200px;
+}
+
+.join_section_table2 > tbody > tr > td > input[type=text]{
+    border: 1px solid silver;
+    width: 300px;
+    height: 30px;
+}.join_section_table2 > tbody > tr > td > input[type=text]:hover{
+    border-color: black;
+}
+.join_section_table2 > tbody > tr > td > input[type=password]{
+    border: 1px solid silver;
+    width: 300px;
+    height: 30px;
+}
+.join_section_table2 > tbody > tr > td > input[type=password]:hover{
+    border-color: black;
+}
+.post {
+    width: 100px;
+}
+
+.post_btn {
+    width: 70px;
+    height: 33px;
+    margin-left: 6px;
+}
+
+.basic_ad {
+    margin: 7px 0 7px 0;
+}
+

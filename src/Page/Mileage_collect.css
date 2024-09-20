@@ -1,0 +1,52 @@
+.mileage_collect_section{
+    align-items: center;
+    max-width: 1100px;
+    margin: 80px auto;
+}
+.mileage_now{
+    border: 1px solid grey;
+    border-top: 4px solid black;
+    width: 600px;
+    
+    border-collapse: collapse;
+}
+.mileage_history{
+    color: black;
+    width: 100%;
+    border-top: 3px solid black;
+    border-bottom: 1px solid grey;
+    text-align: center;
+    border-collapse: collapse;
+
+}
+.mileage_now_tr{
+    height: 60px;
+    
+}
+.mileage_now_tr > td{
+    color: grey;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.mileage_history > thead{
+    height: 50px;
+    background-color: rgb(232, 232, 232);
+}
+.mileage_history_list{
+    border-bottom: 1px solid black;
+    height: 70px;
+}
+.mileage_history_day{
+    width: 110px;
+}
+.mileage_history_count{
+    width: 80px;
+}
+.paging{
+    text-align: center;
+    list-style-type: none;
+}
+.paging li{
+    display: inline-block;
+    padding: 5px;
+}

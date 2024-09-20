@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  .set{
+    margin: 0 auto;
+  }
+  .setdiv{
+    padding-top: 100px;
+  }
+  #main-holder {
+    margin: 0 auto;
+    width: 400px;
+    height: 70%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 0px 0px 5px 2px black;
+    padding: 60px;
+  }
+  #login-form {
+    align-self: flex-start;
+    display: grid;
+  }
+  #login-form > input{
+    width: 300px;
+  }
+  
+  .login-form-id::placeholder {
+    color: #3a3a3a;
+  }
+  
+  .login-form-id {
+    border: none;
+    border-bottom: 1px solid #3a3a3a;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px 0px 5px 5px;
+  }
+  .login-form-pw::placeholder {
+    color: #3a3a3a;
+  }
+  .login-form-pw {
+    border: none;
+    border-bottom: 1px solid #3a3a3a;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px 0px 5px 5px;
+  }
+  #login-form-submit {
+    width: 100%;
+    height: 35px;
+    padding: 7px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    background-color: #3a3a3a;
+    cursor: pointer;
+    outline: none;
+  }
+  #id_save{
+    position: static;
+  }
+  .find {
+    list-style-type: none;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .find > li {
+    font-size: 15px;
+    color: #605a5a;
+    text-align: center;
+  }
+  .find > li > a {
+    text-decoration: none;
+    color: inherit; /* 링크의 색상 제거 */
+  }
+  .find > .bunri{
+    padding: 0px 5px 0px 5px;
+  }
+  
+  /*======================*/
+
+
+  

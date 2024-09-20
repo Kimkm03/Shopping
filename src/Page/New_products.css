@@ -1,0 +1,29 @@
+.new_product_section{
+    align-items: center;
+    max-width: 100%;
+    height: auto;
+    padding: 0 40px 0 40px;
+    margin: 80px auto;
+
+
+     /*범위 확인을 위한 임시 설정*/
+}
+.new_product_section > h2 {
+    text-align: center;
+}
+a{
+    text-decoration: none;
+}
+.sstyle1{
+    font-size: 11px; 
+    color: #5275ff;
+}
+.sstyle2{
+    font-size: 11px; 
+    color: #aaaaaa; 
+    text-decoration: line-through;
+}
+.sstyle3{
+    font-size: 11px;
+    color: #333333;
+}

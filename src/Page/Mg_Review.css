@@ -1,0 +1,82 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+div{
+    margin: 0;
+    padding: 0;
+}
+
+
+.total_review{
+    width: 50%;
+    border-collapse: collapse;
+    text-align: center;
+    border-color: black;
+}
+.total_review > tbody > tr{
+    height: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+.total_review > tbody > tr >td{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.middle_main2{
+    margin-top: 50px;
+    background-color: #efefef;
+    height: 120px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.main2_select{
+    border: 1px solid grey;
+    border-radius: 0;
+    width: 80px;
+    height: 25px;
+    font-weight: 600;
+}
+
+.search_table{
+    width: 60%;
+    border-collapse: collapse;
+    text-align: center;
+    border-color: black;
+}
+.search_table > tbody{
+    text-align: left;
+}
+.search_table > tbody > tr{
+    margin: 10px;
+    height: 40px;
+    align-items: center;
+}
+.search_tabletitle{
+    width: 100px;
+}
+.search_tableinput{
+    border: 1px solid grey;
+    height: 18px;
+}
+.reviewmg_table{
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    border-left: none;  
+    border-right: none;
+    border-bottom: 1px solid grey;
+    border-collapse: collapse;
+    text-align: center;
+}
+.reviewmg_table > thead > tr{
+    height: 50px;
+    border-bottom: 1px solid grey;
+}
+.reviewmg_table > tbody > tr{
+    height: 30px;
+}

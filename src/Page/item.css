@@ -1,0 +1,116 @@
+
+
+div{
+    display: block;
+    unicode-bidi: isolate;
+    font: inherit;
+}
+/*상품 나열 관련 css*/
+.item_section{
+    padding: 0;
+    margin: 0 auto;
+    border-color: #e5e5e5;
+}
+.item_list_tool{
+    max-width: 1510px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    margin: 0 auto 30px;
+    border: 0;
+}
+.list_tool_div{
+    vertical-align: baseline;
+    right:auto;
+    text-align: right;
+}
+.item_list_print{
+    max-width: 100%;
+    height: 38px;
+    padding: 0 30px 0 15px;
+    font-size: 13px;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+}
+ /* 여기부터는 상품 리스트 관련 css*/
+
+.product_section{
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+.product_section_ul{
+    column-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -50px;
+    margin: 0;
+    text-align: left;
+    font-size: 0;
+    line-height: 0;
+    padding-inline-start: 0px;
+}
+.product_section__ul_li{
+    width: calc((100% - 40px) / 3);
+    margin-bottom: 100px;
+    display: inline-block;
+    margin: 0 0 18px;
+    color: #757575;
+    vertical-align: top;
+}
+.product_section_li_div1{
+    margin: 0 0 20px;
+    background: none;
+    position: relative;
+    text-align: center;
+    width: auto;
+    white-space: normal;
+}
+.product_section_div_img{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+.product_section_div_img > a > img{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.product_section_div_detail{
+    font-size: 12px;
+    line-height: 18px;
+    white-space: normal;
+    margin: 0;
+    text-align: left;
+    padding: 0;
+}
+.product_section_div_detail > p{
+    display: block;
+    text-align: left;
+    margin: 10px 0 10px;
+    font-weight: 500;
+}
+.product_section_div_detail > p >a{
+    color: #000;
+    font-size: 13px;
+    text-decoration: none;
+}
+.product_section_div_detail_ul{
+    margin-top: 10px;
+    margin: 12px 0 0;
+    list-style: none;
+    padding-inline-start: 0px;
+}
+.product_section_div_detail_ul > li{
+    margin-bottom: 2px;
+    line-height: 16px;
+    text-align: left;
+    margin: 0 0 3px 0;
+}
+
+
+
+
+

@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+div{
+    margin: 0;
+    padding: 0;
+}
+.orderlistmg{
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    border-collapse: collapse;
+}
+.orderlistmg > thead > tr{
+    height: 60px;
+    border-bottom: 1px solid grey;
+}

@@ -1,0 +1,340 @@
+
+
+
+
+.sale_product{
+    width: 100%;
+    margin: 100px auto;
+    position: relative;
+}
+.sale_product_div{
+    padding: 0 15px;
+    max-width: 1510px;
+    margin: 0 auto 60px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    min-height: 500px;
+    float: none;
+    vertical-align: baseline;
+    
+}
+.sale_product_div2{
+    padding: 50px 0 130px;
+    margin: 0 auto;
+    vertical-align: baseline;
+}
+
+/*=====================*/
+.detailarea{
+    font-size: 0;
+    line-height: 0;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.imgarea{
+    width: 55%;
+    vertical-align: baseline;
+    display: inline-block;
+}
+.imgarea_div{
+    vertical-align: baseline;
+}
+.swiper-container{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    vertical-align: baseline;
+}
+.imgarea_ul{
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 1336px;
+    transform: translate3d(0px, 0px, 0px);
+    display: flex;
+    height: 100%;
+    z-index: 1;
+    padding: 0;
+}
+.imgarea_ul > li {
+    float: left;
+    width: 700px;
+    height: 100%;
+    position: relative;
+}
+.imgarea_ul > li > img{
+    width: 100%;
+    height: auto;
+}
+/*====================================*/
+.infoarea{
+    width: calc(45% - 70px);
+    margin: 0 0 0 70px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 13px;
+    line-height: 1;
+}
+.headingarea{
+    border: 0;
+    padding: 0;
+    margin-bottom: 30px;
+    position: relative;
+    border-bottom: 1px solid #e8e8e8;
+    vertical-align: baseline;
+}
+.headingarea > h1 {
+    display: inline;
+    vertical-align: middle;
+    font-size: 16px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+.headingarea_detail{
+    color: #999;
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 50px 0 0;
+    vertical-align: baseline;
+}
+.product_price{
+    font-size: 16px;
+    color: #555;
+}
+.infoarea_table{
+    border: 0;
+    font-size: 12px;
+    margin: 0;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-align: left;
+}
+.infoarea_table > tbody > tr{
+    margin-bottom: 10px;
+}
+.infoarea_table > th{
+    font-weight: normal;
+    color: #000;
+    width: 115px;
+    padding: 7px 0 8px 0;
+    text-align: left;
+    vertical-align: middle;
+}
+.choice_option{
+    margin-top: 30px;
+}
+.size_select{
+    padding: 4px 10px 4px 0;
+    vertical-align: middle;
+}
+.size_select_option{
+    width: 100%;
+    height: 34px;
+    font-size: 12px;
+    color: #000;
+    border: 1px solid #e6e6e6;
+    padding-left: 3px;
+    vertical-align: middle;
+    outline: none;
+}
+.each_select_option{
+    width: 10%;
+    height: 34px;
+    font-size: 12px;
+    color: #000;
+    border: 1px solid #e6e6e6;
+    padding-left: 3px;
+    vertical-align: middle;
+    outline: none;
+    text-align: center;
+}
+.eachopbtn{
+    border: none;
+    width: 20px;
+    margin: 0 10px 0 10px;
+    height: 30px;
+    background-color: white;
+}
+.eachopbtn:hover{
+    background-color:#e8e8e8
+}
+.totalprice{
+    margin: 0;
+    padding: 34px 9px 19px;
+    color: #555;
+    vertical-align: middle;
+    background: #fff;
+}
+.product_action{
+    padding: 30px 0 10px;
+}
+.btn_list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.buy_btn{
+    width: 100%;
+    flex-basis: inherit;
+    margin-bottom: 10px;
+    background-color: black;
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+    font-weight: 400;
+    text-decoration: none;
+    min-width: 80px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    word-spacing: -0.5px;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+    color: #fff;
+}
+.cart_btn{
+    margin-left: 0px;
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+    font-weight: 400;
+    flex: 1;
+    transition: border .5s;
+    border-color: #e5e5e5;
+    min-width: 80px;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid #bcbcbc;
+    text-decoration: none;
+    vertical-align: middle;
+    word-spacing: -0.5px;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+    color: #000;
+    background-color: #fff;
+    outline: none;
+}
+.wish_btn{
+    margin-left: 10px;
+    font-size: 14px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+    font-weight: 400;
+    flex: 1;
+    transition: border .5s;
+    border-color: #e5e5e5;
+    min-width: 80px;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid #bcbcbc;
+    text-decoration: none;
+    vertical-align: middle;
+    word-spacing: -0.5px;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+    color: #000;
+    background-color: #fff;
+    outline: none;
+}
+
+
+/*===========================*/
+.detail_btn, .review_btn, .guide_btn{
+    height: 50px;
+    width: 200px;
+    background-color: #ffffff;
+    margin:0;
+    padding-bottom: 0;
+    padding-right: 0;
+    align-items: center;
+    border: silver 2px solid;
+
+}
+.btn_section{
+    text-align: center;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding: 0;
+}
+.DETAIL, .GUIDE, .REVIEW{
+    
+    margin-left: 150px;
+    margin-right: 150px;
+}
+.detail_img{ /*5.22 에 추가한 css임*/
+    max-width: 500px;
+    margin: 0 auto;
+}
+.GUIDE_detail{
+    border: silver 2px solid;
+    padding: 20px;
+}
+.product_review{
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: center;
+}
+.product_review_table{
+    width: 1100px;
+    border-top: 3px solid black;
+    border-collapse: collapse;
+}
+.product_review_table_thead{
+    border-bottom: 1px solid grey;
+    height: 50px;
+}
+.product_review_table_tr{
+    padding: 10px;
+    float: left;
+}
+.product_review_table_tr > th > button{
+    border: none;
+    background-color: white;
+    color: grey;
+    width: 90px;
+    font-size: 17px;
+}
+.product_review_table_tr > th > button:hover{
+    color: black;
+}
+.product_review_table_td_detail{
+    border-bottom: 1px solid grey;
+    height: 300px;
+}
+.product_review_table_td_detail > td > img{
+    border-radius: 20%;
+    border: 1px solid grey;
+    margin: 8px;
+}
+.product_review_table_buyoption{
+    width: 220px;
+}
+.product_review_table_td_detail > td > div{
+    border-left: 1px solid grey;
+    height: 200px;
+    text-align: center;
+}
+.btnsel{
+    border: black 2px solid;
+}
+/*
+.paging{
+    text-align: center;
+    list-style-type: none;
+}
+.paging li{
+    display: inline-block;
+    padding: 5px;
+}*/

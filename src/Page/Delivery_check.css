@@ -1,0 +1,86 @@
+.delivery_section{
+    align-items: center;
+    max-width: 1300px;
+    margin: 80px auto;
+}
+.delivery_dayset{
+    padding: 10px;
+    background-color: rgb(222,222,222);
+}
+
+#mobile01{
+    border: 1px solid;
+    border-color: silver;
+    height: 30px;
+    width: 100px;
+    margin-right: 30px;
+}
+#daybtn{
+    height: 30px;
+    width: 70px;
+    margin: -4px;
+    background-color: #fff;
+    border: rgb(222,222,222);
+}
+#daybtn:hover{
+    background-color: grey;
+}
+.delivery_dayset > input{
+    height: 25px;
+    width: 120px;
+    font-weight: bold;
+}
+#dayset{
+    margin-left: 20px;
+}
+#delivery_select{
+    margin-left: 5px;
+    height: 30px;
+    width: 70px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+}
+.delivery_dayset_info{
+    color: grey;
+    font-size: 15px;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+
+
+
+
+
+
+.delivery_table{
+    /*margin: 0px 100px 0px 100px;*/
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    /*border-top: 1px;*/
+    border-left: none;  
+    border-right: none;
+    border-bottom: 1px solid grey;
+    border-collapse: collapse;
+    text-align: center;
+}
+.delivery_table > tbody > tr > td > a > img{
+    height: 140px;
+    float: left;
+}
+#detail{
+    float: left;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+}
+#detail2{
+    float: left;
+    color: grey;
+    margin-left: 15px;
+}

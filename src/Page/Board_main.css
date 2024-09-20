@@ -1,0 +1,75 @@
+.board_main_section{
+    align-items: center;
+    max-width: 1100px;
+    margin: 80px auto;
+}
+.board_main_table{
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    /*border-top: 1px;*/
+    border-left: none;  
+    border-right: none;
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+.board_main_table_title{
+    height: 55px;
+    border-bottom: 1px solid grey;
+}
+.board_main_table_list > td > a{
+    text-decoration: none;
+    color: black;
+}
+.board_day{
+    width: 110px;
+}
+.board_value{
+    width: 80px;
+}
+.board_name{
+    width: 100px;
+}
+.board_check{
+    width: 80px;
+}
+.board_main_table_list{
+    height: 70px;
+}
+
+.board_review_table{
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    /*border-top: 1px;*/
+    border-left: none;  
+    border-right: none;
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+.board_review_table_title{
+    height: 55px;
+    border-bottom: 1px solid grey;
+}
+.board_review_table_detail{
+    height: 100px;
+}
+.board_review_table_day{
+    width: 110px;
+}
+.board_review_table_detail > td > a {
+    text-decoration: none;
+    color: black;
+}
+.paging{
+    text-align: center;
+    list-style-type: none;
+}
+.paging li{
+    display: inline-block;
+    padding: 5px;
+}

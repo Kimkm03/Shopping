@@ -1,0 +1,57 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.productadd_div{
+    padding: 80px;
+    display:relative;
+}
+.productadd_section{
+    margin-left: 170px;
+    margin-right: 170px;
+    align-items: center;
+    max-width: 1300px;
+}
+.addtable{
+    border-collapse: collapse;
+    border-top: 3px solid black;
+    width: 100%;
+}
+
+.addtable > tr{
+    border-bottom: 1px solid grey;
+}
+
+.td_1{
+    width: 200px;
+    height: 70px;
+    background-color: rgb(240, 240, 240);
+    padding-left: 10px;
+}
+.td_2{
+    padding: 20px 0 20px 10px;
+}
+.td_2 > input[type=text] {
+    height: 25px;
+    border: 1px solid silver;
+    width: 400px;
+}
+.td_2 > input:hover {
+    border-color: black;
+}
+.pd_summary{/*요약설명*/
+    height: 200px !important;
+}
+.submitbtn{
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+.submitbtn > input{
+    width: 100px;
+    height: 40px;
+    font: 20px bold;
+    color: white;
+    background-color: black;
+}

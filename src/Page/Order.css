@@ -1,0 +1,94 @@
+.order_datail{
+    align-items: center;
+    max-width: 1300px;
+    margin: 80px auto;
+}
+.orderh2{
+    text-align: center;
+    color: rgb(81, 79, 79);
+}
+.order_history{
+    /*margin: 0px 100px 0px 100px;*/
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    /*border-top: 1px;*/
+    border-left: none;  
+    border-right: none;
+    border-bottom: none;
+    border-collapse: collapse;
+    text-align: center;
+}
+.or_no{
+    width: 40px;
+    height: 60px;
+    font-weight: bold;
+    background-color: rgb(222, 222, 222);
+}
+.or_day{
+    width: 120px;
+    height: 60px;
+    font-weight: bold;
+    background-color: rgb(222, 222, 222);
+}
+.or_num{
+    width: 100px;
+    height: 60px;
+    font-weight: bold;
+    background-color: rgb(222, 222, 222);
+}
+.or_name{
+    width: 660px;
+    height: 60px;
+    font-weight: bold;
+    background-color: rgb(222, 222, 222);
+}
+.or_count{
+    width: 70px;
+    height: 60px;
+    font-weight: bold;
+    background-color: rgb(222, 222, 222);
+}
+.or_price{
+    width: 80px;
+    height: 60px;
+    font-weight: bold;
+    background-color: rgb(222, 222, 222);
+}
+.or_member{
+    width: 100px;
+    height: 60px;
+    font-weight: bold;
+    background-color: rgb(222, 222, 222);
+}
+.order_list{
+    height: 100px;
+}
+.go_review{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: none;
+    width: 80px;
+    height: 30px;
+}
+.go_deliver{
+    background-color: white;
+    font-weight: bold;
+    border: 1px solid grey;
+    width: 80px;
+    height: 30px;
+}
+
+
+
+
+.paging{
+    text-align: center;
+    list-style-type: none;
+}
+.paging li{
+    display: inline-block;
+    padding: 5px;
+}

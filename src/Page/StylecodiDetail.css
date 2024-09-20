@@ -1,0 +1,148 @@
+.codidetailwrap{
+    min-height: auto;
+    position: relative;
+    width: 100%;
+    margin: 100px auto;
+    min-height: 550px;
+    overflow: hidden;
+}
+.codidetailcontents{
+    max-width: 1510px;
+    margin: 0 auto 60px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    min-height: 500px;
+    float: none;
+}
+.product_detail{
+    padding: 50px 0 130px;
+    margin: 0 auto;
+}
+.detail_area{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0;
+    line-height: 0;
+}
+.profile{
+    display: flex;
+    align-items: center;
+    font-size: 0;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.profile_text{
+    line-height: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5a5a5a;
+    cursor: default;
+}
+.summary{
+    margin: 8px 0 0;
+    color: #999;
+    font-weight: normal;
+}
+.img_area{
+    display: flex;
+    width: 100%;
+}
+.leftimg{
+    width: 45%;
+    box-sizing: border-box;
+    margin-right: 7%;
+}
+.leftimg > a {
+    display: block;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+}
+img{
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+}
+.rightimg{
+    width: 48%;
+}
+.relation{
+    margin-bottom: 130px;
+    position: relative;
+}
+.wear_product{
+    padding: 0;
+    line-height: 1;
+    text-align: left;
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+.wear_product_title{
+    line-height: 1;
+    text-align: left;
+    font-size: 20px;
+    font-weight: normal;
+    color: #999;
+    margin-bottom: 30px;
+}
+.wear_product_list{
+    margin: 0;
+    text-align: left;
+    font-size: 0;
+    line-height: 0;
+    list-style: none;
+    padding: 0;
+}
+.wear_product_list > li{
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    margin: 0 0 60px 0;
+}
+.codidetailthumbnail{
+    width: 25%;
+    font-size: 0;
+    margin: 0;
+    background: none;
+    position: relative;
+    text-align: center;
+    white-space: normal;
+}
+.codidetailthumbnail > a {
+    text-decoration: none;
+}
+.codidetailthumbnail > a > img {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+.description{
+    font-size: 17px;
+    color: #5a5a5a;
+    padding: 40px;
+    margin: 0;
+    text-align: left;
+    line-height: 18px;
+}
+.name{
+    display: block;
+    text-align: left;
+    margin: 0 0 10px;
+    font-weight: 500;
+    margin: 0;
+}
+.name > a{
+    text-decoration: none;
+    color: black;
+}
+.price{
+    margin-top: 15px;
+}

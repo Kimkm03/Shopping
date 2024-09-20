@@ -1,0 +1,105 @@
+.Modifyh2{
+    text-align: center;
+    color: rgb(81, 79, 79);
+}
+.rank{
+    border: 1px solid rgb(212, 211, 211);
+    height: 340px;
+    text-align: center;
+}
+.modify_detail{
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 0;
+}
+.modify_table{
+    /*margin: 0px 100px 0px 100px;*/
+    width: 100%;
+    border-radius: 1px;
+    border-color: black;
+    border: 3px solid;
+    /*border-top: 1px;*/
+    border-left: none;  
+    border-right: none;
+    border-bottom: none;
+    border-collapse: collapse;
+}
+/*
+#division_1{
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+}*/
+.modify_table > tr > td{
+    border: 1px solid;
+    border-color: gray;
+    border-left:none;
+    border-right: none;
+    padding: 20px;
+    font-size: 15px;
+    
+}
+.modify_table > tr > td > p{
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    color: rgb(151, 151, 151);
+}
+.id,.pw, .tell, .modiname , .ad, .email, .member{
+    background-color: rgb(240, 240, 240);
+    width: 200px;
+}
+input[type='email'] {
+    width: 200px;
+}
+.joinput{
+    border: 1px solid;
+    border-color: silver;
+    width: 300px;
+    height: 30px;
+}
+.joinput:hover{
+    border-color: black;
+}
+.post{
+    width: 100px;
+}
+.post_btn{
+    width: 70px;
+    height: 33px;
+    margin-left: 6px;
+}
+.basic_ad{
+    margin: 7px 0 7px 0;
+}
+#mobile01{
+    border: 1px solid;
+    border-color: silver;
+    height: 30px;
+    width: 100px;
+}
+.phone{
+    height: 30px;
+    width: 100px;
+}
+#cancle{
+    width: 49%;
+    margin: 0 10px 0 0;
+    background-color: white;
+    height: 55px;
+    font-size: 15px;
+}
+#finish{
+    width: 49%;
+    background-color: black;
+    color: white;
+    height: 55px;
+    font-size: 15px;
+}
+#delete{
+    width: 10%;
+    background-color: white;
+    margin-bottom: 20px;
+    font-weight: bold;
+
+}

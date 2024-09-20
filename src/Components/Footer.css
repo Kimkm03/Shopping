@@ -1,0 +1,41 @@
+.end_banner_section{
+    margin: 0;
+    padding: 0;
+
+    /* position: fixed;
+    bottom: 0;
+    width: 100%; */
+}
+.end_banner{
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .end{
+    border: 1px solid;
+    border-color: grey;
+    width: auto;
+    height: 180px;
+    font-size: 15px;
+    padding-left: 30px;
+    font-weight: bold;
+  }
+  .end_p{
+    font-size: 15px;
+    font-weight: normal;
+  }
+  .end_sns{
+    text-decoration-line: none;
+    color: black;
+  }
+
+  .end_logo {
+    margin: 0 auto;
+    padding: 1.5em 1.5em 1.5em;
+    background-image: url('https://i.postimg.cc/3wyQ75W7/test-logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    height: 100px;
+    width: 200px;
+  }
+  

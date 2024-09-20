@@ -1,0 +1,50 @@
+
+
+
+.membersearch{
+    margin: 100px 0;
+}
+.searchoption1{
+    padding-right: 50px;
+    height: 35px;
+    border: 1px solid black;
+    font-weight: bold;
+}
+.searchoption2{
+    height: 30px;
+    width: 300px;
+    padding-left: 10px;
+    margin-left: 20px;
+    border: 2px solid black;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+.searchoption2:focus{
+    outline: none;
+}
+/*====================*/
+.tablediv{
+    padding-right: 200px;
+}
+.membernumder{
+    padding-bottom: 20px;
+}
+.membertable{
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    border-collapse: collapse;
+}
+.membertable_title{
+    height: 50px;
+    border-bottom: 1px solid grey;
+} 
+.membertable > tbody > tr{
+    height: 40px;
+}
+.membertable > tbody > tr > td > a{
+    color: black;
+    text-decoration: underline;
+}

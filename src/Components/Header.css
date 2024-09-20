@@ -1,0 +1,201 @@
+header{
+    padding: 0px;
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0 0px;
+    box-sizing: border-box;
+    transition: background- 0.5s ease;
+}
+header.fixed{
+    position: fixed;
+    background: rgba(255, 255, 255, 0.8);
+}
+.head_wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+.main_logo{
+    height: 40px;
+    width: 110px;
+}
+.logo_link {
+    display: block; /* Link는 inline 요소이므로 block으로 변경해야 크기를 정할 수 있습니다. */
+    height: 40px; /* 부모 요소의 전체 높이를 사용합니다. */
+    width: 110px; /* 부모 요소의 전체 너비를 사용합니다. */
+    background-image: url('https://i.postimg.cc/3wyQ75W7/test-logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+.gnd_wrap{
+    display: inline-block;
+    vertical-align: middle;
+}
+.gnd_wrap > .gnd > ul{
+    text-align: center;
+    list-style: none;
+}
+.gnd_wrap > .gnd > ul > li{
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    list-style: none;
+    margin: 0 8px 0 8px;
+}
+.gnd_wrap > .gnd > ul > li > a{
+    font-size: 15px;
+    display: block;
+    height: 70px;
+    line-height: 68px;
+    text-decoration: none;
+    color: black;
+}
+
+.head_myshop{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0;
+    position: relative;
+    width: auto;
+    list-style: none;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0;
+    unicode-bidi: isolate;
+}
+/* .btn_search{
+    margin-left: 5px;
+    background-image: url('https://i.postimg.cc/cH85Hwp5/search-btn2.png');
+    background-size: cover;
+    background-position: center;
+    height: 30px;
+} */
+.btn_search > a {
+    text-decoration: none;
+}
+.btn_search{
+    background-color: #ffffff;
+    border: none;
+    margin-left: 8px;
+}
+.btn_search > img{
+    height: 30px;
+    line-height: 68px;
+    font-size: 20px;
+    display: block;
+} 
+/*
+.search_bar{
+    position: absolute;
+    top: 50%;
+    left: auto;
+    right: calc(100% + 15px);
+    overflow: hidden;
+    transform: translateY(-50%);
+    transition: .3s;
+}
+input{
+    font-size: 100%;
+    font-family: Arial, "Apple SD Gothic Neo", "Noto Sans Regular", "맑은 고딕", "malgun gothic", "돋움", "dotum", sans-serif;
+    color: #000;
+    color: var(--font-color-base);
+    vertical-align: middle;
+    border-radius: 0;
+    box-sizing: border-box;
+}*/
+.search_bar_box{
+    display: block;
+    position: static;
+    width: 250px;
+    background-color: #fff;
+    display: flex;
+    justify-content: flex-end;
+}
+.search_bar_box_set{
+    display: flex;
+    align-items: center;
+
+}
+.searchtxtinput{
+    height: 25px;
+    padding: 0 10px 0 10px;
+}
+.searchtxtinput:focus{
+    border: 1px solid;
+}
+.close_btn{
+    right: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    font-size: 17px;
+}
+.head_myshop > li{
+    margin-left: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+.user_menu > a{
+    text-decoration: none;
+}
+.user_menu > a > img{
+    height: 30px;
+    line-height: 68px;
+    font-size: 20px;
+    display: block;
+}
+.btn_basket > a{
+    text-decoration: none;
+}
+.btn_basket > a > img{
+    height: 30px;
+    line-height: 68px;
+    font-size: 20px;
+    display: block;
+}
+.cnt{
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    border-radius: 100%;
+    color: #fff;
+    background: #5a5a5a;
+    font-size: 10px;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    right: -2px;
+    margin-top: -12px;
+}
+.login{
+    align-items: center;
+}
+.login > a{
+    text-decoration: none;
+    color: black;
+}
+.login > a > span {
+    height: 40px;
+    line-height: 45px;
+    font-size: 17px;
+    display: block;
+    align-items: center;
+}
+.username {
+    height: 40px;
+    line-height: 45px;
+    font-size: 17px;
+    display: block;
+    align-items: center;
+}
