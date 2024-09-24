@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import DaumPostcode from 'react-daum-postcode';
+import PricingApiButton from '../Components/PricingApiButton';
 import './Payment.css';
+import Product from './Product';
 
 function Payment() {
     const [product, setProduct] = useState(null);
     const [productId, setProductId] = useState(null);
+    const [productName, setProductName] = useState(sessionStorage.getItem('productName'));
     const [cartItems, setCartItems] = useState([]);
     const [price, setPrice] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -16,6 +19,8 @@ function Payment() {
     const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
     const [isListeningForPostcode, setIsListeningForPostcode] = useState(false);
     const memid = sessionStorage.getItem("memid");
+    const storeId = 'store-cc5c0f67-cf0f-45b3-bc8e-5b2b46921971';
+    const channelKey = 'channel-key-d6f10cc6-a4e1-42bb-bf9d-15c432ea39a3';
 
     useEffect(() => {
         const radioButtons = document.querySelectorAll('input[type="radio"][name="paymethod"]');
@@ -174,6 +179,7 @@ function Payment() {
         try {
             const response = await axios.get(`http://localhost:8000/shopping/api/products/${productId}`);
             setProduct(response.data);
+            setProductName(response.data.pname)
         } catch (error) {
             console.error('상품 정보를 불러오는 중 오류 발생:', error);
         }
@@ -246,7 +252,7 @@ function Payment() {
                 window.removeEventListener('message', handlePostMessage);
             };
         }
-    }, [isListeningForPostcode]);
+    }, [isListeningForPostcode]); 
 
     return (
         <div>
@@ -449,7 +455,7 @@ function Payment() {
                                                 </div>
                                                 <div className="orderbox_detail">
                                                     <strong>
-                                                        <a href="">상품명</a>
+                                                        <a href="">{productName}</a>
                                                     </strong>
                                                     <ul>
                                                         <li>
@@ -664,9 +670,13 @@ function Payment() {
                         </div>{/* 적립 내역 끝*/}
                         <div className="finish_order_btn">
                             <div className="finish_order_btn_div"></div>
-                            <button className="orderbtn_submit overlap5">
-                                <span>KRW {totalPrice}원 결제하기</span>
-                            </button>
+                            <PricingApiButton
+                                title={productName}
+                                price={100}
+                                storeId={storeId}
+                                channelKey={channelKey}
+                                totalPrice={totalPrice}
+                            />
                         </div>{/**<!-- 이용 약관 및 동의 끝--> */}
                         <div className="helparea">
                             <ul className="helparea_ul">

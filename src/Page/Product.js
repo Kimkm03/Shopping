@@ -111,6 +111,7 @@ function Product() {
             const response = await axios.post(`http://localhost:8000/shopping/api/cart/${memberData.memnum}/${productId}/add`, cartItem);
             if (response.data.status === 200) {
                 alert('장바구니에 상품이 추가되었습니다.');
+                sessionStorage.setItem('productName', product.pname);
                 window.location.href = `/Product/${productId}`;
             } else {
                 alert('장바구니 추가에 실패했습니다.');
