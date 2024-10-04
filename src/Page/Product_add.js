@@ -87,7 +87,7 @@ function ProductAdd() {
             const response = await axios.post('http://localhost:8000/shopping/api/add', productData);
             if (response.data.status === 200) {
                 alert('상품이 성공적으로 등록되었습니다.');
-                window.location.href = '/Product_mg';
+                window.location.href = '/Mg_Product';
             } else {
                 alert('상품 등록에 실패했습니다.');
             }

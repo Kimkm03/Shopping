@@ -18,8 +18,10 @@ const PricingApiButton = ({ title, price, storeId, channelKey, totalPrice }) => 
                 payMethod: "CARD",
             });
             console.log('Payment successful:', response);
+            const { txId } = response; // ES6 디스트럭처링 사용
+            console.log('Extracted txId:', txId);
             // 서버로 결제 확인 요청
-            await verifyPayment(response.imp_uid, paymentId, price);
+            await verifyPayment(txId, paymentId, price);
             alert('Payment was successfully completed.');
         } catch (error) {
             console.error('Payment failed:', error.response ? error.response.data : error.message);
@@ -29,7 +31,7 @@ const PricingApiButton = ({ title, price, storeId, channelKey, totalPrice }) => 
 
     const verifyPayment = async (impUid, merchantUid, amount) => {
         try {
-            const response = await fetch(`http://localhost:8000/shopping/orders/verifyIamport/${impUid}`, {
+            const response = await fetch(`http://localhost:8000/shopping/orders/verifyIamportAndAddOrder/${impUid}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

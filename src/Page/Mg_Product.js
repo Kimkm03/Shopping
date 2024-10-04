@@ -66,7 +66,7 @@ function Mg_Product() {
                 alert("선택된 상품들의 정보 업데이트에 성공했습니다.");
                 fetchProducts();
                 setSelectedProducts(new Set()); // 선택된 상품 초기화
-                window.location.href = '/Product_mg';
+                window.location.href = '/Mg_Product';
             } else {
                 console.log('일부 상품 정보 업데이트에 실패했습니다.');
             }

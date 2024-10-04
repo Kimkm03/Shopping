@@ -66,9 +66,9 @@ function Management() {
                             <a href="Mg_Review" class="menuset2">리뷰 목록을 보여드립니다.</a>
                         </td>
                         <td class="tableset">
-                            <a href="" class="menuset">Board <br/> <p class="menuset_p">게시물 관리</p></a>
+                            <a href="Board_main" class="menuset">Board <br/> <p class="menuset_p">게시물 관리</p></a>
                             <br/>
-                            <a href="" class="menuset2">개시물 목록을 보여드립니다.</a>
+                            <a href="Board_main" class="menuset2">개시물 목록을 보여드립니다.</a>
                         </td>
                     </tr>
                     <tr>
