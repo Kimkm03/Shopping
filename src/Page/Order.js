@@ -1,57 +1,121 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Header from '../Components/Header'; // Header 컴포넌트를 import 합니다.
 import Footer from '../Components/Footer';
+import ProductInfo from '../Components/ProductInfo';
 import './Order.css';
 
-function Order(){
-    return(
-    <div> 
-        <Header />
-        <section className="order_datail">
-            <h2>주문조회</h2>
-            <p style={{fontweight: 'bold'}}>주문내역 조회</p>
-            <table className="order_history">
-                
-                <thead>
-                    <tr>
-                        <th className="or_no">No</th>
-                        <th className="or_day">주문일자</th>
-                        <th className="or_num">주문번호</th>
-                        <th className="or_name">상품명</th>
-                        <th className="or_count">수량</th>
-                        <th className="or_price">가격</th>
-                        <th className="or_member">주문처리상태</th>
-                    </tr>
-                </thead>
-                <tr className="order_list">
-                    <td>1</td>
-                    <td>0000-00-00</td>
-                    <td>00000000</td>
-                    <td><a href="" style={{textDecoration: 'none', color: 'black'}}>조원들은 무엇을할까</a></td>
-                    <td>500</td>
-                    <td>500,000</td>
-                    <td> 구매확정<br/><br/>
-                        <a href="write_review.html"><button className="go_review">후기작성</button></a></td>
-                </tr>
-                <tr className="order_list">
-                    <td>1</td>
-                    <td>0000-00-00</td>
-                    <td>00000000</td>
-                    <td><a href="" style={{textDecoration: 'none', color: 'black'}}>조원들은 무엇을할까</a></td>
-                    <td>500</td>
-                    <td>500,000</td>
-                    <td> 배송완료<br/><br/>
-                        <button className="go_deliver">배송조회</button></td>
-                </tr>
-            
-            </table>
-            <div>
-                <ul className="paging">
-                </ul>
-            </div>
-        </section>
-        <Footer />
-    </div>
+function Order() {
+    const [memberData, setMemberData] = useState(null);
+    const [orderData, setOrderData] = useState(null);
+    const memid = sessionStorage.getItem("memid"); // memId가 sessionStorage에 제대로 저장되어 있는지 확인
+
+    // 회원 데이터 가져오기
+    useEffect(() => {
+        const fetchMemberData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8000/shopping/api/mypage/${memid}`);
+                setMemberData(response.data);
+            } catch (error) {
+                console.error('Failed to fetch member data:', error);
+                // 네트워크 오류 등으로 요청이 실패할 경우 적절히 처리
+                alert('서버에서 데이터를 받아올 수 없습니다. 나중에 다시 시도해주세요.');
+            }
+        };
+
+        if (memid) {
+            fetchMemberData();
+        }
+    }, [memid]);
+
+    useEffect(() => {
+        const fetchOrderAndProductData = async () => {
+            if (memberData && memberData.memnum) {
+                try {
+                    // 주문 데이터를 가져옴
+                    const orderResponse = await axios.get(`http://localhost:8000/shopping/api/orderdetail/${memberData.memnum}`);
+                    const fetchedOrderData = orderResponse.data;
+                    setOrderData(fetchedOrderData);
+                } catch (error) {
+                    console.error('Failed to fetch order data:', error);
+                    alert('서버에서 데이터를 받아올 수 없습니다. 나중에 다시 시도해주세요.');
+                }
+            }
+        };
+
+        fetchOrderAndProductData();
+    }, [memberData]); // memberData가 변경될 때마다 주문 및 상품 데이터를 가져옵니다.
+
+
+    const formatDate = (isoDateString) => {
+        const date = new Date(isoDateString);
+        const options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+        };
+        return date.toLocaleString('ko-KR', options);
+    };
+
+    return (
+        <div>
+            <Header />
+            <section className="order_datail">
+                <h2>주문조회</h2>
+                <p style={{ fontweight: 'bold' }}>주문내역 조회</p>
+                <table className="order_history">
+
+                    <thead>
+                        <tr>
+                            <th className="or_no">No</th>
+                            <th className="or_day">주문일자</th>
+                            <th className="or_num">주문번호</th>
+                            <th className="or_name">상품명</th>
+                            <th className="or_count">수량</th>
+                            <th className="or_price">가격</th>
+                            <th className="or_member">주문처리상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {orderData && orderData.length > 0 ? (
+                            orderData.map((order, index) => (
+                                <tr className="order_list" key={index + 1}>
+                                    <td>{index + 1}</td>
+                                    <td>{formatDate(order.orderDate)}</td>
+                                    <td>{order.impUid}</td>
+
+                                    {/* 개별 주문에 해당하는 상품 정보 로딩 */}
+                                    <ProductInfo productCode={order.productCode} />
+
+                                    <td>{order.orderPrice}</td>
+                                    <td>
+                                        구매확정<br /><br />
+                                        <a href="write_review.html">
+                                            <button className="go_review">후기작성</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan={6} style={{ textAlign: 'center' }}>주문 내역이 없습니다.</td>
+                            </tr>
+                        )}
+
+
+                    </tbody>
+                </table>
+                <div>
+                    <ul className="paging">
+                    </ul>
+                </div>
+            </section>
+            <Footer />
+        </div>
     );
 };
 

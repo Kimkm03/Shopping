@@ -18,6 +18,7 @@ function Payment() {
     const [memberData, setMemberData] = useState(null);
     const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
     const [isListeningForPostcode, setIsListeningForPostcode] = useState(false);
+    const [orderRequest, setOrderRequest] = useState(null);
     const memid = sessionStorage.getItem("memid");
     const storeId = 'store-cc5c0f67-cf0f-45b3-bc8e-5b2b46921971';
     const channelKey = 'channel-key-d6f10cc6-a4e1-42bb-bf9d-15c432ea39a3';
@@ -253,6 +254,21 @@ function Payment() {
             };
         }
     }, [isListeningForPostcode]); 
+
+    useEffect(() => {
+        // memberData와 cartItems가 불러와진 후에 orderRequest 생성
+        if (memberData && cartItems.length && totalPrice > 0) {
+            setOrderRequest({
+                userCode: memberData.memnum,
+                productCode: cartItems[0].productId,  // cartItems에서 productId 가져오기
+                shippingAddress: memberData.firstaddress,  // memberData에서 주소 가져오기
+                productSize: cartItems[0].size,  // 첫 번째 상품의 사이즈
+                productColor: cartItems[0].color,  // 첫 번째 상품의 색상
+                request: '문 앞에 놔주세요',  // 고정된 요청 메시지
+                orderPrice: totalPrice  // 예시 가격
+            });
+        }
+    }, [memberData, cartItems]);  // memberData와 cartItems가 변경될 때마다 실행
 
     return (
         <div>
@@ -676,6 +692,7 @@ function Payment() {
                                 storeId={storeId}
                                 channelKey={channelKey}
                                 totalPrice={totalPrice}
+                                orderRequest={orderRequest}
                             />
                         </div>{/**<!-- 이용 약관 및 동의 끝--> */}
                         <div className="helparea">
