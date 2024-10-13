@@ -30,6 +30,11 @@ import Mg_Member from './Page/Mg_Member';
 import Mg_Orderlist from './Page/Mg_Orderlist';
 import Mg_Review from './Page/Mg_Review';
 import Mg_Total from './Page/Mg_Total';
+import Mg_Inquiry from './Page/Mg_Inquiry';
+import Write_inquiry from './Page/Write_inquiry';
+import Write_inquiry_detail from './Page/Write_inquiry_detail';
+import Write_inquiry_reply from './Page/Write_inquiry_reply';
+
 
 
 function App() {
@@ -66,6 +71,10 @@ function App() {
             <Route path="/Mg_Orderlist" element={<Mg_Orderlist />} />
             <Route path="/Mg_Review" element={<Mg_Review />} />
             <Route path="/Mg_Total" element={<Mg_Total />} />
+            <Route path="/Mg_Inquiry" element={<Mg_Inquiry />} />
+            <Route path="/Write_inquiry" element={<Write_inquiry />} />
+            <Route path="/Write_inquiry_detail" element={<Write_inquiry_detail />} />
+            <Route path="/Write_inquiry_reply" element={<Write_inquiry_reply />} />
           </Routes>
       </div>
     </Router>

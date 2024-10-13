@@ -1,7 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 import * as PortOne from "@portone/browser-sdk/v2";
 
-const PricingApiButton = ({ title, price, storeId, channelKey, totalPrice, orderRequest }) => {
+const PricingApiButton = ({ title, price, storeId, channelKey, totalPrice, orderRequest, cartItemId }) => {
     const handlePayment = async (event) => {
         event.preventDefault(); // 기본 폼 제출 방지
         try {
@@ -26,14 +27,14 @@ const PricingApiButton = ({ title, price, storeId, channelKey, totalPrice, order
             }
 
             // 서버로 결제 확인 요청 (orderRequest 전달)
-            await verifyPayment(txId, paymentId, price, orderRequest);
+            await verifyPayment(txId, paymentId, price, orderRequest, cartItemId);
         } catch (error) {
             console.error('Payment failed:', error.response ? error.response.data : error.message);
             alert('Payment failed. Please try again.');
         }
     };
 
-    const verifyPayment = async (impUid, merchantUid, amount, orderRequest) => {
+    const verifyPayment = async (impUid, merchantUid, amount, orderRequest, cartItemId) => {
         try {
             const response = await fetch(`http://localhost:8000/shopping/api/verifyIamportAndAddOrder/${merchantUid}`, {
                 method: 'POST',
@@ -51,6 +52,7 @@ const PricingApiButton = ({ title, price, storeId, channelKey, totalPrice, order
                     productColor: orderRequest.productColor,
                     request: orderRequest.request,
                     orderPrice: orderRequest.orderPrice,
+                    count: orderRequest.count
                 }),
             });
 
@@ -63,12 +65,56 @@ const PricingApiButton = ({ title, price, storeId, channelKey, totalPrice, order
             // 성공적인 응답 처리
             const result = await response.json();
             console.log('주문이 성공적으로 완료되었습니다:', result);
-            alert('주문이 성공적으로 완료되었습니다!');
-            window.location.href = '/order';
+            try {
+                await updateProductQuantity(orderRequest.productCode, orderRequest.count);
+                console.log('상품 수량이 성공적으로 업데이트되었습니다.');
+                try{
+                    await deleteCateItem(cartItemId);
+                    alert('주문이 성공적으로 완료되었습니다!');
+                    window.location.href = '/order';
+                } catch (error){
+                    console.error('카트 업데이트 중 오류 발생:', error);
+                }
+            } catch (error) {
+                console.error('상품 수량 업데이트 중 오류 발생:', error);
+            }
 
         } catch (error) {
             console.error('Verification error:', error);
             alert('결제 검증 중 오류가 발생했습니다.');
+        }
+    };
+
+    // 카트 아이템 삭제 함수
+    const deleteCateItem = async (cartItemId) => {
+        try{
+            const response = await axios.post(`http://localhost:8000/shopping/api/cart/item/deleteCartItem/${cartItemId}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(response.data);
+            if (response.data.status === 200 && response.data.data === 1) {
+                console.log('장바구니 삭제 완료');
+            } else if (response.data.status === 404 && response.data.data === -1) {
+                console.log('카트를 찾지 못했습니다.');
+            } else {
+                console.log('회원탈퇴에 실패했습니다.');
+            }
+        } catch(error){
+            console.error('There was an error!', error);
+        }
+    }
+
+    // 상품 수량 업데이트 함수
+    const updateProductQuantity = async (productCode, orderQuantity) => {
+        try {
+            const response = await axios.put(`http://localhost:8000/shopping/api/products/${productCode}/update-quantity`, {
+                orderQuantity: orderQuantity
+            });
+            return response.data;
+        } catch (error) {
+            throw new Error('상품 수량 업데이트 실패');
         }
     };
 

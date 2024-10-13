@@ -1,4 +1,4 @@
-h2 {
+.joinh2 {
     position: relative;
     text-align: center;
     color: rgb(81, 79, 79);
@@ -59,7 +59,7 @@ h2 {
     border: 3px solid white;
     box-shadow: 0 0 0 1.6px black;
 }
-
+/*
 td{
     border: 1px solid;
     border-color: gray;
@@ -68,6 +68,23 @@ td{
     padding: 20px;
     font-size: 15px;
     
+}*/
+
+.join_section_table1 > tbody > tr > td{
+    border: 1px solid;
+    border-color: gray;
+    border-left:none;
+    border-right: none;
+    padding: 20px;
+    font-size: 15px;
+}
+.join_section_table2 > tbody > tr > td{
+    border: 1px solid;
+    border-color: gray;
+    border-left:none;
+    border-right: none;
+    padding: 20px;
+    font-size: 15px;
 }
 
 .set{

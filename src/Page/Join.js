@@ -202,7 +202,7 @@ function Join() {
       <Header />
       <section className='join_section'>
         <div className="back">
-          <h2>회원 가입</h2>
+          <h2 className='joinh2'>회원 가입</h2>
           <p className='member_access'>회원인증</p>
           <br />
           <table className="join_section_table1">

@@ -73,6 +73,7 @@
     border-color: grey;
     width: 300px;
     height: 200px;
+    text-align: center;
 }
 .tableset :hover{
     color: grey;

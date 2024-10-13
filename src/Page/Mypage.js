@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import './Mypage.css';
@@ -70,9 +71,9 @@ function Mypage() {
                   <p className="menuset_p">배송조회</p>
                 </a>
                 <br />
-                <a href="Delivery_check" className="menuset2">
-                  고객님께서 주문하신 상품의 배송조회를 하실 수 있습니다.
-                </a>
+                <Link to="/Delivery_check" className="menuset2">
+                고객님께서 주문하신 상품의 배송조회를 하실 수 있습니다.
+                </Link>
               </td>
               <td className="tableset">
                 <a href="order" className="menuset">
@@ -80,9 +81,9 @@ function Mypage() {
                   <p className="menuset_p">주문내역조회</p>
                 </a>
                 <br />
-                <a href="order.html" className="menuset2">
-                  고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.
-                </a>
+                <Link to="/order" className="menuset2">
+                고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.
+                </Link>
               </td>
               <td className="tableset">
                 <a href="modify" className="menuset">
@@ -90,9 +91,9 @@ function Mypage() {
                   <p className="menuset_p">회원정보수정</p>
                 </a>
                 <br />
-                <a href="modify.html" className="menuset2">
-                  회원이신 고객님의 개인정보를 관리하는 공간입니다.
-                </a>
+                <Link to="/modify" className="menuset2">
+                회원이신 고객님의 개인정보를 관리하는 공간입니다.
+                </Link>
               </td>
               <td className="tableset">
                 <a href="wishlist" className="menuset">
@@ -100,9 +101,9 @@ function Mypage() {
                   <p className="menuset_p">관심 상품</p>
                 </a>
                 <br />
-                <a href="wishlist.html" className="menuset2">
-                  관심 상품으로 등록하신 상품의 목록을 보여드립니다.
-                </a>
+                <Link to="/wishlist" className="menuset2">
+                관심 상품으로 등록하신 상품의 목록을 보여드립니다.
+                </Link>
               </td>
               <td className="tableset">
                 <a href="board_main" className="menuset">
@@ -110,9 +111,9 @@ function Mypage() {
                   <p className="menuset_p">게시물 관리</p>
                 </a>
                 <br />
-                <a href="board_main.html" className="menuset2">
-                  관심 상품으로 등록하신 상품의 목록을 보여드립니다.
-                </a>
+                <Link to="/board_main" className="menuset2">
+                관심 상품으로 등록하신 상품의 목록을 보여드립니다.
+                </Link>
               </td>
             </tr>
           </tbody>

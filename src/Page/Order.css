@@ -3,7 +3,7 @@
     max-width: 1300px;
     margin: 80px auto;
 }
-h2{
+.orderh2{
     text-align: center;
     color: rgb(81, 79, 79);
 }
@@ -81,8 +81,22 @@ h2{
     height: 30px;
 }
 
+.order_product{
+    text-align: center;
+    align-items: center;
+}
 
+.order_productbox{
+    display: flex;
+    align-items: center;
+}
+.order_productimg{
+    padding: 20px 20px 20px 100px;
+}
 
+.order_productName{
+    text-align: center;
+}
 
 .paging{
     text-align: center;

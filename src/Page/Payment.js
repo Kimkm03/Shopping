@@ -265,7 +265,8 @@ function Payment() {
                 productSize: cartItems[0].size,  // 첫 번째 상품의 사이즈
                 productColor: cartItems[0].color,  // 첫 번째 상품의 색상
                 request: '문 앞에 놔주세요',  // 고정된 요청 메시지
-                orderPrice: totalPrice  // 예시 가격
+                orderPrice: totalPrice , // 예시 가격
+                count: cartItems[0].quantity
             });
         }
     }, [memberData, cartItems]);  // memberData와 cartItems가 변경될 때마다 실행
@@ -480,7 +481,7 @@ function Payment() {
                                                             )}
                                                         </li>
                                                         {cartItems[0] && (
-                                                            <li>수량: {cartItems[0].count}</li>
+                                                            <li>수량: {cartItems[0].quantity}</li>
                                                         )}
                                                     </ul>
                                                     <div>
@@ -693,6 +694,7 @@ function Payment() {
                                 channelKey={channelKey}
                                 totalPrice={totalPrice}
                                 orderRequest={orderRequest}
+                                {...(cartItems.length > 0 && { cartItemId: cartItems[0].id })} // cartItems가 있을 때만 cartItemId 전달
                             />
                         </div>{/**<!-- 이용 약관 및 동의 끝--> */}
                         <div className="helparea">

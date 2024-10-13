@@ -1,0 +1,22 @@
+
+
+
+
+.inquiryreply{
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 20px 20px 20px 20px;
+}
+.iqreplytxt{
+    width: 500px;
+    height: 50px;
+    padding: 20px;
+}
+.inquiry_reply_save_btn{
+    background-color: black;
+    color: #ffffff;
+    float: right;
+    padding: 5px;
+    border-radius: 5px;
+    border-color: black;
+}/*Write_inquiry_detail.js 코드 css입니다.*/

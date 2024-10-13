@@ -65,7 +65,7 @@ function Order() {
         <div>
             <Header />
             <section className="order_datail">
-                <h2>주문조회</h2>
+                <h2 className='orderh2'>주문조회</h2>
                 <p style={{ fontweight: 'bold' }}>주문내역 조회</p>
                 <table className="order_history">
 
@@ -90,7 +90,7 @@ function Order() {
 
                                     {/* 개별 주문에 해당하는 상품 정보 로딩 */}
                                     <ProductInfo productCode={order.productCode} />
-
+                                    <td>{order.count}</td>
                                     <td>{order.orderPrice}</td>
                                     <td>
                                         구매확정<br /><br />

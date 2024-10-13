@@ -11,6 +11,7 @@ function Product() {
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedColor, setSelectedColor] = useState('');
     const [memberData, setMemberData] = useState(null);
+    const [quantity, setQuantity] = useState(1); // 수량 상태를 1로 초기화
     const memid = sessionStorage.getItem("memid"); // memId가 sessionStorage에 제대로 저장되어 있는지 확인
 
     useEffect(() => {
@@ -92,6 +93,7 @@ function Product() {
         setSelectedColor(event.target.value);
     };
 
+
     const handleAddToCart = async () => {
         if (!selectedSize || !selectedColor) {
             alert('사이즈와 색상을 선택해주세요.');
@@ -104,14 +106,13 @@ function Product() {
             color: selectedColor,
             price: product.price,
             count: product.pcount,
-            quantity: 1 // 예시로 1로 설정, 실제 구현에 따라 조정 가능
+            quantity: quantity // 예시로 1로 설정, 실제 구현에 따라 조정 가능
         };
 
         try {
             const response = await axios.post(`http://localhost:8000/shopping/api/cart/${memberData.memnum}/${productId}/add`, cartItem);
             if (response.data.status === 200) {
                 alert('장바구니에 상품이 추가되었습니다.');
-                sessionStorage.setItem('productName', product.pname);
                 window.location.href = `/Product/${productId}`;
             } else {
                 alert('장바구니 추가에 실패했습니다.');
@@ -119,6 +120,24 @@ function Product() {
         } catch (error) {
             console.error('장바구니 추가 중 오류 발생:', error);
             alert('장바구니 추가 중 오류가 발생했습니다.');
+        }
+    };
+
+    // 수량 증가 함수
+    const handleIncrease = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    };
+
+    // 수량 감소 함수 (1 이하로는 감소하지 않도록 설정)
+    const handleDecrease = () => {
+        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    };
+
+    // 수동으로 수량 변경
+    const handleQuantityChange = (e) => {
+        const value = parseInt(e.target.value, 10);
+        if (!isNaN(value) && value > 0) {
+            setQuantity(value);
         }
     };
 
@@ -153,19 +172,18 @@ function Product() {
                                     {product.discountprice > 0 ? (
                                         <>
                                             <div style={{ marginBottom: '15px' }}>
-                                                <strike><span className='sstyle2'> KRW {product.price}</span></strike>
+                                                <strike><span className='sstyle2'>KRW {product.price.toLocaleString()}</span></strike>
                                             </div>
                                             <div>
-                                                <strong><span>KRW {product.discountprice}</span></strong>
+                                                <strong><span>KRW {product.discountprice.toLocaleString()}</span></strong>
                                             </div>
                                         </>
                                     ) : (
                                         <div>
-                                            <strong><span> KRW {product.price}</span></strong>
+                                            <strong><span>KRW {product.price.toLocaleString()}</span></strong>
                                         </div>
                                     )}
                                 </div>
-
                                 <div className="choice_option">
                                     <table className="infoarea_table">
                                         <tbody>
@@ -173,7 +191,7 @@ function Product() {
                                                 <th>사이즈</th>
                                                 <td className="size_select">
                                                     <select className="size_select_option" name="" id="" value={selectedSize} onChange={handleSizeChange}>
-                                                        <option value="">--[필수]-옵션을 선택해주세요--</option>
+                                                        <option value="">--[필수]-사이즈를 선택해주세요--</option>
                                                         {renderSizeOptions()}
                                                     </select>
                                                 </td>
@@ -182,9 +200,23 @@ function Product() {
                                                 <th>색상</th>
                                                 <td className="size_select">
                                                     <select className="size_select_option" name="" id="" value={selectedColor} onChange={handleColorChange}>
-                                                        <option value="">--[필수]-옵션을 선택해주세요--</option>
+                                                        <option value="">--[필수]-색상을 선택해주세요--</option>
                                                         {renderColorOptions()}
                                                     </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>수량</th>
+                                                <td className="size_select">
+                                                    <button className='eachopbtn' onClick={handleIncrease}>+</button>
+                                                    <input
+                                                        className="each_select_option"
+                                                        type="number"
+                                                        value={quantity}
+                                                        onChange={handleQuantityChange}
+                                                        min="1"
+                                                    />
+                                                    <button className='eachopbtn' onClick={handleDecrease}>-</button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -192,11 +224,11 @@ function Product() {
                                 </div>
                                 <div className="totalprice">
                                     <strong>총 상품 금액 :</strong>
-                                    <span className="total">
-                                        <strong>
-                                            KRW {product.discountprice > 0 ? product.discountprice : product.price}
-                                        </strong>
-                                    </span>
+                                    {product.discountprice > 0 ? (
+                                        <span className="total"><strong>KRW {product.discountprice}</strong></span>
+                                    ) : (
+                                        <span className='total'><strong>KRW {product.price}</strong></span>
+                                    )}
                                 </div>
                                 <div className="product_action">
                                     <div className="btn_list">
