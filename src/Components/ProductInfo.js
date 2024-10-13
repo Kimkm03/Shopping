@@ -25,8 +25,8 @@ const ProductInfo = ({ productCode }) => {
             <td className='order_product'>
                 <Link to={`/product/${product.pnum}`} className='order_productbox'>
                     <img src={`http://localhost:8000/shopping/api/products/${product.pnum}/picture`} alt={product.pname} className='order_productimg'/>
-                    <a className='order_productName'>{product.pname}</a>
                 </Link>
+                    <a className='order_productName'>{product.pname}</a>
             </td>
         </>
     ) : (

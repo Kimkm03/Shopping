@@ -19,6 +19,15 @@ function Payment() {
     const [isPostcodeOpen, setIsPostcodeOpen] = useState(false);
     const [isListeningForPostcode, setIsListeningForPostcode] = useState(false);
     const [orderRequest, setOrderRequest] = useState(null);
+    const [deliveryData, setDeliveryData] = useState({
+        receiverName: "",
+        postcode: "",
+        receiverPhone: "",
+        receiverEmail: "",
+        firstaddress: "",
+        secondaddress: "",
+        shippingAddress: ""
+    });
     const memid = sessionStorage.getItem("memid");
     const storeId = 'store-cc5c0f67-cf0f-45b3-bc8e-5b2b46921971';
     const channelKey = 'channel-key-d6f10cc6-a4e1-42bb-bf9d-15c432ea39a3';
@@ -106,11 +115,31 @@ function Payment() {
         }
     };
 
+    // 회원 정보를 deliveryData로 설정
+    const initializeDeliveryData = (data) => {
+        setDeliveryData({
+            receiverName: data.memname || "",
+            postcode: data.postcode || "",
+            receiverPhone: data.pnumber || "",
+            receiverEmail: data.email || "",
+            firstaddress: data.firstaddress || "",
+            secondaddress: data.secondaddress || "",
+            shippingAddress: `${data.firstaddress || ""} ${data.secondaddress || ""}` // 주소 합치기
+        });
+    };
+
     useEffect(() => {
         if (memid) {
             fetchMemberData();  // 함수가 선언된 후 호출되어야 합니다
         }
     }, [memid]);
+
+    // 회원 데이터가 업데이트될 때 deliveryData를 설정
+    useEffect(() => {
+        if (memberData) {
+            initializeDeliveryData(memberData); // 회원 정보를 deliveryData에 초기화
+        }
+    }, [memberData]);
 
     useEffect(() => {
         if (memberData) {
@@ -118,20 +147,33 @@ function Payment() {
         }
     }, [memberData]);
 
+    // 신규 입력 클릭 시 초기화
     const handleNewInfoClick = () => {
-        setMemberData({
-            memname: '',
-            postcode: '',
-            firstaddress: '',
-            secondaddress: '',
-            pnumber: '',
-            email: ''
+        setDeliveryData({
+            receiverName: "",
+            postcode: "",
+            receiverPhone: "",
+            receiverEmail: "",
+            firstaddress: "",
+            secondaddress: "",
+            shippingAddress: ""
         });
     };
 
     // 회원정보와 일치 클릭 시 데이터 다시 불러오기
     const handleMemberInfoClick = () => {
-        fetchMemberData();
+        if (memberData) {
+            setDeliveryData((prevData) => ({
+                ...prevData,
+                receiverName: memberData.memname || '',
+                postcode: memberData.postcode || '',
+                receiverPhone: memberData.pnumber || '',
+                receiverEmail: memberData.email || '',
+                firstaddress: memberData.firstaddress || '',
+                secondaddress: memberData.secondaddress || '',
+                shippingAddress: `${memberData.firstaddress || ''} ${memberData.secondaddress || ''}` // 주소 합치기
+            }));
+        }
     };
 
     useEffect(() => {
@@ -195,7 +237,7 @@ function Payment() {
     const handleAddressComplete = (data) => {
         console.log('Address data received:', data);
         const { address, zonecode } = data;
-        setMemberData(prevData => ({
+        setDeliveryData(prevData => ({
             ...prevData,
             firstaddress: address,
             postcode: zonecode
@@ -239,7 +281,7 @@ function Payment() {
                 if (event.origin !== window.location.origin) return; // 보안 체크
 
                 const { address, zonecode } = event.data;
-                setMemberData(prevData => ({
+                setDeliveryData(prevData => ({
                     ...prevData,
                     firstaddress: address,
                     postcode: zonecode
@@ -253,7 +295,15 @@ function Payment() {
                 window.removeEventListener('message', handlePostMessage);
             };
         }
-    }, [isListeningForPostcode]); 
+    }, [isListeningForPostcode]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setDeliveryData(prevState => ({
+            ...prevState,
+            [name]: value // 입력된 값으로 업데이트
+        }));
+    };
 
     useEffect(() => {
         // memberData와 cartItems가 불러와진 후에 orderRequest 생성
@@ -261,15 +311,19 @@ function Payment() {
             setOrderRequest({
                 userCode: memberData.memnum,
                 productCode: cartItems[0].productId,  // cartItems에서 productId 가져오기
-                shippingAddress: memberData.firstaddress,  // memberData에서 주소 가져오기
+                receiverName: deliveryData.receiverName,
+                postcode: deliveryData.postcode,
+                receiverPhone: "010" + deliveryData.receiverPhone,
+                receiverEmail: deliveryData.receiverEmail,
+                shippingAddress: deliveryData.firstaddress + deliveryData.secondaddress,
                 productSize: cartItems[0].size,  // 첫 번째 상품의 사이즈
                 productColor: cartItems[0].color,  // 첫 번째 상품의 색상
                 request: '문 앞에 놔주세요',  // 고정된 요청 메시지
-                orderPrice: totalPrice , // 예시 가격
+                orderPrice: totalPrice, // 예시 가격
                 count: cartItems[0].quantity
             });
         }
-    }, [memberData, cartItems]);  // memberData와 cartItems가 변경될 때마다 실행
+    }, [memberData, cartItems, deliveryData]);  // memberData와 cartItems가 변경될 때마다 실행
 
     return (
         <div>
@@ -354,7 +408,15 @@ function Payment() {
                                             <tbody>
                                                 <tr>
                                                     <th>받는 사람</th>
-                                                    <td><input type="text" className="overlap3" value={memberData?.memname || ''} /></td>
+                                                    <td>
+                                                        <input
+                                                            type="text"
+                                                            className="overlap3"
+                                                            name="receiverName"
+                                                            value={deliveryData.receiverName}
+                                                            onChange={handleChange}
+                                                        />
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>주소</th>
@@ -364,10 +426,12 @@ function Payment() {
                                                                 <input
                                                                     id="postcode"
                                                                     className="ad_input overlap3"
+                                                                    name='postcode'
                                                                     type="text"
                                                                     placeholder="우편번호"
                                                                     readOnly
-                                                                    value={memberData?.postcode || ''}
+                                                                    value={deliveryData.postcode}
+                                                                    onChange={handleChange}
                                                                 />
                                                                 <button id="ad_btn" className="ad_btn overlap5" type='button' onClick={openPostcodePopup}>주소검색</button>
                                                                 {isPostcodeOpen && (
@@ -383,19 +447,23 @@ function Payment() {
                                                                 <input
                                                                     id="address"
                                                                     className="ad_input_2 overlap3"
+                                                                    name='firstaddress'
                                                                     type="text"
                                                                     placeholder="기본 주소"
                                                                     readOnly
-                                                                    value={memberData?.firstaddress || ''}
+                                                                    value={deliveryData.firstaddress}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </li>
                                                             <li>
                                                                 <input
                                                                     id="detailaddress"
                                                                     className="ad_input_2 overlap3"
+                                                                    name='secondaddress'
                                                                     type="text"
                                                                     placeholder="나머지 주소"
-                                                                    value={memberData?.secondaddress || ''}
+                                                                    value={deliveryData.secondaddress}
+                                                                    onChange={handleChange}
                                                                 />
                                                             </li>
                                                         </ul>
@@ -405,7 +473,14 @@ function Payment() {
                                                     <th>휴대전화</th>
                                                     <td>
                                                         <div className="call_div">
-                                                            <select name="" id="" className="overlap4">
+                                                            <select
+                                                                value={deliveryData.receiverPhone.split('-')[0] || ''} // 선택된 번호
+                                                                onChange={(e) => {
+                                                                    const newPhone = `${e.target.value}-${deliveryData.receiverPhone.split('-')[1] || ''}-${deliveryData.receiverPhone.split('-')[2] || ''}`;
+                                                                    setDeliveryData({ ...deliveryData, receiverPhone: newPhone });
+                                                                }}
+                                                                className="overlap4"
+                                                            >
                                                                 <option value="010">010</option>
                                                                 <option value="011">011</option>
                                                                 <option value="016">016</option>
@@ -417,13 +492,21 @@ function Payment() {
                                                             <input
                                                                 type="text"
                                                                 className="overlap3"
-                                                                value={memberData?.pnumber?.split('-')[1] || ''}
+                                                                value={deliveryData.receiverPhone.split('-')[1] || ''} // 두 번째 부분
+                                                                onChange={(e) => {
+                                                                    const newPhone = `${deliveryData.receiverPhone.split('-')[0] || ''}-${e.target.value}-${deliveryData.receiverPhone.split('-')[2] || ''}`;
+                                                                    setDeliveryData({ ...deliveryData, receiverPhone: newPhone });
+                                                                }}
                                                             />
                                                             -
                                                             <input
                                                                 type="text"
                                                                 className="overlap3"
-                                                                value={memberData?.pnumber?.split('-')[2] || ''}
+                                                                value={deliveryData.receiverPhone.split('-')[2] || ''} // 세 번째 부분
+                                                                onChange={(e) => {
+                                                                    const newPhone = `${deliveryData.receiverPhone.split('-')[0] || ''}-${deliveryData.receiverPhone.split('-')[1] || ''}-${e.target.value}`;
+                                                                    setDeliveryData({ ...deliveryData, receiverPhone: newPhone });
+                                                                }}
                                                             />
                                                         </div>
                                                     </td>
@@ -435,9 +518,20 @@ function Payment() {
                                                             <input
                                                                 type="text"
                                                                 className="overlap3"
-                                                                value={memberData?.email?.split('@')[0] || ''}
+                                                                value={deliveryData.receiverEmail.split('@')[0] || ''} // 이메일 아이디
+                                                                onChange={(e) => {
+                                                                    const newEmail = `${e.target.value}@${deliveryData.receiverEmail.split('@')[1] || 'naver.com'}`;
+                                                                    setDeliveryData({ ...deliveryData, receiverEmail: newEmail });
+                                                                }}
                                                             /> @
-                                                            <select name="" id="" className="overlap4">
+                                                            <select
+                                                                value={deliveryData.receiverEmail.split('@')[1] || 'naver.com'} // 이메일 도메인
+                                                                onChange={(e) => {
+                                                                    const newEmail = `${deliveryData.receiverEmail.split('@')[0] || ''}@${e.target.value}`;
+                                                                    setDeliveryData({ ...deliveryData, receiverEmail: newEmail });
+                                                                }}
+                                                                className="overlap4"
+                                                            >
                                                                 <option value="naver.com">naver.com</option>
                                                                 <option value="daum.net">daum.net</option>
                                                                 <option value="nate.com">nate.com</option>

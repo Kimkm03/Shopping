@@ -61,6 +61,27 @@ function Order() {
         return date.toLocaleString('ko-KR', options);
     };
 
+    const getStatusText = (status) => {
+        switch (status) {
+            case 'PENDING':
+                return '결제 대기 중';
+            case 'PAID':
+                return '결제완료';
+            case 'PREPARING_SHIPMENT':
+                return '배송 준비 중';
+            case 'IN_TRANSIT':
+                return '배송 중';
+            case 'DELIVERED':
+                return '배송완료';
+            case 'REFUNDED':
+                return '환불';
+            case 'EXCHANGED':
+                return '교환';
+            default:
+                return '알 수 없음'; // 예외 처리
+        }
+    };
+
     return (
         <div>
             <Header />
@@ -93,7 +114,7 @@ function Order() {
                                     <td>{order.count}</td>
                                     <td>{order.orderPrice}</td>
                                     <td>
-                                        구매확정<br /><br />
+                                        {getStatusText(order.orderStatus)}<br /><br />
                                         <a href="write_review.html">
                                             <button className="go_review">후기작성</button>
                                         </a>
