@@ -313,7 +313,7 @@ function Payment() {
                 productCode: cartItems[0].productId,  // cartItems에서 productId 가져오기
                 receiverName: deliveryData.receiverName,
                 postcode: deliveryData.postcode,
-                receiverPhone: "010" + deliveryData.receiverPhone,
+                receiverPhone: deliveryData.receiverPhone,
                 receiverEmail: deliveryData.receiverEmail,
                 shippingAddress: deliveryData.firstaddress + deliveryData.secondaddress,
                 productSize: cartItems[0].size,  // 첫 번째 상품의 사이즈
@@ -474,7 +474,7 @@ function Payment() {
                                                     <td>
                                                         <div className="call_div">
                                                             <select
-                                                                value={deliveryData.receiverPhone.split('-')[0] || ''} // 선택된 번호
+                                                                value={deliveryData.receiverPhone.split('-')[0] || '010'} // 선택된 번호
                                                                 onChange={(e) => {
                                                                     const newPhone = `${e.target.value}-${deliveryData.receiverPhone.split('-')[1] || ''}-${deliveryData.receiverPhone.split('-')[2] || ''}`;
                                                                     setDeliveryData({ ...deliveryData, receiverPhone: newPhone });
@@ -488,13 +488,14 @@ function Payment() {
                                                                 <option value="018">018</option>
                                                                 <option value="019">019</option>
                                                             </select>
+
                                                             -
                                                             <input
                                                                 type="text"
                                                                 className="overlap3"
                                                                 value={deliveryData.receiverPhone.split('-')[1] || ''} // 두 번째 부분
                                                                 onChange={(e) => {
-                                                                    const newPhone = `${deliveryData.receiverPhone.split('-')[0] || ''}-${e.target.value}-${deliveryData.receiverPhone.split('-')[2] || ''}`;
+                                                                    const newPhone = `${deliveryData.receiverPhone.split('-')[0] || '010'}-${e.target.value}-${deliveryData.receiverPhone.split('-')[2] || ''}`;
                                                                     setDeliveryData({ ...deliveryData, receiverPhone: newPhone });
                                                                 }}
                                                             />
@@ -504,7 +505,7 @@ function Payment() {
                                                                 className="overlap3"
                                                                 value={deliveryData.receiverPhone.split('-')[2] || ''} // 세 번째 부분
                                                                 onChange={(e) => {
-                                                                    const newPhone = `${deliveryData.receiverPhone.split('-')[0] || ''}-${deliveryData.receiverPhone.split('-')[1] || ''}-${e.target.value}`;
+                                                                    const newPhone = `${deliveryData.receiverPhone.split('-')[0] || '010'}-${deliveryData.receiverPhone.split('-')[1] || ''}-${e.target.value}`;
                                                                     setDeliveryData({ ...deliveryData, receiverPhone: newPhone });
                                                                 }}
                                                             />

@@ -1,51 +1,73 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import Header from '../Components/Header'; // Header 컴포넌트를 import 합니다.
 import Footer from '../Components/Footer';
 import './Write_inquiry_detail.css';
 
-function Write_inquiry_detail(){
-    
-    return(
+function Write_inquiry_detail() {
+  const { boardId } = useParams();
+  const [board, setBoard] = useState(null);
+
+  useEffect(() => {
+    fetchBoard();
+  }, [boardId]);
+
+  const fetchBoard = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/shopping/api/board/${boardId}`);
+      setBoard(response.data);
+    } catch (error) {
+      console.error('문의 정보를 불러오는 중 오류 발생:', error);
+    }
+  };
+
+  return (
     <div>
-        <Header />
-        <section class="write_inquiry_section">
-      <br /><br /><br />
-      <h2>문의하기</h2>
-      <br /><br /><br />
-      
-      
-      <div>
-        <p>제목 :</p>
-        <br />  
-        <span>
-            배송 문의입니다.
-        </span>
-      </div>
-      <br />
-      <div>
-        <p>내용 :</p>
-        <br />
-        <span>
-            금일 주문건은 언제 배송이 되나요?
-        </span>
-      </div>
-      <br /><br /><br />
-      <div className='inquiryreply'>
-        <p>답변 :</p>
-        <br />
-        <span>
-            금일 16시 이전 주문건은 당일 배송으로 업체에 전달하여 2~4일 이내로 도착할 것으로 예상됩니다. 감사합니다.
+      <Header />
+      <section class="write_inquiry_section">
+        <br /><br /><br />
+        <h2>문의하기</h2>
+        <br /><br /><br />
 
-        </span>
-      </div>
-      <br /><br /><br />
-      
 
-      <table></table>
-    </section>
-        <Footer />
+        <div>
+          <p>제목 :</p>
+          <br />
+          {board && (  
+            <span>
+              {board.title}
+            </span>
+          )}
+        </div>
+        <br />
+        <div>
+          <p>내용 :</p>
+          <br />
+          {board && (
+            <span>
+              {board.content}
+            </span>
+          )}
+        </div>
+        <br /><br /><br />
+        <div className='inquiryreply'>
+          <p>답변 :</p>
+          <br />
+          {board && (
+            <span>
+              {board.reply}
+            </span>
+          )}
+        </div>
+        <br /><br /><br />
+
+
+        <table></table>
+      </section>
+      <Footer />
     </div>
-    );
+  );
 };
 
 export default Write_inquiry_detail;

@@ -41,41 +41,41 @@ function App() {
   return (
     <Router>
       <div className="App">
-          <Routes>
-            <Route path="/Main" element={<Main />} />
-            <Route path="/Join" element={<Join />} />
-            <Route path="/New_products" element={<New_products />} />
-            <Route path="/Best_products" element={<Best_products />} />
-            <Route path="/product/:productId" element={<Product />} />
-            <Route path="/Stylecodi" element={<Stylecodi />} />
-            <Route path="/StylecodiDetail" element={<StylecodiDetail />} />
-            <Route path="/OUTER" element={<OUTER />} />
-            <Route path="/top" element={<TOP />} />
-            <Route path="/PANTS" element={<PANTS />} />
-            <Route path="/Basket" element={<Basket />} />
-            <Route path="/Order" element={<Order />} />
-            <Route path="/Mileage_collect" element={<Mileage_collect />} />
-            <Route path="/Board_main" element={<Board_main />} />
-            <Route path="/Delivery_check" element={<Delivery_check />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/Modify" element={<Modify />} />
-            <Route path="/Payment" element={<Payment />} />
-            <Route path="/Wishlist" element={<Wishlist />} />
-            <Route path="/Write_review" element={<Write_review />} />
-            <Route path="/Mypage" element={<Mypage />} /> {/* Mypage 경로 추가 */}
-            <Route path="/Product_add" element={<Product_add />} />
-            <Route path="/Management" element={<Management />} />
-            <Route path="/Search" element={<Search />} />
-            <Route path="/Mg_Product" element={<Mg_Product />} />
-            <Route path="/Mg_Member" element={<Mg_Member />} />
-            <Route path="/Mg_Orderlist" element={<Mg_Orderlist />} />
-            <Route path="/Mg_Review" element={<Mg_Review />} />
-            <Route path="/Mg_Total" element={<Mg_Total />} />
-            <Route path="/Mg_Inquiry" element={<Mg_Inquiry />} />
-            <Route path="/Write_inquiry" element={<Write_inquiry />} />
-            <Route path="/Write_inquiry_detail" element={<Write_inquiry_detail />} />
-            <Route path="/Write_inquiry_reply" element={<Write_inquiry_reply />} />
-          </Routes>
+        <Routes>
+          <Route path="/Main" element={<Main />} />
+          <Route path="/Join" element={<Join />} />
+          <Route path="/New_products" element={<New_products />} />
+          <Route path="/Best_products" element={<Best_products />} />
+          <Route path="/product/:productId" element={<Product />} />
+          <Route path="/Stylecodi" element={<Stylecodi />} />
+          <Route path="/StylecodiDetail" element={<StylecodiDetail />} />
+          <Route path="/OUTER" element={<OUTER />} />
+          <Route path="/top" element={<TOP />} />
+          <Route path="/PANTS" element={<PANTS />} />
+          <Route path="/Basket" element={<Basket />} />
+          <Route path="/Order" element={<Order />} />
+          <Route path="/Mileage_collect" element={<Mileage_collect />} />
+          <Route path="/Board_main" element={<Board_main />} />
+          <Route path="/Delivery_check" element={<Delivery_check />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Modify" element={<Modify />} />
+          <Route path="/Payment" element={<Payment />} />
+          <Route path="/Wishlist" element={<Wishlist />} />
+          <Route path="/Write_review" element={<Write_review />} />
+          <Route path="/Mypage" element={<Mypage />} /> {/* Mypage 경로 추가 */}
+          <Route path="/Product_add" element={<Product_add />} />
+          <Route path="/Management" element={<Management />} />
+          <Route path="/Search" element={<Search />} />
+          <Route path="/Mg_Product" element={<Mg_Product />} />
+          <Route path="/Mg_Member" element={<Mg_Member />} />
+          <Route path="/Mg_Orderlist" element={<Mg_Orderlist />} />
+          <Route path="/Mg_Review" element={<Mg_Review />} />
+          <Route path="/Mg_Total" element={<Mg_Total />} />
+          <Route path="/Mg_Inquiry" element={<Mg_Inquiry />} />
+          <Route path="/Write_inquiry" element={<Write_inquiry />} />
+          <Route path="/Write_inquiry_detail/:boardId" element={<Write_inquiry_detail />} />
+          <Route path="/Write_inquiry_reply/:boardId" element={<Write_inquiry_reply />} />
+        </Routes>
       </div>
     </Router>
   );
