@@ -7,6 +7,8 @@ import './Management.css';
 
 function Management() {
     const [memberCount, setMemberCount] = useState(0);
+    const [todayOrderCount, setTodayOrderCount] = useState(0);
+    const [totalOrderCount, setTotalOrderCount] = useState(0);
 
     useEffect(() => {
         const fetchMemberCount = async () => {
@@ -22,6 +24,36 @@ function Management() {
         fetchMemberCount();
     }, []);
 
+    useEffect(() => {
+        const fetchTodayOrderCount = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/shopping/api/todayOrders');
+                setTodayOrderCount(response.data);  // 받아온 데이터의 길이를 상태로 설정
+            } catch (error) {
+                console.error('Error fetching member count:', error);
+                setTodayOrderCount(0);  // 에러 발생 시 0으로 설정
+            }
+        };
+
+        fetchTodayOrderCount();
+    }, []);
+
+    useEffect(() => {
+        const fetchTotalOrderCount = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/shopping/api/totalOrders');
+                setTotalOrderCount(response.data);  // 받아온 데이터의 길이를 상태로 설정
+            } catch (error) {
+                console.error('Error fetching member count:', error);
+                setTotalOrderCount(0);  // 에러 발생 시 0으로 설정
+            }
+        };
+
+        fetchTotalOrderCount();
+    }, []);
+
+
+
     return(
         <div>
             <Header />
@@ -32,9 +64,9 @@ function Management() {
                 <table class="management_section_table1">
                     <tr class="table1_num">
                         <td><span>9,999,999,999</span></td>
-                        <td><span>9,999,999,999</span></td>
+                        <td><span>{todayOrderCount}</span></td>
                         <td><span>{memberCount}</span></td>
-                        <td><span>9,999,999,999</span></td>
+                        <td><span>{totalOrderCount}</span></td>
                     </tr>
                     <tr class="table1_text">
                         <td>금일 방문자</td>

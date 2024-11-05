@@ -21,7 +21,7 @@ function Footer() {
                                 <div className='end_logo'></div>
                             </td>
                             <td className="end">
-                                OWNER . 강민태, 김경모, 정건아 <br />
+                                OWNER . 강민태, 김경모 <br />
                                 ADDRESS . 부천대학교 <br />
                                 졸업작품
                             </td>

@@ -7,6 +7,7 @@ import './Mg_Product.css';
 function Mg_Product() {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState(new Set()); // 선택된 상품들의 pnum을 저장할 Set
+    const [selectAll, setSelectAll] = useState(false);
     const [productStates, setProductStates] = useState({}); // 상품별 상태 정보를 저장할 객체
     const [discountprice, setDiscountPrice] = useState('');
 
@@ -77,15 +78,25 @@ function Mg_Product() {
 
 
     const handleCheckboxChange = (e, pnum) => {
-        const isChecked = e.target.checked;
-
-        // 선택된 상품들을 관리하는 Set 업데이트
-        if (isChecked) {
-            setSelectedProducts(prevSelected => new Set([...prevSelected, pnum]));
+        const newSelectedProducts = new Set(selectedProducts);
+        if (e.target.checked) {
+            newSelectedProducts.add(pnum);
         } else {
-            const updatedSelected = new Set(selectedProducts);
-            updatedSelected.delete(pnum);
-            setSelectedProducts(updatedSelected);
+            newSelectedProducts.delete(pnum);
+        }
+        setSelectedProducts(newSelectedProducts);
+        setSelectAll(newSelectedProducts.size === products.length);
+    };
+
+    const handleSelectAll = (e) => {
+        const isChecked = e.target.checked;
+        setSelectAll(isChecked);
+
+        if (isChecked) {
+            const allProductIds = new Set(products.map(product => product.pnum));
+            setSelectedProducts(allProductIds);
+        } else {
+            setSelectedProducts(new Set());
         }
     };
 
@@ -148,7 +159,9 @@ function Mg_Product() {
                         <table id="producttable" className="producttable">
                             <thead>
                                 <tr>
-                                    <th style={{ width: "3%" }}><input type="checkbox" /></th>
+                                    <th style={{ width: "3%" }}><input type="checkbox"
+                                        onChange={handleSelectAll}
+                                        checked={selectAll} /></th>
                                     <th style={{ width: "30%" }}>상품</th>
                                     <th style={{ width: "8%" }}>정가</th>
                                     <th style={{ width: "8%" }}>판매가</th>

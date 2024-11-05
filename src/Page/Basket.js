@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import axios from 'axios';
@@ -11,7 +11,10 @@ function Basket() {
     const [totalPrice, setTotalPrice] = useState(0);
     const [cartId, setCartId] = useState(null);
     const [memberData, setMemberData] = useState(null);
+    const [selectedItems, setSelectedItems] = useState(new Set());
+    const [selectAll, setSelectAll] = useState(false);
     const memid = sessionStorage.getItem("memid");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchMemberData = async () => {
@@ -65,14 +68,21 @@ function Basket() {
         }
     };
 
-    const calculateTotalPrice = (items) => {
-        const total = items.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+    useEffect(() => {
+        const selectedCartItems = cartItems.filter(item => selectedItems.has(item.id));
+        calculateTotalPrice(selectedCartItems);
+    }, [selectedItems]);
+
+    const calculateTotalPrice = (selectedCartItems) => {
+        const total = selectedCartItems.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
         setTotalPrice(total);
     };
+    
+    
 
     const handleDeleteItem = async (itemId) => {
         try {
-            const response = await axios.delete(`http://localhost:8000/shopping/api/cart/item/delete/${itemId}`);
+            const response = await axios.post(`http://localhost:8000/shopping/api/cart/item/deleteCartItem/${itemId}`);
             if (response.status === 200) {
                 fetchCartItems(cartId);
                 alert('상품이 장바구니에서 삭제되었습니다.');
@@ -84,6 +94,37 @@ function Basket() {
         }
     };
 
+    const handleSelectAll = (e) => {
+        const isChecked = e.target.checked;
+        setSelectAll(isChecked);
+
+        if (isChecked) {
+            const allItemIds = new Set(cartItems.map(item => item.id));
+            setSelectedItems(allItemIds);
+        } else {
+            setSelectedItems(new Set());
+        }
+    };
+
+    const handleItemCheckboxChange = (e, itemId) => {
+        const newSelectedItems = new Set(selectedItems);
+        if (e.target.checked) {
+            newSelectedItems.add(itemId);
+        } else {
+            newSelectedItems.delete(itemId);
+        }
+        setSelectedItems(newSelectedItems);
+        setSelectAll(newSelectedItems.size === cartItems.length);
+    };
+
+    const handleProceedToPayment = () => {
+        if (selectedItems.size === 0) {
+            alert("주문하실 상품을 선택해주세요");
+            return;
+        }
+        const selectedCartIds = Array.from(new Set(selectedItems));
+        navigate('/payment', { state: { selectedCartIds } });
+    };
     return (
         <div>
             <Header />
@@ -102,7 +143,10 @@ function Basket() {
                     <thead>
                         <tr className="basket_table_head">
                             <th className="wid60">NO</th>
-                            <th className="wid60"><input type="checkbox" className="basketcb" /></th>
+                            <th className="wid60"><input type="checkbox"
+                                className="basketcb"
+                                onChange={handleSelectAll}
+                                checked={selectAll} /></th>
                             <th>상품정보</th>
                             <th className="wid60">수량</th>
                             <th className="wid100">금액</th>
@@ -114,7 +158,11 @@ function Basket() {
                             cartItems.map((item, index) => (
                                 <tr key={item.id} className="basket_item_list">
                                     <td>{index + 1}</td>
-                                    <td><input type="checkbox" className="basketcb" /></td>
+                                    <td><input type="checkbox"
+                                        className="basketcb"
+                                        checked={selectedItems.has(item.id)}
+                                        onChange={(e) => handleItemCheckboxChange(e, item.id)}
+                                    /></td>
                                     <td className="basket_item">
                                         <Link to={`/product/${item.productId}`}>
                                             <img src={`http://localhost:8000/shopping/api/products/${item.productId}/picture`} alt={item.productName} />
@@ -137,7 +185,7 @@ function Basket() {
                 <br /><br />
                 <div className="total_price">총 결제 금액 :&nbsp;&nbsp;&nbsp;&nbsp; <div>{totalPrice.toLocaleString()}</div> &nbsp;&nbsp;</div>
                 <br /><br /><br />
-                <Link to="/payment"><button className="basket_buy_btn">주문하기</button></Link>
+                <button className="basket_buy_btn" onClick={handleProceedToPayment}>주문하기</button>
                 <br /><br /><br />
             </section>
             <Footer />

@@ -13,8 +13,7 @@ function Stylecodi(){
             <div class="codicontents">
                 <div class="top_div">
                     <div style={{display: 'block'}}>
-                        <a href=""><img class="top_div_img" src={`${process.env.PUBLIC_URL}/styleimg.jpg`} alt=""/>
-                        </a>
+                        <img class="top_div_img" src={`${process.env.PUBLIC_URL}/styleimg.jpg`} alt=""/>
                     </div>
                 </div>
 

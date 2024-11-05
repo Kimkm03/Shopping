@@ -33,7 +33,7 @@ function Delivery_check() {
             if (memberData && memberData.memnum) {
                 try {
                     // 주문 데이터를 가져옴
-                    const orderResponse = await axios.get(`http://localhost:8000/shopping/api/orderdetail/${memberData.memnum}`);
+                    const orderResponse = await axios.get(`http://localhost:8000/shopping/api/orderstatusdetail/${memberData.memnum}`);
                     const fetchedOrderData = orderResponse.data;
                     setOrderData(fetchedOrderData);
                 } catch (error) {

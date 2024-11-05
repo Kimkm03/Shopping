@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import DaumPostcode from 'react-daum-postcode';
 import PricingApiButton from '../Components/PricingApiButton';
 import './Payment.css';
-import Product from './Product';
 
 function Payment() {
     const [product, setProduct] = useState(null);
     const [productId, setProductId] = useState(null);
     const [productName, setProductName] = useState(sessionStorage.getItem('productName'));
     const [cartItems, setCartItems] = useState([]);
-    const [price, setPrice] = useState(0);
+    // const [price, setPrice] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
     const [cartId, setCartId] = useState(null);
     const [cartItemCount, setCartItemCount] = useState(0);
@@ -31,6 +30,8 @@ function Payment() {
     const memid = sessionStorage.getItem("memid");
     const storeId = 'store-cc5c0f67-cf0f-45b3-bc8e-5b2b46921971';
     const channelKey = 'channel-key-d6f10cc6-a4e1-42bb-bf9d-15c432ea39a3';
+    const location = useLocation();
+    const selectedCartIds = location.state?.selectedCartIds || [];
 
     useEffect(() => {
         const radioButtons = document.querySelectorAll('input[type="radio"][name="paymethod"]');
@@ -47,21 +48,21 @@ function Payment() {
         const individualCrForm = document.getElementById('individual_cr_form');
         const businessCrForm = document.getElementById('business_cr_form');
 
-        radioButtons.forEach(radio => {
-            radio.addEventListener('change', updateLabelColors);
-        });
+        // radioButtons.forEach(radio => {
+        //     radio.addEventListener('change', updateLabelColors);
+        // });
 
-        paymethodCard.addEventListener('change', toggleCashReceiptSection);
-        paymethodCash.addEventListener('change', toggleCashReceiptSection);
-        paymethodKakao.addEventListener('change', toggleCashReceiptSection);
-        yescr.addEventListener('change', toggleCashReceiptForm);
-        nocr.addEventListener('change', toggleCashReceiptForm);
-        individualCr.addEventListener('change', toggleDivisionForm);
-        businessCr.addEventListener('change', toggleDivisionForm);
+        // paymethodCard.addEventListener('change', toggleCashReceiptSection);
+        // paymethodCash.addEventListener('change', toggleCashReceiptSection);
+        // paymethodKakao.addEventListener('change', toggleCashReceiptSection);
+        // yescr.addEventListener('change', toggleCashReceiptForm);
+        // nocr.addEventListener('change', toggleCashReceiptForm);
+        // individualCr.addEventListener('change', toggleDivisionForm);
+        // businessCr.addEventListener('change', toggleDivisionForm);
 
         updateLabelColors();
-        toggleCashReceiptSection();
-        toggleDivisionForm();
+        // toggleCashReceiptSection();
+        // toggleDivisionForm();
 
         function updateLabelColors() {
             radioButtons.forEach(radio => {
@@ -74,24 +75,24 @@ function Payment() {
             });
         }
 
-        function toggleCashReceiptSection() {
-            if (paymethodCash.checked) {
-                segmentSurport.classList.remove('hidden');
-                cashReceiptSection.classList.remove('hidden');
-                toggleCashReceiptForm();
-            } else {
-                segmentSurport.classList.add('hidden');
-                cashReceiptSection.classList.add('hidden');
-            }
-        }
+        // function toggleCashReceiptSection() {
+        //     if (paymethodCash.checked) {
+        //         segmentSurport.classList.remove('hidden');
+        //         cashReceiptSection.classList.remove('hidden');
+        //         toggleCashReceiptForm();
+        //     } else {
+        //         segmentSurport.classList.add('hidden');
+        //         cashReceiptSection.classList.add('hidden');
+        //     }
+        // }
 
-        function toggleCashReceiptForm() {
-            if (yescr.checked) {
-                cashReceiptForm.classList.remove('hidden');
-            } else {
-                cashReceiptForm.classList.add('hidden');
-            }
-        }
+        // function toggleCashReceiptForm() {
+        //     if (yescr.checked) {
+        //         cashReceiptForm.classList.remove('hidden');
+        //     } else {
+        //         cashReceiptForm.classList.add('hidden');
+        //     }
+        // }
 
         function toggleDivisionForm() {
             if (individualCr.checked) {
@@ -129,6 +130,10 @@ function Payment() {
     };
 
     useEffect(() => {
+        fetchCartItemCount()
+    });
+
+    useEffect(() => {
         if (memid) {
             fetchMemberData();  // 함수가 선언된 후 호출되어야 합니다
         }
@@ -144,6 +149,7 @@ function Payment() {
     useEffect(() => {
         if (memberData) {
             fetchCartId(memberData.memnum);
+
         }
     }, [memberData]);
 
@@ -176,11 +182,11 @@ function Payment() {
         }
     };
 
-    useEffect(() => {
-        if (cartId !== null) {
-            fetchCartItems(cartId);
-        }
-    }, [cartId]);
+    // useEffect(() => {
+    //     if (cartId !== null) {
+    //         fetchCartItems(cartId);
+    //     }
+    // }, [cartId]);
 
     const fetchCartId = async (memnum) => {
         try {
@@ -196,19 +202,65 @@ function Payment() {
         }
     };
 
-    const fetchCartItems = async (cartId) => {
-        try {
-            const response = await axios.get(`http://localhost:8000/shopping/api/cart/item/${cartId}/items`);
-            setCartItems(response.data);
-            setPrice(response.data.price);
-            calculateTotalPrice(response.data);
-            if (response.data.length > 0) {
-                const firstItemProductId = response.data[0].productId;
-                setProductId(firstItemProductId);
+    useEffect(() => {
+        const fetchCartItems = async () => {
+            if (selectedCartIds.length > 0) {
+                try {
+                    // 중복된 카트 ID 제거
+                    const uniqueCartIds = [...new Set(selectedCartIds)];
+
+                    // 모든 카트 ID의 아이템을 병합하여 가져오기
+                    const cartItemsPromises = uniqueCartIds.map(cartId =>
+                        axios.get(`http://localhost:8000/shopping/api/cart/item/selectItems/${cartId}`)
+                    );
+
+                    // 모든 요청이 완료될 때까지 기다리기
+                    const responses = await Promise.all(cartItemsPromises);
+
+                    // 모든 응답에서 데이터를 병합
+                    const allCartItems = responses.flatMap(response => response.data);
+
+                    console.log(allCartItems); // 모든 카트 아이템 로그
+
+                    // 기존 카트 아이템과 새로운 아이템 결합
+                    setCartItems(allCartItems);
+
+                    calculateTotalPrice(allCartItems); // 총 가격 계산
+
+                    // 첫 번째 제품 ID 설정
+                    if (allCartItems.length > 0) {
+                        const firstItemProductId = allCartItems[0].productId;
+                        setProductId(firstItemProductId);
+                    }
+                } catch (error) {
+                    if (error.response) {
+                        console.error(`HTTP 오류 발생 (상태 코드: ${error.response.status}):`, error.response.data);
+                    } else if (error.request) {
+                        console.error('서버에 요청을 보냈으나 응답이 없었습니다:', error.request);
+                    } else {
+                        console.error('요청을 설정하는 동안 오류가 발생했습니다:', error.message);
+                    }
+                    setCartItems([]); // 오류 발생 시 빈 배열 설정
+                }
+            } else {
+                console.log('선택된 장바구니 ID가 없습니다.'); // 카트 ID 없을 경우 로그
             }
+        };
+
+        fetchCartItems(); // 호출을 한 번만 수행
+    }, [selectedCartIds]); // selectedCartIds가 변경될 때만 실행
+
+
+
+
+
+
+    const fetchCartItemCount = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/shopping/api/cart/${memid}/count`);
+            setCartItemCount(response.data); // 서버에서 장바구니에 있는 상품 수량을 가져와 상태 업데이트
         } catch (error) {
-            console.error('장바구니 데이터를 가져오는 중 오류 발생:', error);
-            setCartItems([]); // 오류 발생 시 빈 배열 설정
+            console.error('장바구니 상품 수량 가져오기 실패:', error);
         }
     };
 
@@ -351,7 +403,7 @@ function Payment() {
                 <div className="payment_main">
                     <div className="nextline_1"></div>
                     <div className="payment_detail">
-                        <div className="detail_section">
+                        {/* <div className="detail_section">
                             <div className="detail_title">
                                 <h2>상품 수령</h2>
                                 ::after
@@ -369,7 +421,7 @@ function Payment() {
                                     </ul>
                                 </div>
                             </div>
-                        </div>{/*  상품 수령 끝 */}
+                        </div> 상품 수령 끝 */}
                         <div className="detail_section">
                             <div className="detail_title">
                                 <h2>배송지</h2>
@@ -556,38 +608,36 @@ function Payment() {
                                 <div className="orderarea">
                                     <div className="orderarea_div">
                                         <div className="orderlist">
-                                            <div className="orderbox">
-                                                <div className="orderbox_img">
-                                                    {product && (
-                                                        <img
-                                                            src={`http://localhost:8000/shopping/api/products/${product.pnum}/picture`}
-                                                            alt={product.pname}
-                                                        />
-                                                    )}
-                                                </div>
-                                                <div className="orderbox_detail">
-                                                    <strong>
-                                                        <a href="">{productName}</a>
-                                                    </strong>
-                                                    <ul>
-                                                        <li>
-                                                            {cartItems[0] && (
-                                                                <p className="option">[Color: {cartItems[0].color}]<br />[Size: {cartItems[0].size}]</p>
-                                                            )}
-                                                        </li>
-                                                        {cartItems[0] && (
-                                                            <li>수량: {cartItems[0].quantity}</li>
-                                                        )}
-                                                    </ul>
-                                                    <div>
-                                                        {cartItems[0] && (
-                                                            <span>KRW {cartItems[0].price}</span>
+                                            {cartItems.map((item, index) => (
+                                                <div className="orderbox" key={index}>
+                                                    <div className="orderbox_img">
+                                                        {product && (
+                                                            <img
+                                                                src={`http://localhost:8000/shopping/api/products/${item.productId}/picture`} // 각 아이템의 pnum 사용
+                                                                alt={item.productName} // 각 아이템의 pname 사용
+                                                            />
                                                         )}
                                                     </div>
+                                                    <div className="orderbox_detail">
+                                                        <strong>
+                                                            <a href="">{item.productName}</a> {/* 각 아이템의 pname 사용 */}
+                                                        </strong>
+                                                        <ul>
+                                                            <li>
+                                                                <p className="option">[Color: {item.color}]<br />[Size: {item.size}]</p>
+                                                            </li>
+                                                            <li>수량: {item.quantity}</li>
+                                                        </ul>
+                                                        <div>
+                                                            <span>KRW {item.price}</span>
+                                                        </div>
+                                                        <br />
+                                                    </div>
+                                                    <button>X</button>
                                                 </div>
-                                                <button>X</button>
-                                            </div>
-                                        </div>{/**<!-- 상품 반복 구간--> */}
+                                            ))}
+                                        </div>
+
 
                                     </div>
                                     <div className="deliver_price">
@@ -599,7 +649,7 @@ function Payment() {
                                 </div>
                             </div>
                         </div> {/**<!-- 상품리스트 끝 --> */}
-                        <div className="detail_section">
+                        {/* <div className="detail_section">
                             <div className="detail_title">
                                 <h2>적립금 사용</h2>
                                 ::after
@@ -625,7 +675,7 @@ function Payment() {
                                     </div>
                                 </div>
                             </div>
-                        </div> {/**<!-- 마일리지 끝 --> */}
+                        </div> *<!-- 마일리지 끝 --> */}
                         <div className="detail_section">
                             <div className="detail_title">
                                 <h2>결제 정보</h2>
@@ -639,10 +689,19 @@ function Payment() {
                                                 <tr>
                                                     <th>주문 상품</th>
                                                     <td>
-                                                        <span>KRW <span>{price}</span></span>
+                                                        {cartItems.length > 0 ? (
+                                                            cartItems.map((item, index) => (
+                                                                <div key={index}>
+                                                                    <span>KRW <span>{item.price}</span></span>
+                                                                    {index < cartItems.length - 1 && <br />} {/* 마지막 아이템이 아닐 경우 줄바꿈 */}
+                                                                </div>
+                                                            ))
+                                                        ) : (
+                                                            <span>상품이 없습니다.</span> // 카트가 비어있을 경우 메시지 표시
+                                                        )}
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                {/* <tr>
                                                     <th>배송비</th>
                                                     <td><span>+KRW 0</span></td>
                                                 </tr>
@@ -651,8 +710,9 @@ function Payment() {
                                                     <td className="red">
                                                         <span>-KRW<span>0</span></span>
                                                     </td>
-                                                </tr>
+                                                </tr> */}
                                             </tbody>
+
                                         </table>
                                     </div>
                                 </div>
@@ -677,20 +737,20 @@ function Payment() {
                                                     <input type="radio" id="paymethod_card" name="paymethod" value="card" checked="checked" autocomplete="off" />
                                                     <label for="paymethod_card" className="overlap2">카드 결제</label>
                                                 </span>
-                                                <span className="paymethod_choice">
+                                                {/* <span className="paymethod_choice">
                                                     <input type="radio" id="paymethod_cash" name="paymethod" value="cash" autocomplete="off" />
                                                     <label for="paymethod_cash" className="overlap2">무통장 입금</label>
                                                 </span>
                                                 <span className="paymethod_choice">
                                                     <input type="radio" id="paymethod_kakao" name="paymethod" value="kakao" autocomplete="off" />
                                                     <label for="paymethod_kakao" className="overlap2">카카오페이</label>
-                                                </span>
+                                                </span> */}
 
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="segment_surport hidden">
+                                {/* <div className="segment_surport hidden">
                                     <div className="segment_surport_2">
                                         <table className='paymenttable'>
                                             <tbody>
@@ -745,10 +805,10 @@ function Payment() {
                                             </div>
                                         </div>
                                     </div>
-                                </div>{/**<!----> */}
+                                </div>*<!----> */}
                             </div>
-                        </div>{/**<!-- 결제 수단 끝 --> */}
-                        <div className="detail_section">
+                        </div>
+                        {/* <div className="detail_section">
                             <div className="detail_title">
                                 <h2>적립 내역</h2>
                                 ::after
@@ -779,7 +839,7 @@ function Payment() {
                                     <strong><span>0 원</span></strong>
                                 </div>
                             </div>
-                        </div>{/* 적립 내역 끝*/}
+                        </div>적립 내역 끝 */}
                         <div className="finish_order_btn">
                             <div className="finish_order_btn_div"></div>
                             <PricingApiButton

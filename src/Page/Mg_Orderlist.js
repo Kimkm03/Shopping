@@ -8,7 +8,6 @@ import './Mg_Orderlist.css';
 function Mg_Orderlist() {
     const [userInfo, setUserInfo] = useState({});
     const [orderData, setOrderData] = useState([]);
-    const [selectedStatus, setSelectedStatus] = useState({});
 
     // 주문 데이터 가져오기
     useEffect(() => {
@@ -44,25 +43,13 @@ function Mg_Orderlist() {
         }
     }, [orderData]);
 
-    const handleStatusChange = (orderId, status) => {
-        setSelectedStatus((prev) => ({
-            ...prev,
-            [orderId]: status,
-        }));
-    };
-
-    const updateOrderStatus = async () => {
+    const handleStatusChange = async (orderId, status) => {
         try {
-            const requests = Object.entries(selectedStatus).map(([orderId, status]) => {
-                return axios.put(`http://localhost:8000/shopping/api/updateOrder/${orderId}`, null, {
-                    params: { orderStatus: status } // 쿼리 매개변수로 전송
-                });
+            await axios.put(`http://localhost:8000/shopping/api/updateOrder/${orderId}`, null, {
+                params: { orderStatus: status }
             });
-
-            await Promise.all(requests);
-            alert('주문 상태가 업데이트되었습니다.');
-            // 데이터 새로 고침
             fetchOrders();
+            alert('주문 상태가 업데이트되었습니다.');
         } catch (error) {
             console.error('주문 상태 업데이트 오류:', error);
             alert('주문 상태 업데이트에 실패했습니다.');
@@ -159,7 +146,6 @@ function Mg_Orderlist() {
                                 )}
                             </tbody>
                         </table>
-                        <button onClick={updateOrderStatus}>주문 상태 업데이트</button>
                     </div>
                 </div>
             </div>

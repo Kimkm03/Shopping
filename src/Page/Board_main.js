@@ -61,7 +61,7 @@ function Board_main(){
             <section className="board_main_section">
             
             
-            <h2>작성한 리뷰</h2><br/><br/>
+            {/* <h2>작성한 리뷰</h2><br/><br/>
             <table className="reviewmg_table">
                 <thead>
                     <tr>
@@ -91,7 +91,7 @@ function Board_main(){
                         <td><button className='reviewremovebtn'>삭제</button></td>
                     </tr>
                 </tbody>
-            </table>
+            </table> */}
             <br/><br/><br/>
             <h2>문의 내역</h2><br/>
             <Link to="/Write_inquiry" className='inquiry_btn'>+문의하기</Link>

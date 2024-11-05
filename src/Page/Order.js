@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../Components/Header'; // Header 컴포넌트를 import 합니다.
 import Footer from '../Components/Footer';
@@ -9,6 +10,7 @@ function Order() {
     const [memberData, setMemberData] = useState(null);
     const [orderData, setOrderData] = useState(null);
     const memid = sessionStorage.getItem("memid"); // memId가 sessionStorage에 제대로 저장되어 있는지 확인
+    const navigate = useNavigate();
 
     // 회원 데이터 가져오기
     useEffect(() => {
@@ -82,6 +84,10 @@ function Order() {
         }
     };
 
+    const handleReviewClick = (productCode) => {
+        navigate('/write_review', { state: { productCode } });
+    };
+
     return (
         <div>
             <Header />
@@ -115,9 +121,7 @@ function Order() {
                                     <td>{order.orderPrice}</td>
                                     <td>
                                         {getStatusText(order.orderStatus)}<br /><br />
-                                        <a href="write_review.html">
-                                            <button className="go_review">후기작성</button>
-                                        </a>
+                                        <button className="go_review" onClick={() => handleReviewClick(order.productCode)}>후기작성</button>
                                     </td>
                                 </tr>
                             ))

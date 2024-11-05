@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import './Product.css';
@@ -94,6 +94,32 @@ function Product() {
     };
 
 
+    const handleByNow = async () => {
+        if (!selectedSize || !selectedColor) {
+            alert('사이즈와 색상을 선택해주세요.');
+            return;
+        }
+
+        const cartItem = {
+            product_Id: product.pnum,
+            size: selectedSize,
+            color: selectedColor,
+            price: product.price,
+            count: product.pcount,
+            quantity: quantity // 예시로 1로 설정, 실제 구현에 따라 조정 가능
+        };
+
+        try {
+            const response = await axios.post(`http://localhost:8000/shopping/api/cart/${memberData.memnum}/${productId}/add`, cartItem);
+            if (response.data.status === 200) {
+                window.location.href = '/Payment';
+            } 
+        } catch (error) {
+            console.error('장바구니 추가 중 오류 발생:', error);
+            alert('오류가 발생했습니다.');
+        }
+    };
+
     const handleAddToCart = async () => {
         if (!selectedSize || !selectedColor) {
             alert('사이즈와 색상을 선택해주세요.');
@@ -143,54 +169,57 @@ function Product() {
 
     return (
         <div>
-            <Header />
-            <section className="sale_product">
-                <div className="sale_product_div">
-                    <div className="sale_product_div2">
-                        <div className="detailarea">
+    <Header />
+    <section className="sale_product">
+        <div className="sale_product_div">
+            <div className="sale_product_div2">
+                <div className="detailarea">
 
-                            <div className="imgarea">
-                                <div className="imgarea_div">
-                                    <div className="swiper-container">
-                                        <ul className="imgarea_ul">
-                                            <li>
-                                                <img src={`http://localhost:8000/shopping/api/products/${product.pnum}/picture`} alt={product.pname} />
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <div className="imgarea">
+                        <div className="imgarea_div">
+                            <div className="swiper-container">
+                                <ul className="imgarea_ul">
+                                    <li>
+                                        <img src={`http://localhost:8000/shopping/api/products/${product.pnum}/picture`} alt={product.pname} />
+                                    </li>
+                                </ul>
                             </div>
+                        </div>
+                    </div>
 
-                            <div className="infoarea">
-                                <div className="headingarea">
-                                    <h1>{product.name}</h1>
-                                    <div className="headingarea_detail">
-                                        {product.comment}
+                    <div className="infoarea">
+                        <div className="headingarea">
+                            <h1>{product.name}</h1>
+                            <div className="headingarea_detail">
+                                {product.comment}
+                            </div>
+                        </div>
+                        <div className="product_price">
+                            {product.discountprice > 0 ? (
+                                <>
+                                    <div style={{ marginBottom: '15px' }}>
+                                        <strike><span className='sstyle2'>KRW {product.price.toLocaleString()}</span></strike>
                                     </div>
+                                    <div>
+                                        <strong><span>KRW {product.discountprice.toLocaleString()}</span></strong>
+                                    </div>
+                                </>
+                            ) : (
+                                <div>
+                                    <strong><span>KRW {product.price.toLocaleString()}</span></strong>
                                 </div>
-                                <div className="product_price">
-                                    {product.discountprice > 0 ? (
-                                        <>
-                                            <div style={{ marginBottom: '15px' }}>
-                                                <strike><span className='sstyle2'>KRW {product.price.toLocaleString()}</span></strike>
-                                            </div>
-                                            <div>
-                                                <strong><span>KRW {product.discountprice.toLocaleString()}</span></strong>
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <div>
-                                            <strong><span>KRW {product.price.toLocaleString()}</span></strong>
-                                        </div>
-                                    )}
-                                </div>
+                            )}
+                        </div>
+
+                        {product.productstate == "판매중" ? (
+                            <>
                                 <div className="choice_option">
                                     <table className="infoarea_table">
                                         <tbody>
                                             <tr>
                                                 <th>사이즈</th>
                                                 <td className="size_select">
-                                                    <select className="size_select_option" name="" id="" value={selectedSize} onChange={handleSizeChange}>
+                                                    <select className="size_select_option" value={selectedSize} onChange={handleSizeChange}>
                                                         <option value="">--[필수]-사이즈를 선택해주세요--</option>
                                                         {renderSizeOptions()}
                                                     </select>
@@ -199,7 +228,7 @@ function Product() {
                                             <tr>
                                                 <th>색상</th>
                                                 <td className="size_select">
-                                                    <select className="size_select_option" name="" id="" value={selectedColor} onChange={handleColorChange}>
+                                                    <select className="size_select_option" value={selectedColor} onChange={handleColorChange}>
                                                         <option value="">--[필수]-색상을 선택해주세요--</option>
                                                         {renderColorOptions()}
                                                     </select>
@@ -232,20 +261,25 @@ function Product() {
                                 </div>
                                 <div className="product_action">
                                     <div className="btn_list">
-                                        <a href="" className="buy_btn">
-                                            <span>BUY IT NOW</span>
-                                        </a>
+                                        <button className="buy_btn" onClick={handleByNow}><span>BUY IT NOW</span></button>
                                         <button className="cart_btn" onClick={handleAddToCart}>CART</button>
                                         <button className="wish_btn">WISH LIST</button>
                                     </div>
                                 </div>
+                            </>
+                        ) : (
+                            <div className="out_of_stock">
+                                <strong>현재 상품은 품절되었습니다.</strong>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
-            </section>
-            <Footer />
+            </div>
         </div>
+    </section>
+    <Footer />
+</div>
+
     );
 }
 
