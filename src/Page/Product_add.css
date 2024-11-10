@@ -19,7 +19,7 @@ body{
     width: 100%;
 }
 
-.addtable > tr{
+.addtable >tbody > tr{
     border-bottom: 1px solid grey;
 }
 

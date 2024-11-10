@@ -8,6 +8,7 @@ import Best_products from './Page/Best_products';
 import Product from './Page/Product';
 import Stylecodi from './Page/Stylecodi';
 import StylecodiDetail from './Page/StylecodiDetail';
+import StylecodiRegister from './Page/StylecodiRegister';
 import OUTER from './Page/OUTER';
 import TOP from './Page/TOP';
 import PANTS from './Page/PANTS';
@@ -48,7 +49,8 @@ function App() {
           <Route path="/Best_products" element={<Best_products />} />
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/Stylecodi" element={<Stylecodi />} />
-          <Route path="/StylecodiDetail" element={<StylecodiDetail />} />
+          <Route path="/StylecodiDetail/:styleId" element={<StylecodiDetail />} />
+          <Route path='/StylecodiRegister' element={<StylecodiRegister />} />
           <Route path="/OUTER" element={<OUTER />} />
           <Route path="/top" element={<TOP />} />
           <Route path="/PANTS" element={<PANTS />} />

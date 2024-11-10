@@ -30,11 +30,14 @@ div{
     min-height: 500px;
     float: none;
 }
+
+
 /*========================================*/
+
+
 .top_div{
     width: 100%;
     text-align: center;
-    font-size: 0;
     margin: 0;
     padding: 0;
 }
@@ -42,6 +45,102 @@ div{
     width: 100%;
     height: 400px;
 }
+
+.filterback{
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경을 어둡게 처리 */
+    
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* 필터창이 가장 위에 표시되도록 설정 */
+}
+.filterback.active {
+    display: flex; /* active 클래스가 있을 때 보이도록 변경 */
+}
+.filtersection{
+    background-color: #fff;
+    max-width: 750px;
+    margin: 0px auto;
+    padding: 20px 40px 20px 40px;
+}
+.filter_canclebtn{
+    font-size: 20px;
+    border: none;
+    background-color: #fff;
+    float: left;
+}
+.filtermain{
+    margin: 15px 0 15px 0px;
+}
+
+.filter_box{
+    display: flex;
+    padding: 0 15px;
+    align-items: center;
+    max-width: 1510px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+.filter_btn{
+    background-color: #fff;
+    margin-right: 20px;
+    /*border: 1px solid #757575;
+    padding: 3px;
+    border-radius: 7px; */
+
+    padding-right: 10px;
+    border-right: 2px solid black;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+}
+.flitericonimg{
+    width: 40px;
+    height: 40px;
+}
+.keywordload{ /*선택한 라디오버튼 큰 틀*/
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.applied_filter { /* 선택된 라디오버튼의 내용 css */
+    margin-right: 10px; /* 각 필터 항목 간에 10px의 간격을 추가 */
+    padding: 5px;       /* 필터 항목 내부에 약간의 여백을 추가 */
+    /*background-color: #f0f0f0;*/ /* 선택사항: 필터 배경색 추가 */
+    border-radius: 4px; /* 선택사항: 약간의 둥근 모서리 추가 */
+    font-weight: bold;
+}
+
+.filter_tit{
+    font-weight: bold;
+    color: #757575;
+    padding-bottom: 10px;
+}
+.filter_chobox{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 12px 32px;
+}
+.filterla{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    align-items: center;
+}
+.filter_savebtn{
+    background-color: black;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 8px 15px 8px 15px;
+    width: 200px;
+}
+
 /*========================================*/
 .middle_div{
     margin-top: -20px;

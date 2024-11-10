@@ -7,24 +7,22 @@ import './Product_add.css';
 function ProductAdd() {
     const [formData, setFormData] = useState({
         categorynum: '',
+        subcategorynum: '',
         pname: '',
         price: '',
         pcount: '',
-        size: '',
-        color: '',
+        size: [],
+        color: [],
         comment: ''
     });
 
     const [picture, setPicture] = useState(null);
-    const [memberId, setMemberId] = useState(null); // 관리자 확인을 위한 memberId 상태 추가
-    const [isAdmin, setIsAdmin] = useState(false); // 관리자 확인 상태 추가
+    const [memberId, setMemberId] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
-        // 실제로는 로그인 정보를 가져오는 API 호출이 필요할 수 있습니다.
-        // 예시로 간단하게 memberId와 isAdmin 값을 설정합니다.
         const fetchMemberInfo = async () => {
             try {
-                // 로그인된 사용자 정보를 가져오는 API 요청
                 const memid = sessionStorage.getItem("memid");
                 const response = await axios.get(`http://localhost:8000/shopping/api/mypage/${memid}`);
                 setMemberId(response.data.memnum);
@@ -33,30 +31,27 @@ function ProductAdd() {
                 console.error('회원 정보 가져오기 실패:', error);
             }
         };
-
         fetchMemberInfo();
     }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+            // categorynum이 변경될 때는 subcategorynum을 빈 문자열로 초기화
+            ...(name === "categorynum" ? { subcategorynum: "" } : {})
+        }));
     };
 
-    const checkhandleChange = (e) => {
+    const handleCheckboxChange = (e) => {
         const { name, value } = e.target;
-        let updatedValues = [...formData[name]]; // 기존 formData[name] 배열을 복제하여 사용
-        if (e.target.checked) {
-            updatedValues.push(value); // 체크된 경우 배열에 추가
-        } else {
-            updatedValues = updatedValues.filter(val => val !== value); // 체크 해제된 경우 배열에서 제거
-        }
-        setFormData({
-            ...formData,
-            [name]: updatedValues
-        });
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: prevData[name].includes(value)
+                ? prevData[name].filter((val) => val !== value)
+                : [...prevData[name], value]
+        }));
     };
 
     const handleFileChange = (e) => {
@@ -74,11 +69,12 @@ function ProductAdd() {
         const productData = new FormData();
         productData.append('product', JSON.stringify(formData));
         productData.append('picture', picture);
-        productData.append('memberId', memberId); // memberId 추가
+        productData.append('memberId', memberId);
+
         formData.size.forEach(size => {
             productData.append('size', size);
         });
-        
+
         formData.color.forEach(color => {
             productData.append('color', color);
         });
@@ -104,7 +100,7 @@ function ProductAdd() {
                 <div className="productadd_section">
                     <h2>상품 등록</h2>
                     <form onSubmit={handleSubmit}>
-                        <p>* 기본 정보</p>
+                        <p>*필수</p>
                         <table className="addtable">
                             <tbody>
                                 <tr>
@@ -115,6 +111,37 @@ function ProductAdd() {
                                             <option value="1">OUTER</option>
                                             <option value="2">TOP</option>
                                             <option value="3">BOTTOM</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="td_1">* 중분류</td>
+                                    <td className="td_2">
+                                        <select name="subcategorynum" value={formData.subcategorynum} onChange={handleChange} required>
+                                            <option value="">=필수선택=</option>
+                                            {formData.categorynum === '1' && (
+                                                <>
+                                                    <option value="1">패딩</option>
+                                                    <option value="2">자켓</option>
+                                                    <option value="3">가디건</option>
+                                                </>
+                                            )}
+                                            {formData.categorynum === '2' && (
+                                                <>
+                                                    <option value="1">후드</option>
+                                                    <option value="2">맨투맨</option>
+                                                    <option value="3">니트</option>
+                                                    <option value="4">반팔</option>
+                                                </>
+                                            )}
+                                            {formData.categorynum === '3' && (
+                                                <>
+                                                    <option value="1">청바지</option>
+                                                    <option value="2">면바지</option>
+                                                    <option value="3">트레이닝바지</option>
+                                                    <option value="4">반바지</option>
+                                                </>
+                                            )}
                                         </select>
                                     </td>
                                 </tr>
@@ -133,198 +160,37 @@ function ProductAdd() {
                                 <tr>
                                     <td className="td_1">* 사이즈</td>
                                     <td className="td_2">
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="sizeXS"
-                                                name="size"
-                                                value="XS"
-                                                checked={formData.size.includes("XS")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="sizeXS">XS</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="sizeS"
-                                                name="size"
-                                                value="S"
-                                                checked={formData.size.includes("S")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="sizeS">S</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="sizeM"
-                                                name="size"
-                                                value="M"
-                                                checked={formData.size.includes("M")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="sizeM">M</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="sizeL"
-                                                name="size"
-                                                value="L"
-                                                checked={formData.size.includes("L")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="sizeL">L</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="sizeXL"
-                                                name="size"
-                                                value="XL"
-                                                checked={formData.size.includes("XL")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="sizeXL">XL</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="sizeXXL"
-                                                name="size"
-                                                value="XXL"
-                                                checked={formData.size.includes("XXL")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="sizeXXL">XXL</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="sizeXXXL"
-                                                name="size"
-                                                value="XXXL"
-                                                checked={formData.size.includes("XXXL")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="sizeXXXL">XXXL</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="sizeFREE"
-                                                name="size"
-                                                value="FREE"
-                                                checked={formData.size.includes("FREE")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="sizeFREE">FREE</label>
-                                        </div>
+                                        {['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'FREE'].map((size) => (
+                                            <div key={size}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={`size${size}`}
+                                                    name="size"
+                                                    value={size}
+                                                    checked={formData.size.includes(size)}
+                                                    onChange={handleCheckboxChange}
+                                                />
+                                                <label htmlFor={`size${size}`}>{size}</label>
+                                            </div>
+                                        ))}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td className="td_1">* 색상</td>
                                     <td className="td_2">
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorBLACK"
-                                                name="color"
-                                                value="BLACK"
-                                                checked={formData.color.includes("BLACK")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorBLACK">BLACK</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorWHITE"
-                                                name="color"
-                                                value="WHITE"
-                                                checked={formData.color.includes("WHITE")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorWHITE">WHITE</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorGREEN"
-                                                name="color"
-                                                value="GREEN"
-                                                checked={formData.color.includes("GREEN")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorGREEN">GREEN</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorYELLOW"
-                                                name="color"
-                                                value="YELLOW"
-                                                checked={formData.color.includes("YELLOW")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorYELLOW">YELLOW</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorBLUE"
-                                                name="color"
-                                                value="BLUE"
-                                                checked={formData.color.includes("BLUE")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorBLUE">BLUE</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorSKYBLUE"
-                                                name="color"
-                                                value="SKYBLUE"
-                                                checked={formData.color.includes("SKYBLUE")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorSKYBLUE">SKYBLUE</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorPURPLE"
-                                                name="color"
-                                                value="PURPLE"
-                                                checked={formData.color.includes("PURPLE")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorPURPLE">PURPLE</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorRED"
-                                                name="color"
-                                                value="RED"
-                                                checked={formData.color.includes("RED")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorRED">RED</label>
-                                        </div>
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="colorORANGE"
-                                                name="color"
-                                                value="ORANGE"
-                                                checked={formData.color.includes("ORANGE")}
-                                                onChange={checkhandleChange}
-                                            />
-                                            <label htmlFor="colorORANGE">ORANGE</label>
-                                        </div>
+                                        {['BLACK', 'WHITE', 'GREEN', 'YELLOW', 'BLUE', 'SKYBLUE', 'PURPLE', 'RED', 'ORANGE'].map((color) => (
+                                            <div key={color}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={`color${color}`}
+                                                    name="color"
+                                                    value={color}
+                                                    checked={formData.color.includes(color)}
+                                                    onChange={handleCheckboxChange}
+                                                />
+                                                <label htmlFor={`color${color}`}>{color}</label>
+                                            </div>
+                                        ))}
                                     </td>
                                 </tr>
                                 <tr>

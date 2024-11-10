@@ -27,6 +27,7 @@ function Payment() {
         secondaddress: "",
         shippingAddress: ""
     });
+    const [deliveryMessage, setDeliveryMessage] = useState('문 앞에 놔주세요');  // 기본값 설정
     const memid = sessionStorage.getItem("memid");
     const storeId = 'store-cc5c0f67-cf0f-45b3-bc8e-5b2b46921971';
     const channelKey = 'channel-key-d6f10cc6-a4e1-42bb-bf9d-15c432ea39a3';
@@ -370,12 +371,12 @@ function Payment() {
                 shippingAddress: deliveryData.firstaddress + deliveryData.secondaddress,
                 productSize: cartItems[0].size,  // 첫 번째 상품의 사이즈
                 productColor: cartItems[0].color,  // 첫 번째 상품의 색상
-                request: '문 앞에 놔주세요',  // 고정된 요청 메시지
+                request: deliveryMessage,  // 요청 메시지
                 orderPrice: totalPrice, // 예시 가격
                 count: cartItems[0].quantity
             });
         }
-    }, [memberData, cartItems, deliveryData]);  // memberData와 cartItems가 변경될 때마다 실행
+    }, [memberData, cartItems, deliveryData, deliveryMessage]);  // memberData와 cartItems가 변경될 때마다 실행
 
     return (
         <div>
@@ -591,6 +592,17 @@ function Payment() {
                                                                 <option value="gmail.com">gmail.com</option>
                                                             </select>
                                                         </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>배송 메세지</th>
+                                                    <td>
+                                                        <input
+                                                            type='text'
+                                                            className="overlap3"
+                                                            value={deliveryMessage}
+                                                            onChange={(e) => setDeliveryMessage(e.target.value)}
+                                                        />
                                                     </td>
                                                 </tr>
                                             </tbody>

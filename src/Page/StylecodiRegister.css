@@ -1,0 +1,65 @@
+.codiregdiv{
+    padding: 80px;
+}
+.codiregsection{
+    margin: 0px auto;
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.coditabletit{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.coditable{
+    border-collapse: collapse;
+    border-top: 3px solid black;
+    padding: 0px;
+    margin: 0px;
+}
+.coditr1{
+    border-bottom: 1px solid grey;
+}
+.coditd1{
+    background-color: rgb(240, 240, 240);
+    width: 150px;
+    padding: 0px 20px 0px 20px;
+}
+.coditd2{
+    padding: 20px 0 20px 10px;
+    width: 600px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+}
+.coditd2 > input[type=text] {
+    height: 25px;
+    border: 1px solid silver;
+    width: 400px;
+}
+.colorimg{
+    width: 20px;
+    height: 20px;
+}
+.codiupload_btn{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 7px;
+    float: right;
+}
+.codipreview_btn{
+    background-color: rgb(240, 240, 240);
+    color: black;
+    font-weight: bold;
+    border-color: darkgrey;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 7px;
+    float: left;
+    box-shadow: none;
+}
