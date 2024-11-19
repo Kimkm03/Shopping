@@ -16,6 +16,8 @@ import Basket from './Page/Basket';
 import Order from './Page/Order';
 import Mileage_collect from './Page/Mileage_collect';
 import Board_main from './Page/Board_main';
+import Board_review from './Page/Board_review';
+import Board_style from './Page/Board_style';
 import Delivery_check from './Page/Delivery_check';
 import Mypage from './Page/Mypage'; // Mypage 컴포넌트 import
 import Login from './Page/Login';
@@ -58,6 +60,8 @@ function App() {
           <Route path="/Order" element={<Order />} />
           <Route path="/Mileage_collect" element={<Mileage_collect />} />
           <Route path="/Board_main" element={<Board_main />} />
+          <Route path='/Board_review' element={<Board_review />}/>
+          <Route path='/Board_style' element={<Board_style />}/>
           <Route path="/Delivery_check" element={<Delivery_check />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Modify" element={<Modify />} />

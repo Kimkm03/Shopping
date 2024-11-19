@@ -8,15 +8,38 @@ import './Write_review.css';
 function Write_review() {
   const [rating, setRating] = useState(0);
   const [photo, setPhoto] = useState(null);
+  const memid = sessionStorage.getItem("memid");
   const location = useLocation();
-  const { productCode } = location.state || {};
+  const { productCode, productColor, productSize } = location.state || {};
   const [formData, setFormData] = useState({
     starcnt: '',
     content: '',
     delveryreply: '',
     takeoutreply: '',
     productCode: productCode,
+    productColor: productColor,
+    productSize: productSize,
+    memnum: ''
   });
+
+  useEffect(() => {
+    const fetchMemberData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8000/shopping/api/mypage/${memid}`);
+            setFormData(prevFormData => ({
+              ...prevFormData,
+              memnum: response.data.memnum
+            }));
+        } catch (error) {
+            console.error('Failed to fetch member data:', error);
+            alert('서버에서 데이터를 받아올 수 없습니다. 나중에 다시 시도해주세요.');
+        }
+    };
+
+    if (memid) {
+        fetchMemberData();
+    }
+}, [memid]);
 
   // 평점 선택
   const handleRatingClick = (value) => {

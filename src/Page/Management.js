@@ -63,13 +63,13 @@ function Management() {
                 <p style={{fontWeight: 'bold'}}>금일 현황</p>
                 <table class="management_section_table1">
                     <tr class="table1_num">
-                        <td><span>9,999,999,999</span></td>
+                        {/* <td><span>9,999,999,999</span></td> */}
                         <td><span>{todayOrderCount}</span></td>
                         <td><span>{memberCount}</span></td>
                         <td><span>{totalOrderCount}</span></td>
                     </tr>
                     <tr class="table1_text">
-                        <td>금일 방문자</td>
+                        {/* <td>금일 방문자</td> */}
                         <td>금일 주문건</td>
                         <td>총 유저수</td>
                         <td>누적 주문</td>

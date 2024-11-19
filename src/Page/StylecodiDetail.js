@@ -7,7 +7,8 @@ import './StylecodiDetail.css';
 
 function StylecodiDetail() {
     const { styleId } = useParams();
-    const memname = sessionStorage.getItem("memname");
+    const [memname, setMemName] = useState(null);
+    //const memname = sessionStorage.getItem("memname");
     const [stylecodi, setStylecodi] = useState(null);  // 스타일 코드 정보
     const [upperProduct, setUpperProduct] = useState(null);  // 상의 상품 정보
     const [lowerProduct, setLowerProduct] = useState(null);  // 하의 상품 정보
@@ -36,6 +37,20 @@ function StylecodiDetail() {
         fetchData();
     }, [styleId]);  // 컴포넌트가 처음 렌더링될 때만 실행
 
+    useEffect(() => {
+        const fetchMemberData = async () => {
+            if (stylecodi) {
+                try {
+                    const memberResponse = await axios.get(`http://localhost:8000/shopping/api/memberInfo/${stylecodi.memnum}`);
+                    setMemName(memberResponse.data.memname);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
+        }
+        fetchMemberData();
+    }, [stylecodi]);
+
     return (
         <div>
             <Header />
@@ -46,7 +61,9 @@ function StylecodiDetail() {
                             <div className="profile">
                                 {/* <div><img src={stylecodi.profilePicture} alt="Profile" /></div> */}
                                 <div className="profile_text">
-                                    <span>{memname}</span>
+                                    {memname && (
+                                        <span>{memname}</span>
+                                    )}
                                     <div className="summary">
                                         {stylecodi && stylecodi.height && (
                                             <span>{stylecodi.height}cm</span>
@@ -60,11 +77,9 @@ function StylecodiDetail() {
                             </div>
                             <div className="img_area">
                                 <div className="leftimg">
-                                    <a href="">
-                                        {stylecodi && stylecodi.id && (
-                                            <img src={`http://localhost:8000/shopping/api/style/${stylecodi.id}/picture`} alt="Main Style" />
-                                        )}
-                                    </a>
+                                    {stylecodi && stylecodi.id && (
+                                        <img src={`http://localhost:8000/shopping/api/style/${stylecodi.id}/picture`} alt="Main Style" />
+                                    )}
                                 </div>
                                 <div className="rightimg">
                                     <div className="relation">

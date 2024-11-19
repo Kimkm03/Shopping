@@ -11,7 +11,6 @@
     padding: 0 15px;
     max-width: 1510px;
     margin: 0 auto 60px;
-    padding: 0 15px;
     box-sizing: border-box;
     min-height: 500px;
     float: none;
@@ -324,11 +323,46 @@
 .product_review_table_td_detail > td > div{
     border-left: 1px solid grey;
     height: 200px;
-    text-align: center;
+    padding-left: 20px;
 }
 .btnsel{
     border: black 2px solid;
 }
+.prd_revtit{
+    margin: 50px 0 20px 0px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.rev_statscore{
+    padding-left: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 25px;
+}
+.rev_opt{
+    padding-left: 10px;
+    color: rgb(78, 78, 78);
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+.rev_usertxt{
+    padding-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 .paging{
     text-align: center;

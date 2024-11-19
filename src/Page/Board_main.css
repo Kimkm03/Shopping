@@ -1,85 +1,46 @@
-.board_main_section{
-    align-items: center;
-    max-width: 1100px;
-    margin: 80px auto;
-}
-.board_main_table{
+.boardmain_section{
     width: 100%;
-    border-radius: 1px;
-    border-color: black;
-    border: 3px solid;
-    /*border-top: 1px;*/
-    border-left: none;  
-    border-right: none;
-    border-bottom: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
-}
-.board_main_table_title{
-    height: 55px;
-    border-bottom: 1px solid grey;
-}
-.board_main_table_list > td > a{
-    text-decoration: none;
-    color: black;
-}
-.board_day{
-    width: 110px;
-}
-.board_value{
-    width: 80px;
-}
-.board_name{
-    width: 100px;
-}
-.board_check{
-    width: 80px;
-}
-.board_main_table_list{
-    height: 70px;
+    padding-top: 100px;
 }
 
-.board_review_table{
-    width: 100%;
-    border-radius: 1px;
-    border-color: black;
-    border: 3px solid;
-    /*border-top: 1px;*/
-    border-left: none;  
-    border-right: none;
-    border-bottom: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
+
+.board_sidemenu{
+    width: 10%;
+    height: 100%;
+    float: left;
 }
-.board_review_table_title{
-    height: 55px;
-    border-bottom: 1px solid grey;
+.board_sidemenu > ul {
+    padding-top: 100px;
+    box-sizing: border-box;
 }
-.board_review_table_detail{
-    height: 100px;
+.board_sidemenu > ul > li{
+    list-style: none;
+    height: 40px;
+    margin: 10px;
+    text-align: right;
+    line-height: 40px;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    white-space: nowrap;
 }
-.board_review_table_day{
-    width: 110px;
+.board_sidemenu > ul > li:hover{
+    font-weight: bold;
 }
-.board_review_table_detail > td > a {
+.board_sidemenu > ul > li > a{
     text-decoration: none;
     color: black;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-.paging{
-    text-align: center;
-    list-style-type: none;
-}
-.paging li{
+
+.board_detail{
+    width: calc(80% - 50px);
     display: inline-block;
-    padding: 5px;
+    margin-left: 50px;
 }
-.reviewremovebtn{
-    background-color: #ffffff;
-    border: none;
-}
-.reviewremovebtn:hover{
-    background-color:rgb(227, 227, 227);
-    border-radius: 10px;
+.board_title{
+    margin: 100px 0;
 }
 
 .inquiry_btn{
@@ -90,4 +51,28 @@
     margin-right: 10px;
     font-size: 0.8rem;
     float: right;
+}
+
+.board_styletable{
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+.board_delbtn{
+    background-color: #ffffff;
+    border-color: grey;
+    border: 1px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.board_styletable_tb{
+    height: 80px;
+}
+.rev_searchtop{
+    margin-top: 20px;
+    background-color: #efefef;
+    height: 120px;
+    padding-left: 10px;
+    padding-top: 10px;
 }

@@ -74,9 +74,9 @@ function Stylecodi() {
         fetchStyles();
     }, []); // 컴포넌트가 마운트될 때 한 번만 호출
 
-    if (styles.length === 0) {
-        return <div>스타일이 없습니다.</div>;
-    }
+    // if (styles.length === 0) {
+    //     return <div>스타일이 없습니다.</div>;
+    // }
 
     const formatDate = (isoDateString) => {
         const date = new Date(isoDateString);
