@@ -9,8 +9,7 @@ function Product() {
     const { productId } = useParams(); // URL에서 productId를 추출합니다.
     const [product, setProduct] = useState(null);
     const [review, setReview] = useState(null);
-    const [userName, setUserName] = useState('');
-    const [userCode, setUserCode] = useState('');
+    const [userNames, setUserNames] = useState([]);  // 유저 이름 배열로 상태 초기화
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedColor, setSelectedColor] = useState('');
     const [memberData, setMemberData] = useState(null);
@@ -61,26 +60,16 @@ function Product() {
         try {
             const response = await axios.get(`http://localhost:8000/shopping/api/review/product/${productId}`);
             setReview(response.data);
-            setUserCode(response.data[0].memnum);
+            // 각 리뷰에 대해 memnum을 이용해 유저 이름을 가져옴
+            const userPromises = response.data.map((rev) =>
+                axios.get(`http://localhost:8000/shopping/api/memberInfo/${rev.memnum}`)
+            );
+            const userResponses = await Promise.all(userPromises);
+            setUserNames(userResponses.map(res => res.data.memname));  // 유저 이름들을 배열로 저장
         } catch (error) {
             console.error('리뷰 정보를 불러오는 중 오류 발생 : ', error);
         }
-    }
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8000/shopping/api/memberInfo/${userCode}`);
-                setUserName(response.data.memname);
-            } catch (error) {
-                console.error('유저 정보를 불러오는 중 오류 발생 : ', error);
-            }
-        };
-
-        if (userCode) {
-            fetchUser();
-        }
-    }, [userCode]);
+    };
 
     if (!product) {
         return <div>Loading...</div>;
@@ -195,6 +184,32 @@ function Product() {
             setQuantity(value);
         }
     };
+
+    const renderReviews = review && review.length > 0 && review.map((rev, index) => {
+        const currentUserName = userNames[index];  // 인덱스를 사용하여 유저 이름을 가져옴
+    
+        return (
+            <tr key={index} className="product_review_table_td_detail">
+                <td>
+                    <p className="rev_statscore">{'★'.repeat(rev.starcnt)}</p>
+                    <p className="rev_opt">
+                        배송 : <span>{rev.delveryreply === 'fast' ? '빨라요' : rev.delveryreply === 'bad' ? '아쉬워요' : rev.delveryreply}</span> /
+                        포장 : <span>{rev.takeoutreply === 'careful' ? '꼼꼼해요' : rev.takeoutreply === 'bad' ? '아쉬워요' : rev.takeoutreply}</span>
+                    </p>
+                    <p className="rev_usertxt">{rev.content}</p><br />
+                    <img src={`http://localhost:8000/shopping/api/review/${rev.id}/picture`} alt={'리뷰 이미지'} />
+                </td>
+                <td className="product_review_table_buyoption">
+                    <div>
+                        {currentUserName ? `${currentUserName}님의 리뷰` : "유저 정보 없음"}<br />
+                        사이즈 : <span>{rev.productSize}</span><br />
+                        색상 : <span>{rev.productColor}</span><br />
+                    </div>
+                </td>
+            </tr>
+        );
+    });
+    
 
     return (
         <div>
@@ -313,32 +328,16 @@ function Product() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {Array.isArray(review) && review.length > 0 ? (
+                                {renderReviews}
+                                {/* {Array.isArray(review) && review.length > 0 ? (
                                     review.map((rev, index) => (
-                                        <tr key={index} className="product_review_table_td_detail">
-                                            <td>
-                                                <p className="rev_statscore">{'★'.repeat(rev.starcnt)}</p>
-                                                <p className="rev_opt">
-                                                배송 : <span>{rev.delveryreply === 'fast' ? '빨라요' : rev.delveryreply === 'bad' ? '아쉬워요' : rev.delveryreply}</span> / 
-                                                포장 : <span>{rev.takeoutreply === 'careful' ? '꼼꼼해요' : rev.takeoutreply === 'bad' ? '아쉬워요' : rev.takeoutreply}</span>
-                                                </p>
-                                                <p className="rev_usertxt">{rev.content}</p><br />
-                                                    <img src={`http://localhost:8000/shopping/api/review/${rev.id}/picture`} alt={'리뷰 이미지'} />
-                                            </td>
-                                            <td className="product_review_table_buyoption">
-                                                <div>
-                                                    {userName && <span>{userName}</span>}님의 리뷰입니다. <br />
-                                                    사이즈 : <span>{rev.productSize}</span><br />
-                                                    색상 : <span>{rev.productColor}</span><br />
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        
                                     ))
                                 ) : (
                                     <tr>
                                         <td colSpan="2">리뷰가 없습니다.</td>
                                     </tr>
-                                )}
+                                )} */}
                             </tbody>
                         </table>
                     </div>
