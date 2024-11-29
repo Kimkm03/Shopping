@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import './Mg_Product.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser,faShirt,faScroll,faComment,faPenToSquare,faMinus,faChartSimple } from '@fortawesome/free-solid-svg-icons';
+
+
 function Mg_Product() {
     const [products, setProducts] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState(new Set()); // 선택된 상품들의 pnum을 저장할 Set
@@ -132,20 +136,30 @@ function Mg_Product() {
             <div className="mgmain_section">
                 <div className="sidemenu">
                     <ul>
-                        <li><Link to="/Mg_Member">-회원관리</Link></li>
-                        <li><Link to="/Mg_Orderlist">-주문 관리</Link></li>
-                        <li><Link to="/Mg_Product" className="txtbold">-상품 관리</Link></li>
-                        <li><Link to="/Mg_Review">-리뷰 관리</Link></li>
-                        <li><Link to="/Mg_Total">-통계</Link></li>
+                        <li><Link to="/Mg_Orderlist" ><FontAwesomeIcon icon={faScroll} />주문 관리</Link></li>
+                        <li><Link to="/Mg_Member"><FontAwesomeIcon icon={faUser} />회원 관리</Link></li>
+                        <li><Link to="/Mg_Product" className="txtbold"><FontAwesomeIcon icon={faShirt} />상품 관리</Link></li>
+                        <li><Link to="/Mg_Inquiry"><FontAwesomeIcon icon={faComment} />고객 문의</Link></li>
+                        <li><Link to="/Mg_Review"><FontAwesomeIcon icon={faPenToSquare} />게시글 관리</Link></li>
+                        <li><Link to="/Mg_Review" className='suvsidemenu'><FontAwesomeIcon icon={faMinus} />리뷰</Link></li>
+                        <li><Link to="/Mg_Total"><FontAwesomeIcon icon={faChartSimple} />통계</Link></li>
                     </ul>
                 </div>
                 <div className="mgmain_detail">
-                    <div className="productsearch">
-                        <h2 className='productsearch_title'>상품 관리 페이지</h2>
+                    <div className="mgmain_title">
+                        <h2>상품 관리 페이지</h2>
                         {/* 검색 필드와 버튼 등 추가 필요 */}
                     </div>
+                    <div className='mg_search'>{/* 검색 기능 추가 예정 */}
+                            <form className='mg_searchform'>
+                                <input type='text' className='mg_searchtxt' placeholder="상품명" />
+                                <button type="submit" className="btn_search">
+                                <img src="https://i.postimg.cc/cH85Hwp5/search-btn2.png" alt="Search" />
+                                </button>
+                            </form>
+                    </div>
                     <div className="tablediv">
-                        <Link to='/Product_add'><button> + 상품등록 </button></Link>
+                        <Link to='/Product_add'><button className='pdadd_btn'> + 상품등록 </button></Link>
                         <div className="tablediv2">
                             <span>총 <span id="productresult">{products.length}</span> 개</span>
                             <span style={{ float: "right" }}>

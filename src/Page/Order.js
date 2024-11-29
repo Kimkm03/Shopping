@@ -6,6 +6,13 @@ import Footer from '../Components/Footer';
 import ProductInfo from '../Components/ProductInfo';
 import './Order.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTruckFast } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
+
 function Order() {
     const [memberData, setMemberData] = useState(null);
     const [orderData, setOrderData] = useState({});
@@ -129,11 +136,29 @@ function Order() {
     return (
         <div>
             <Header />
+            <div className='sidebar'>
+                <ul className='sidebar_ul'>
+                    <li ><Link to='/Delivery_check'><FontAwesomeIcon icon={faTruckFast} /> 배송조회</Link></li>
+                    <li className='sidebar_select'><Link to='/order'><FontAwesomeIcon icon={faCartShopping} /> 주문 조회</Link></li>
+                    <li><Link to='/Wishlist'><FontAwesomeIcon icon={faHeart} /> 관심 상품</Link></li>
+                    <li><Link to='/Board_main'><FontAwesomeIcon icon={faPenToSquare} /> 게시글 관리</Link></li>
+                    <li className='mg40_left'><Link to='/Board_main'><FontAwesomeIcon icon={faMinus} /> 문의</Link></li>
+                    <li className='mg40_left'><Link to='/Board_review'><FontAwesomeIcon icon={faMinus} /> 리뷰</Link></li>
+                    <li className='mg40_left'><Link to='/Board_style'><FontAwesomeIcon icon={faMinus} /> 스타일</Link></li>
+                </ul>
+            </div>
             <section className="order_datail">
                 <h2 className='orderh2'>주문조회</h2>
-                <p style={{ fontweight: 'bold' }}>주문내역 조회</p>
+                {/* <p style={{ fontweight: 'bold' }}>주문내역 조회</p> */}
+                <div className='od_his_search'>
+                    <form className='od_his_searchform'>
+                        <input type='text'  className='od_his_searchip'/>
+                        <button type="submit" className="btn_search">
+                  <img src="https://i.postimg.cc/cH85Hwp5/search-btn2.png" alt="Search" />
+                </button>
+                    </form>
+                </div>
                 <table className="order_history">
-
                     <thead>
                         <tr>
                             <th className="or_no">No</th>
@@ -178,10 +203,6 @@ function Order() {
 
                     </tbody>
                 </table>
-                <div>
-                    <ul className="paging">
-                    </ul>
-                </div>
             </section>
             <Footer />
         </div>

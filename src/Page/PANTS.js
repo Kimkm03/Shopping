@@ -22,7 +22,7 @@ function PANTS() {
     };
     return (
         <div>
-            <Header />
+            <Header /><div className='allbasicpage'>
             <div class="title">
                 <div class="item_title">BOTTOM</div>
                 <br /><br /><br />
@@ -83,7 +83,7 @@ function PANTS() {
                     </ul>
                 </div>
 
-            </section>
+            </section></div>
             <Footer />
         </div>
     );

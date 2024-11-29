@@ -7,7 +7,7 @@ div{
     margin: 0;
 }
 .codiwrap{
-    min-height: auto;
+    min-height: 800px;
     position: relative;
     width: 100%;
     margin: 0 auto;

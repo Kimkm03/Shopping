@@ -17,3 +17,16 @@ div{
     height: 60px;
     border-bottom: 1px solid grey;
 }
+.mg_search{
+    padding: 15px 0 15px 0;
+    display: flex;
+}
+.mg_searchform{
+    display: flex;
+    text-align: center;
+}
+.mg_searchtxt{
+    padding: 0px 10px 0 10px;
+    height: 25px;
+    width: 200px;
+}

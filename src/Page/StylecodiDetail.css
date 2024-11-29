@@ -54,7 +54,7 @@
     margin-right: 7%;
 }
 .leftimg > a {
-    display: block;
+    display: block; /* 경모 파일 수정해주기 */
     border-radius: 20px;
     overflow: hidden;
     text-decoration: none;

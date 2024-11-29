@@ -43,7 +43,8 @@ const Main = () => {
 
   return (
     <div>
-      <Header /> {/* Header 컴포넌트를 사용합니다. */}
+      <Header /> {/* Header 컴포넌트를 사용합니다. */}<div className='allbasicpage'>
+
       <div className="slide_section">
             {/* 슬라이드 바 생성 */}
             {bestproducts.map((product, index) => (
@@ -116,7 +117,7 @@ const Main = () => {
             ))}
           </ul>
         </div>
-      </div>
+      </div></div>
       <Footer />
     </div>
   );

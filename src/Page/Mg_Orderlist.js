@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import ProductInfo from '../Components/ProductInfo';
 import './Mg_Orderlist.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser,faShirt,faScroll,faComment,faPenToSquare,faMinus,faChartSimple } from '@fortawesome/free-solid-svg-icons';
+
 
 function Mg_Orderlist() {
     const [userInfo, setUserInfo] = useState({});
@@ -76,17 +79,27 @@ function Mg_Orderlist() {
             <div className="mgmain_section">
                 <div className="sidemenu">
                     <ul>
-                        <li><Link to="/Mg_Member">-회원관리</Link></li>
-                        <li><Link to="/Mg_Orderlist" className="txtbold">-주문 관리</Link></li>
-                        <li><Link to="/Mg_Product">-상품 관리</Link></li>
-                        <li><Link to="/Mg_Review">-리뷰 관리</Link></li>
-                        <li><Link to="/Mg_Total">-통계</Link></li>
+                        <li><Link to="/Mg_Orderlist" className="txtbold"><FontAwesomeIcon icon={faScroll} />주문 관리</Link></li>
+                        <li><Link to="/Mg_Member"><FontAwesomeIcon icon={faUser} />회원 관리</Link></li>
+                        <li><Link to="/Mg_Product"><FontAwesomeIcon icon={faShirt} />상품 관리</Link></li>
+                        <li><Link to="/Mg_Inquiry"><FontAwesomeIcon icon={faComment} />고객 문의</Link></li>
+                        <li><Link to="/Mg_Review"><FontAwesomeIcon icon={faPenToSquare} />게시글 관리</Link></li>
+                        <li><Link to="/Mg_Review" className='suvsidemenu'><FontAwesomeIcon icon={faMinus} />리뷰</Link></li>
+                        <li><Link to="/Mg_Total"><FontAwesomeIcon icon={faChartSimple} />통계</Link></li>
                     </ul>
                 </div>{/* 사이드 바 끝 */}
                 <div className="mgmain_detail">
-                    <div className="pr100">
+                    <div className='tablediv'>
                         <div className="mgmain_title">
                             <h2>주문 관리</h2>
+                        </div>
+                        <div className='mg_search'>{/* 검색 기능 추가 예정 */}
+                            <form className='mg_searchform'>
+                                <input type='text' className='mg_searchtxt' placeholder="상품명 또는 주문자" />
+                                <button type="submit" className="btn_search">
+                                <img src="https://i.postimg.cc/cH85Hwp5/search-btn2.png" alt="Search" />
+                                </button>
+                            </form>
                         </div>
                         <table className="orderlistmg">
                             <thead>

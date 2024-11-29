@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import './Mg_Member.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser,faShirt,faScroll,faComment,faPenToSquare,faMinus,faChartSimple } from '@fortawesome/free-solid-svg-icons';
+
 
 
 function Mg_Inquiry() {
@@ -60,29 +63,30 @@ function Mg_Inquiry() {
         <div>
             <Header />
             <div className="mgmain_section">
-                <div className="pr50">
                     <div className="sidemenu">
                         <ul>
-                            <li><Link to="/Mg_Member">-회원관리</Link></li>
-                            <li><Link to="/Mg_Orderlist">-주문 관리</Link></li>
-                            <li><Link to="/Mg_Product">-상품 관리</Link></li>
-                            <li><Link to="/Mg_Review">-리뷰 관리</Link></li>
-                            <li><Link to="/Mg_Inquiry" className="txtbold">-고객 문의</Link></li>
-                            <li><Link to="/Mg_Total">-통계</Link></li>
+                            <li><Link to="/Mg_Orderlist" ><FontAwesomeIcon icon={faScroll} />주문 관리</Link></li>
+                            <li><Link to="/Mg_Member"><FontAwesomeIcon icon={faUser} />회원 관리</Link></li>
+                            <li><Link to="/Mg_Product"><FontAwesomeIcon icon={faShirt} />상품 관리</Link></li>
+                            <li><Link to="/Mg_Inquiry" className="txtbold"><FontAwesomeIcon icon={faComment} />고객 문의</Link></li>
+                            <li><Link to="/Mg_Review"><FontAwesomeIcon icon={faPenToSquare} />게시글 관리</Link></li>
+                            <li><Link to="/Mg_Review" className='suvsidemenu'><FontAwesomeIcon icon={faMinus} />리뷰</Link></li>
+                            <li><Link to="/Mg_Total"><FontAwesomeIcon icon={faChartSimple} />통계</Link></li>
                         </ul>
                     </div>{/* 사이드 바 끝 */}
                     <div className="mgmain_detail" >
-                        <div className="membersearch">
-                            <h2 className='membersearch_title'>고객 문의</h2>
-                            <br></br>
-                            <br />
-                            <select name="" id="" className='searchoption1'>
-                                <option value="">아이디</option>
-                                <option value="">이름</option>
-                            </select>
-                            <input type="text" className='searchoption2'></input>
-
+                        <div className="mgmain_title">
+                            <h2>고객 문의</h2>
                         </div>
+                        <div className='mg_search'>{/* 검색 기능 추가 예정 */}
+                            <form className='mg_searchform'>
+                                <input type='text' className='mg_searchtxt' placeholder="아이디 또는 이름" />
+                                <button type="submit" className="btn_search">
+                                <img src="https://i.postimg.cc/cH85Hwp5/search-btn2.png" alt="Search" />
+                                </button>
+                            </form>
+                        </div>
+                        
                         <div className="tablediv">
 
                             <table id="membertable" className="membertable">
@@ -128,7 +132,7 @@ function Mg_Inquiry() {
                             </table>
                         </div>
                     </div>
-                </div>
+                
             </div>
         </div>
 

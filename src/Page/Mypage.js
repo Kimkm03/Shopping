@@ -67,7 +67,7 @@ function Mypage() {
 
   return (
     <div>
-      <Header />
+      <Header /><div className='allbasicpage'>
       <section className="mypage_detail">
         <h2 className='mypage_detail_title'>마이 페이지</h2>
         <div className="rank">
@@ -122,16 +122,7 @@ function Mypage() {
                   고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.
                 </Link>
               </td>
-              <td className="tableset">
-                <a href="modify" className="menuset">
-                  Profile <br />
-                  <p className="menuset_p">회원정보수정</p>
-                </a>
-                <br />
-                <Link to="/modify" className="menuset2">
-                  회원이신 고객님의 개인정보를 관리하는 공간입니다.
-                </Link>
-              </td>
+              
               <td className="tableset">
                 <a href="wishlist" className="menuset">
                   Wishlist <br />
@@ -152,10 +143,20 @@ function Mypage() {
                   관심 상품으로 등록하신 상품의 목록을 보여드립니다.
                 </Link>
               </td>
+              <td className="tableset">
+                <a href="modify" className="menuset">
+                  Profile <br />
+                  <p className="menuset_p">회원정보수정</p>
+                </a>
+                <br />
+                <Link to="/modify" className="menuset2">
+                  회원이신 고객님의 개인정보를 관리하는 공간입니다.
+                </Link>
+              </td>
             </tr>
           </tbody>
         </table>
-      </section>
+      </section></div>
       <Footer />
     </div>
   );

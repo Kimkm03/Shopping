@@ -1,12 +1,23 @@
 .wishlist_section{
-    align-items: center;
     max-width: 1300px;
     margin: 80px auto;
+    padding-top: 45px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
 }
 .wishlisttitle{
-    text-align: center;
     color: rgb(81, 79, 79);
-    margin: 50px 0;
+}
+.wishlist_searchform{
+    display: flex;  
+    align-items: center;
+    padding: 15px 0 15px 0;
+}
+.wishlist_searchip{
+    padding: 0px 10px 0 10px;
+    height: 25px;
+    width: 200px;
 }
 .wishlist_table{
     /*margin: 0px 100px 0px 100px;*/
@@ -52,6 +63,8 @@
     height: 30px;
     background-color: black;
     color: #fff;
+    margin-right: 6px;
+    border-radius: 6px;
 }
 .wishlist_cancle{
     width: 60px;
@@ -59,6 +72,7 @@
     background-color: #dfdede;
     color: black;
     border-style: none;
+    border-radius: 6px;
 }
 
 

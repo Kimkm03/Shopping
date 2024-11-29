@@ -23,8 +23,8 @@ function Best_products() {
     };
 
     return (
-        <div>
-            <Header />
+        <div >
+            <Header /><div className='allbasicpage'>
             <div className="best_product_section">
                 <h2>BEST ITEM</h2>
             </div>
@@ -73,6 +73,7 @@ function Best_products() {
                     </ul>
                 </div>
             </section>
+            </div>
             <Footer />
         </div>
     );

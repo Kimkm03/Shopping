@@ -23,8 +23,8 @@ function New_products() {
     };
 
     return (
-        <div>
-            <Header />
+        <div className=''>
+            <Header /><div className='allbasicpage'>
             <div className="new_product_section">
                 <h2>NEW ITEM</h2>
             </div>
@@ -74,7 +74,8 @@ function New_products() {
                     </ul>
                 </div>
             </section>
-            <Footer />
+            </div>
+        <Footer />  
         </div>
     );
 }

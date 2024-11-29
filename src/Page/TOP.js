@@ -23,7 +23,7 @@ function TOP() {
 
     return (
         <div>
-            <Header />
+            <Header /><div className='allbasicpage'>
             <div className="title">
                 <div className="item_title">TOP</div>
                 <br /><br /><br />
@@ -81,7 +81,7 @@ function TOP() {
                         ))}
                     </ul>
                 </div>
-            </section>
+            </section></div>
             <Footer />
         </div>
     );

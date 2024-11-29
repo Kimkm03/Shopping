@@ -1,9 +1,43 @@
+
+
+
+
+.sidebar{
+    display: flex;
+    float: left;
+    padding-left: 50px;
+    padding-top: 40px;
+    height: 100vh;
+    width: 120px;
+}
+.sidebar_ul > li{
+    list-style: none;
+    padding: 15px 0 15px 0;
+    font-weight: bold;
+}
+.mg40_left{
+    margin-left: 40px;
+}
+.sidebar_select {
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+
+
+
+
+
 .delivery_section{
-    align-items: center;
     max-width: 1300px;
     margin: 80px auto;
+    padding-top: 45px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
 }
 .delivery_dayset{
+    margin-top: 20px;
     padding: 10px;
     background-color: rgb(222,222,222);
 }
@@ -67,6 +101,9 @@
     border-bottom: 1px solid grey;
     border-collapse: collapse;
     text-align: center;
+}
+.delivery_table > thead{
+    border-bottom: 1px solid grey;
 }
 .delivery_table > tbody > tr > td > a > img{
     height: 140px;

@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import './Mg_Total.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser,faShirt,faScroll,faComment,faPenToSquare,faMinus,faChartSimple } from '@fortawesome/free-solid-svg-icons';
+
 
 function Mg_Total() {
     return(
@@ -10,13 +13,15 @@ function Mg_Total() {
             <div className="mgmain_section">
                 <div className="sidemenu">
                     <ul>
-                        <li><Link to="/Mg_Member">-회원관리</Link></li>
-                        <li><Link to="/Mg_Orderlist">-주문 관리</Link></li>
-                        <li><Link to="/Mg_Product">-상품 관리</Link></li>
-                        <li><Link to="/Mg_Review">-리뷰 관리</Link></li>
-                        <li><Link to="/Mg_Total" className="txtbold">-통계</Link></li>
+                        <li><Link to="/Mg_Orderlist" ><FontAwesomeIcon icon={faScroll} />주문 관리</Link></li>
+                        <li><Link to="/Mg_Member"><FontAwesomeIcon icon={faUser} />회원 관리</Link></li>
+                        <li><Link to="/Mg_Product"><FontAwesomeIcon icon={faShirt} />상품 관리</Link></li>
+                        <li><Link to="/Mg_Inquiry"><FontAwesomeIcon icon={faComment} />고객 문의</Link></li>
+                        <li><Link to="/Mg_Review"><FontAwesomeIcon icon={faPenToSquare} />게시글 관리</Link></li>
+                        <li><Link to="/Mg_Review" className='suvsidemenu'><FontAwesomeIcon icon={faMinus} />리뷰</Link></li>
+                        <li><Link to="/Mg_Total" className="txtbold"><FontAwesomeIcon icon={faChartSimple} />통계</Link></li>
                     </ul>
-                </div> {/* 사이드 바 끝 */}
+                </div>{/* 사이드 바 끝 */}
                 <div className="mgmain_detail">
                     <div className="pr100 pb100">
                         <div className="mgmain_title">

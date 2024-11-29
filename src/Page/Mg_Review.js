@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import './Mg_Review.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser,faShirt,faScroll,faComment,faPenToSquare,faMinus,faChartSimple } from '@fortawesome/free-solid-svg-icons';
 
 function Mg_Review() {
     const [reviewData, setReviewData] = useState(null);
@@ -71,15 +73,17 @@ function Mg_Review() {
             <Header />
             <div className="mgmain_section">
 
-                <div class="sidemenu">
+                <div className="sidemenu">
                     <ul>
-                        <li><Link to="/Mg_Member">-회원관리</Link></li>
-                        <li><Link to="/Mg_Orderlist">-주문 관리</Link></li>
-                        <li><Link to="/Mg_Product">-상품 관리</Link></li>
-                        <li><Link to="/Mg_Review" className="txtbold">-리뷰 관리</Link></li>
-                        <li><Link to="/Mg_Total">-통계</Link></li>
+                        <li><Link to="/Mg_Orderlist" ><FontAwesomeIcon icon={faScroll} />주문 관리</Link></li>
+                        <li><Link to="/Mg_Member"><FontAwesomeIcon icon={faUser} />회원 관리</Link></li>
+                        <li><Link to="/Mg_Product"><FontAwesomeIcon icon={faShirt} />상품 관리</Link></li>
+                        <li><Link to="/Mg_Inquiry"><FontAwesomeIcon icon={faComment} />고객 문의</Link></li>
+                        <li><Link to="/Mg_Review"><FontAwesomeIcon icon={faPenToSquare} />게시글 관리</Link></li>
+                        <li><Link to="/Mg_Review" className='suvsidemenu txtbold'><FontAwesomeIcon icon={faMinus} />리뷰</Link></li>
+                        <li><Link to="/Mg_Total"><FontAwesomeIcon icon={faChartSimple} />통계</Link></li>
                     </ul>
-                </div> {/* 사이드 바 끝 */}
+                </div>{/* 사이드 바 끝 */}
                 <div className="mgmain_detail">
                     <div className="mgmain_title">
                         <h2>리뷰 관리</h2>
@@ -102,7 +106,7 @@ function Mg_Review() {
                             </tbody>
                         </table>
                     </div>
-                    <div className="pr200">
+                    <div className="">
                         <div className="middle_main2">
                             <table className="search_table">
                                 <tbody>

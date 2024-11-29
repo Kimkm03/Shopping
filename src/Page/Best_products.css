@@ -5,10 +5,15 @@
     height: auto;
     padding: 0 40px 0 40px;
     margin: 80px auto;
+    
 
 
     /*범위 확인을 위한 임시 설정*/
 }
 .best_product_section > h2{
     text-align: center;
+}
+
+.allbasicpage{
+    min-height: 1000px;
 }

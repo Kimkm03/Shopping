@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import './Mg_Member.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser,faShirt,faScroll,faComment,faPenToSquare,faMinus,faChartSimple } from '@fortawesome/free-solid-svg-icons';
+
 
 function Mg_Member() {
     const [members, setMembers] = useState([]); // 여러 회원 데이터를 저장하기 위해 배열로 설정
@@ -57,19 +60,22 @@ function Mg_Member() {
         <div>
             <Header />
             <div className="mgmain_section">
-                <div className="pr50">
                     <div className="sidemenu">
                         <ul>
-                            <li><Link to="/Mg_Member" className="txtbold">-회원관리</Link></li>
-                            <li><Link to="/Mg_Orderlist">-주문 관리</Link></li>
-                            <li><Link to="/Mg_Product">-상품 관리</Link></li>
-                            <li><Link to="/Mg_Review">-리뷰 관리</Link></li>
-                            <li><Link to="/Mg_Total">-통계</Link></li>
+                            <li><Link to="/Mg_Orderlist" ><FontAwesomeIcon icon={faScroll} />주문 관리</Link></li>
+                            <li><Link to="/Mg_Member" className="txtbold"><FontAwesomeIcon icon={faUser} />회원 관리</Link></li>
+                            <li><Link to="/Mg_Product"><FontAwesomeIcon icon={faShirt} />상품 관리</Link></li>
+                            <li><Link to="/Mg_Inquiry"><FontAwesomeIcon icon={faComment} />고객 문의</Link></li>
+                            <li><Link to="/Mg_Review"><FontAwesomeIcon icon={faPenToSquare} />게시글 관리</Link></li>
+                            <li><Link to="/Mg_Review" className='suvsidemenu'><FontAwesomeIcon icon={faMinus} />리뷰</Link></li>
+                            <li><Link to="/Mg_Total"><FontAwesomeIcon icon={faChartSimple} />통계</Link></li>
                         </ul>
                     </div>{/* 사이드 바 끝 */}
                     <div className="mgmain_detail">
                         <div className="membersearch">
-                            <h2 className='membersearch_title'>회원검색</h2>
+                            <div className="mgmain_title">
+                                <h2>회원 관리</h2>
+                            </div>
                             <br></br>
                             <br/>
                             <select name="" id="" className='searchoption1'>
@@ -77,6 +83,7 @@ function Mg_Member() {
                                 <option value="">이름</option>
                             </select>
                             <input type="text" className='searchoption2' onClick={handleSearch}></input>
+                            
                         </div>
                         <div className="tablediv">
                             <p className="membernumder"> 총 <span id="memberresult" ref={memberResultRef}></span> 명</p> {/* 스크립트 구현함 */}
@@ -110,7 +117,7 @@ function Mg_Member() {
                             </table>
                         </div>
                     </div>
-                </div>
+                
             </div>
         </div>
     );

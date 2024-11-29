@@ -7,7 +7,9 @@ div{
     padding: 0;
 }
 
-
+.mdmainsiz{
+    width: 80%;
+}
 .total_review{
     width: 50%;
     border-collapse: collapse;

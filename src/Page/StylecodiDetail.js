@@ -77,9 +77,11 @@ function StylecodiDetail() {
                             </div>
                             <div className="img_area">
                                 <div className="leftimg">
-                                    {stylecodi && stylecodi.id && (
-                                        <img src={`http://localhost:8000/shopping/api/style/${stylecodi.id}/picture`} alt="Main Style" />
-                                    )}
+                                    <a>
+                                        {stylecodi && stylecodi.id && (
+                                            <img src={`http://localhost:8000/shopping/api/style/${stylecodi.id}/picture`} alt="Main Style" />
+                                        )}
+                                    </a>
                                 </div>
                                 <div className="rightimg">
                                     <div className="relation">

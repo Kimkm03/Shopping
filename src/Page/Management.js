@@ -79,33 +79,15 @@ function Management() {
                 <table class="management_section_table2">
                 <tr >
                         <td className="tableset">
-                            <Link to="/Mg_Orderlist" className="menuset">Order <br/> <p className="menuset_p">주문 관리</p></Link>
+                            <Link to="/Mg_Orderlist" className="menuset">Order-mg <br/> <p className="menuset_p">주문 관리</p></Link>
                             <br/>
-                            <Link to="/Mg_Orderlist" className="menuset2">고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.</Link>
+                            <Link to="/Mg_Orderlist" className="menuset2">고객님의 주문내역을 확인하실 수 있습니다.</Link>
                         </td>
                         <td className="tableset">
                             <Link to="/Mg_Member" className="menuset">Member-mg <br/> <p className="menuset_p">회원 관리</p></Link>
                             <br/>
                             <Link to="/Mg_Member" className="menuset2">고객님의 개인정보를 관리하는 공간입니다.</Link>
-                        </td>
-                        <td className="tableset">
-                            <Link to="/Mg_Review" className="menuset">Review <br/> <p className="menuset_p">리뷰 관리</p></Link>
-                            <br/>
-                            <Link to="/Mg_Review" className="menuset2">리뷰 목록을 보여드립니다.</Link>
-                        </td>
-                        <td className="tableset">
-                            <Link to="" className="menuset">Board <br/> <p className="menuset_p">게시물 관리</p></Link>
-                            <br/>
-                            <Link to="" className="menuset2">개시물 목록을 보여드립니다.</Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="tableset">
-                            <Link to="" className="menuset">Mileage <br/> <p className="menuset_p">적립금</p></Link>
-                            <br/>
-                            <Link to="" className="menuset2">적립금 목록을 보여드립니다.</Link>
-                        </td>
-                        <td className="tableset">
+                        </td><td className="tableset">
                             <Link to="/Mg_Product" className="menuset">Product-mg <br/> <p className="menuset_p">상품 관리</p></Link>
                             <br/>
                             <Link to="/Mg_Product" className="menuset2">상품 목록을 보여드립니다.</Link>
@@ -114,6 +96,13 @@ function Management() {
                             <Link to="/Mg_Inquiry" className="menuset">Inquiry-mg <br/> <p className="menuset_p">고객 문의</p></Link>
                             <br/>
                             <Link to="/Mg_Inquiry" className="menuset2">고객 문의사항 입니다.</Link>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="tableset">
+                            <Link to="/Mg_Review" className="menuset">Review <br/> <p className="menuset_p">리뷰 관리</p></Link>
+                            <br/>
+                            <Link to="/Mg_Review" className="menuset2">리뷰 목록을 보여드립니다.</Link>
                         </td>
                         <td className="tableset">
                             <Link to="/Mg_Total" className="menuset">Total-mg <br/> <p className="menuset_p">통계</p></Link>

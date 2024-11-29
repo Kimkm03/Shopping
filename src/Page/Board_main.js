@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 import Header from '../Components/Header'; // Header 컴포넌트를 import 합니다.
 import './Board_main.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTruckFast } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
+
 function Board_main(){
     const [memberData, setMemberData] = useState(null);
     const [boardData, setBoardData] = useState(null);
@@ -57,14 +64,18 @@ function Board_main(){
     return (
         <div>
             <Header />
+            <div className='sidebar'>
+            <ul className='sidebar_ul'>
+                <li ><Link to='/Delivery_check'><FontAwesomeIcon icon={faTruckFast} /> 배송조회</Link></li>
+                <li><Link to='/order'><FontAwesomeIcon icon={faCartShopping} /> 주문 조회</Link></li>
+                <li ><Link to='/Wishlist'><FontAwesomeIcon icon={faHeart} /> 관심 상품</Link></li>
+                <li><Link to='/Board_main'><FontAwesomeIcon icon={faPenToSquare} /> 게시글 관리</Link></li>
+                <li className='mg40_left sidebar_select'><Link to='/Board_main'><FontAwesomeIcon icon={faMinus} /> 문의</Link></li>
+                <li className='mg40_left'><Link to='/Board_review'><FontAwesomeIcon icon={faMinus} /> 리뷰</Link></li>
+                <li className='mg40_left'><Link to='/Board_style'><FontAwesomeIcon icon={faMinus} /> 스타일</Link></li>
+            </ul>
+            </div>{/* 사이드 바 끝 */}
             <div className='boardmain_section'>
-                <div class="board_sidemenu">
-                    <ul>
-                        <li><Link to="/Board_main" className="txtbold">-문의 내역</Link></li>
-                        <li><Link to="/Board_review">-리뷰 내역</Link></li>
-                        <li><Link to="/Board_style">-스타일 내역</Link></li>
-                    </ul>
-                </div> {/* 사이드 바 끝 */}
                 <div className="board_detail">
                     <div className="board_title">
                         <h2>문의 내역</h2>

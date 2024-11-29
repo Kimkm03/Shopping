@@ -1,48 +1,25 @@
+
+
+
+
 .boardmain_section{
-    width: 100%;
-    padding-top: 100px;
-}
-
-
-.board_sidemenu{
-    width: 10%;
-    height: 100%;
-    float: left;
-}
-.board_sidemenu > ul {
-    padding-top: 100px;
-    box-sizing: border-box;
-}
-.board_sidemenu > ul > li{
-    list-style: none;
-    height: 40px;
-    margin: 10px;
-    text-align: right;
-    line-height: 40px;
-    text-overflow: ellipsis;
-    box-sizing: border-box;
-    white-space: nowrap;
-}
-.board_sidemenu > ul > li:hover{
-    font-weight: bold;
-}
-.board_sidemenu > ul > li > a{
-    text-decoration: none;
-    color: black;
-    box-sizing: border-box;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: 1300px;
+    margin: 80px auto;
+    padding-top: 45px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
 }
 
 .board_detail{
     width: calc(80% - 50px);
     display: inline-block;
-    margin-left: 50px;
 }
+/*
 .board_title{
     margin: 100px 0;
 }
-
+*/
 .inquiry_btn{
     background-color: black;
     color: #ffffff;
