@@ -17,6 +17,7 @@ function Order() {
     const [memberData, setMemberData] = useState(null);
     const [orderData, setOrderData] = useState({});
     const [reviewStates, setReviewStates] = useState({});
+    const [keyword, setKeyword] = useState("");
     const memid = sessionStorage.getItem("memid"); // memId가 sessionStorage에 제대로 저장되어 있는지 확인
     const navigate = useNavigate();
 
@@ -46,39 +47,62 @@ function Order() {
                     const orderResponse = await axios.get(`http://localhost:8000/shopping/api/orderdetail/${memberData.memnum}`);
                     const fetchedOrderData = orderResponse.data;
                     setOrderData(fetchedOrderData);
-    
+
                     // 각 주문의 productCode와 memnum으로 리뷰 상태를 동시에 조회
                     if (Array.isArray(fetchedOrderData)) {
                         const reviewStatePromises = fetchedOrderData.map(order =>
                             // productCode와 memnum을 함께 전달
                             axios.get(`http://localhost:8000/shopping/api/review/product/${order.productCode}/memnum/${memberData.memnum}`)
                         );
-    
+
                         // 모든 리뷰 상태 요청이 완료될 때까지 대기
                         const reviewResponses = await Promise.all(reviewStatePromises);
-    
+
                         // productCode를 키로 하여 리뷰 상태 객체 생성
                         const states = reviewResponses.reduce((acc, response, index) => {
                             const productCode = fetchedOrderData[index].productCode;
                             acc[productCode] = response.data.state; // 상태는 boolean 값
+                            console.log(response.data);
                             return acc;
                         }, {});
-    
+
                         // 상태 설정
                         setReviewStates(states);
                     } else {
                         console.error("fetchedOrderData가 배열이 아닙니다.", fetchedOrderData);
                     }
-    
+
                 } catch (error) {
                     console.error('Failed to fetch order or review data:', error);
                     alert('서버에서 데이터를 받아올 수 없습니다. 나중에 다시 시도해주세요.');
                 }
             }
         };
-    
+
         fetchOrderAndReviewStates();
-    }, [memberData]);    
+    }, [memberData]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // 기본 폼 제출 동작 방지
+        if (!keyword.trim()) {
+            alert("검색어를 입력해주세요!");
+            return;
+        }
+
+        try {
+            const response = await axios.get(`http://localhost:8000/shopping/api/orders/search`, {
+                params: { keyword },
+            });
+            setOrderData(response.data);
+            // 검색 결과를 화면에 표시하거나 다른 작업 수행
+        } catch (error) {
+            console.error("검색 요청 중 오류 발생:", error);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        setKeyword(e.target.value);
+    };
 
     const formatDate = (isoDateString) => {
         const date = new Date(isoDateString);
@@ -117,20 +141,20 @@ function Order() {
 
     const handleReviewClick = (productCode) => {
         // orderData에서 productCode가 일치하는 제품을 찾음
-    const product = orderData.find(item => item.productCode === productCode);
+        const product = orderData.find(item => item.productCode === productCode);
 
-    if (product) {
-        navigate('/write_review', {
-            state: {
-                productCode,
-                productColor: product.productColor,
-                productSize: product.productSize
-            }
-            
-        });
-    } else {
-        console.error("해당 제품 코드를 찾을 수 없습니다.");
-    }
+        if (product) {
+            navigate('/write_review', {
+                state: {
+                    productCode,
+                    productColor: product.productColor,
+                    productSize: product.productSize
+                }
+
+            });
+        } else {
+            console.error("해당 제품 코드를 찾을 수 없습니다.");
+        }
     };
 
     return (
@@ -151,11 +175,20 @@ function Order() {
                 <h2 className='orderh2'>주문조회</h2>
                 {/* <p style={{ fontweight: 'bold' }}>주문내역 조회</p> */}
                 <div className='od_his_search'>
-                    <form className='od_his_searchform'>
-                        <input type='text'  className='od_his_searchip'/>
+                    <form className='od_his_searchform' onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            className="od_his_searchip"
+                            value={keyword}
+                            onChange={handleInputChange}
+                            placeholder="검색어를 입력하세요"
+                        />
                         <button type="submit" className="btn_search">
-                  <img src="https://i.postimg.cc/cH85Hwp5/search-btn2.png" alt="Search" />
-                </button>
+                            <img
+                                src="https://i.postimg.cc/cH85Hwp5/search-btn2.png"
+                                alt="Search"
+                            />
+                        </button>
                     </form>
                 </div>
                 <table className="order_history">

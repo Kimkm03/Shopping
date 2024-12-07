@@ -31,7 +31,23 @@
     gap: 20px;
     margin-bottom: 20px;
     width: 100%;
+    justify-content: space-between;
 }
+
+.styleheartcheck{ /*11-30추가된 코드*/
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    color: #444444;
+    margin-right: 50px;
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+}
+.styleheartcheckicon{/*11-30추가된 코드*/
+    font-size: '24px';
+}
+
 .profile_text{
     line-height: 1;
     font-size: 14px;
@@ -150,3 +166,4 @@ img{
     margin-top: 15px;
     font-size: 13px;
 }
+

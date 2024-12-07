@@ -82,7 +82,7 @@ function App() {
           <Route path="/Write_inquiry" element={<Write_inquiry />} />
           <Route path="/Write_inquiry_detail/:boardId" element={<Write_inquiry_detail />} />
           <Route path="/Write_inquiry_reply/:boardId" element={<Write_inquiry_reply />} />
-          <Route path='/Wishlist_stylelist' element={<Wishlist_stylelist />} />
+          <Route path="/Wishlist_stylelist/" element={<Wishlist_stylelist />} />
         </Routes>
       </div>
     </Router>

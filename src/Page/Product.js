@@ -130,7 +130,7 @@ function Product() {
         try {
             const response = await axios.post(`http://localhost:8000/shopping/api/cart/${memberData.memnum}/${productId}/add`, cartItem);
             if (response.data.status === 200) {
-                window.location.href = '/Payment';
+                window.location.href = '/Basket';
             }
         } catch (error) {
             console.error('장바구니 추가 중 오류 발생:', error);
@@ -167,6 +167,27 @@ function Product() {
         }
     };
 
+    const handleAddToWish = async () => {
+        if(memberData){
+            const wishlist = {
+                productCode: productId,
+                memberCode: memberData.memnum
+            }
+
+            try {
+                const response = await axios.post('http://localhost:8000/shopping/api/wishlist/save', wishlist)
+                if (response.data.status === 200){
+                    alert('관심상품에 상품이 추가되었습니다.')
+                    window.location.href = '/Wishlist';
+                } else {
+                    alert('관심상품에 상품 추가에 실패했습니다.');
+                }
+            } catch (error) {
+                console.error('관심 상품 추가 중 오류 발생:', error)
+            }
+        }
+    };
+
     // 수량 증가 함수
     const handleIncrease = () => {
         setQuantity(prevQuantity => prevQuantity + 1);
@@ -187,7 +208,7 @@ function Product() {
 
     const renderReviews = review && review.length > 0 && review.map((rev, index) => {
         const currentUserName = userNames[index];  // 인덱스를 사용하여 유저 이름을 가져옴
-    
+
         return (
             <tr key={index} className="product_review_table_td_detail">
                 <td>
@@ -209,7 +230,7 @@ function Product() {
             </tr>
         );
     });
-    
+
 
     return (
         <div>
@@ -306,7 +327,7 @@ function Product() {
                                             <div className="btn_list">
                                                 <button className="buy_btn" onClick={handleByNow}><span>BUY IT NOW</span></button>
                                                 <button className="cart_btn" onClick={handleAddToCart}>CART</button>
-                                                <button className="wish_btn">WISH LIST</button>
+                                                <button className="wish_btn" onClick={handleAddToWish}>WISH LIST</button>
                                             </div>
                                         </div>
                                     </>
