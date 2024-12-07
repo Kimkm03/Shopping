@@ -85,7 +85,7 @@ function Mg_Orderlist() {
                         <li><Link to="/Mg_Inquiry"><FontAwesomeIcon icon={faComment} />고객 문의</Link></li>
                         <li><Link to="/Mg_Review"><FontAwesomeIcon icon={faPenToSquare} />게시글 관리</Link></li>
                         <li><Link to="/Mg_Review" className='suvsidemenu'><FontAwesomeIcon icon={faMinus} />리뷰</Link></li>
-                        <li><Link to="/Mg_Total"><FontAwesomeIcon icon={faChartSimple} />통계</Link></li>
+                        {/* <li><Link to="/Mg_Total"><FontAwesomeIcon icon={faChartSimple} />통계</Link></li> */}
                     </ul>
                 </div>{/* 사이드 바 끝 */}
                 <div className="mgmain_detail">

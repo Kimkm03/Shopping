@@ -104,11 +104,11 @@ function Management() {
                             <br/>
                             <Link to="/Mg_Review" className="menuset2">리뷰 목록을 보여드립니다.</Link>
                         </td>
-                        <td className="tableset">
+                        {/* <td className="tableset">
                             <Link to="/Mg_Total" className="menuset">Total-mg <br/> <p className="menuset_p">통계</p></Link>
                             <br/>
                             <Link to="/Mg_Total" className="menuset2">통계 자료입니다.</Link>
-                        </td>
+                        </td> */}
                     </tr>
                 </table>
             </section>

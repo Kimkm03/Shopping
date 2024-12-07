@@ -16,6 +16,7 @@ function Wishlist() {
     const [memberData, setMemberData] = useState(null);
     const [wishListData, SetWishListData] = useState(null);
     const [productData, SetProductData] = useState(null);
+    const [keyword, setKeyword] = useState("");
     const memid = sessionStorage.getItem("memid");
 
     useEffect(() => {
@@ -84,22 +85,49 @@ function Wishlist() {
         try {
             // API 호출: 서버에 삭제 요청
             await axios.post(`http://localhost:8000/shopping/api/wishlist/delete/${id}`);
-    
+
             // 삭제 성공 시 상태 업데이트
             const updatedWishlist = productData.filter(
                 (product) => !wishListData.some((wish) => wish.id === id && wish.pnum === product.pnum)
             );
             SetProductData(updatedWishlist);
-    
+
             alert('찜 목록에서 삭제되었습니다.');
-    
+
             // 페이지를 새로고침
             window.location.href = '/Wishlist';
         } catch (error) {
             console.error('Failed to remove product from wishlist:', error);
             alert('찜 목록에서 삭제하는 중 오류가 발생했습니다. 다시 시도해주세요.');
         }
-    };    
+    };
+
+    const handleInputChange = (e) => {
+        setKeyword(e.target.value);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // 기본 폼 제출 동작 방지
+        if (!keyword.trim()) {
+            alert("검색어를 입력해주세요!");
+            return;
+        }
+
+        if(memberData){
+            const memberCode = memberData.memnum; // 실제 로그인된 사용자 코드로 교체해야 함
+        
+            try {
+                const response = await axios.get(`http://localhost:8000/shopping/api/wishlist/search`, {
+                    params: { keyword, memberCode }, // keyword와 memberCode를 함께 전달
+                });
+                SetWishListData(response.data); // 검색 결과를 화면에 표시하거나 다른 작업 수행
+            } catch (error) {
+                console.error("검색 요청 중 오류 발생:", error);
+            }
+        }
+    };
+    
+
 
     return (
         <div>
@@ -121,10 +149,15 @@ function Wishlist() {
 
                 <h2 className='wishlisttitle'>관심 상품 목록</h2>
                 <div>
-                    <form className='wishlist_searchform'>
-                        <input type='text' className='wishlist_searchip' />
+                    <form className='wishlist_searchform' onSubmit={handleSubmit}>
+                        <input
+                            type='text'
+                            className='wishlist_searchip'
+                            value={keyword}
+                            onChange={handleInputChange}
+                            placeholder="검색어를 입력하세요" />
 
-                        <button type="submit" className="btn_search">
+                        <button type="submit" className="btn_search" >
                             <img src="https://i.postimg.cc/cH85Hwp5/search-btn2.png" alt="Search" />
                         </button>
                     </form>
@@ -151,7 +184,7 @@ function Wishlist() {
                                         </Link>
                                         <button
                                             className="wishlist_cancle"
-                                        onClick={() => handleRemoveFromWishlist(wishListData[index].id)}
+                                            onClick={() => handleRemoveFromWishlist(wishListData[index].id)}
                                         >
                                             삭제
                                         </button>
