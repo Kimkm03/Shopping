@@ -98,8 +98,8 @@ function Board_style() {
                                     <tr key={index} className="board_styletable_tb">
                                         <td>{formatDate(data.createDate)}</td>
                                         <td>
-                                            <Link to="/StylecodiRegister">링크란</Link>
-                                            <Link to="/StylecodiRegister">링크란</Link>
+                                        <Link to={`/stylecodidetail/${data.id}`}>바로가기</Link>
+                                            {/* <Link to="/StylecodiRegister">링크란</Link> */}
                                         </td>
                                         <td>
                                             <button className="board_delbtn">삭제하기</button>

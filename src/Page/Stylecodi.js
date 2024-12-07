@@ -179,7 +179,7 @@ function Stylecodi() {
                                                 <span className="list_top_label">{index + 1}</span>
                                                 <div className="list_img">
                                                     <Link to={`/stylecodidetail/${style.id}`}>
-                                                        <img src={`${process.env.PUBLIC_URL}/style${index + 1}.jpg`} alt={style.name} />
+                                                        <img src={`http://localhost:8000/shopping/api/style/${style.id}/picture`} alt={style.name} />
                                                     </Link>
                                                 </div>
                                             </div>
