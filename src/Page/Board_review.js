@@ -103,7 +103,7 @@ function Board_review() {
                     <Link to="/order" className='inquiry_btn'>+리뷰 작성</Link>
                     <br /><br />
                     <div className="">
-                        <div className="rev_searchtop">
+                        {/* <div className="rev_searchtop">
                             <table className="search_table">
                                 <tbody>
                                     <tr>
@@ -123,7 +123,7 @@ function Board_review() {
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> */}
                         <table className="reviewmg_table">
                             <thead>
                                 <tr>
@@ -136,7 +136,7 @@ function Board_review() {
                                     {/* <th className="wid100">회원명</th> */}
                                     <th className="wid100">등록일</th>
                                     <th className="wid50">이미지</th>
-                                    <th className="wid50">기타</th>
+                                    {/* <th className="wid50">기타</th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -162,7 +162,7 @@ function Board_review() {
                                             {/* <td>{review.memberName}</td> */}
                                             <td>{formatDate(review.createDate)}</td>
                                             <td>{review.picture ? "유" : "무"}</td>
-                                            <td><button className="board_delbtn">삭제</button></td>
+                                            {/* <td><button className="board_delbtn">삭제</button></td> */}
                                         </tr>
                                     ))
                                 ) : (

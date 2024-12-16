@@ -198,7 +198,7 @@ function StylecodiRegister() {
                                 </td>
                             </tr>
                             <tr>
-                                <td><button className='codipreview_btn'> 미리보기 </button></td>
+                                {/* <td><button className='codipreview_btn'> 미리보기 </button></td> */}
                                 <td><button className='codiupload_btn' onClick={handleSubmit}> 등록하기 </button></td>
                             </tr>
                         </tbody>

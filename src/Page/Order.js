@@ -17,6 +17,7 @@ function Order() {
     const [memberData, setMemberData] = useState(null);
     const [orderData, setOrderData] = useState({});
     const [reviewStates, setReviewStates] = useState({});
+    const [code, setCode] = useState("");
     const [keyword, setKeyword] = useState("");
     const memid = sessionStorage.getItem("memid"); // memId가 sessionStorage에 제대로 저장되어 있는지 확인
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ function Order() {
             try {
                 const response = await axios.get(`http://localhost:8000/shopping/api/mypage/${memid}`);
                 setMemberData(response.data);
+                setCode(response.data.memnum);
             } catch (error) {
                 console.error('Failed to fetch member data:', error);
                 // 네트워크 오류 등으로 요청이 실패할 경우 적절히 처리
@@ -62,7 +64,6 @@ function Order() {
                         const states = reviewResponses.reduce((acc, response, index) => {
                             const productCode = fetchedOrderData[index].productCode;
                             acc[productCode] = response.data.state; // 상태는 boolean 값
-                            console.log(response.data);
                             return acc;
                         }, {});
 
@@ -90,11 +91,13 @@ function Order() {
         }
 
         try {
-            const response = await axios.get(`http://localhost:8000/shopping/api/orders/search`, {
-                params: { keyword },
-            });
-            setOrderData(response.data);
-            // 검색 결과를 화면에 표시하거나 다른 작업 수행
+            if(keyword && code){
+                const response = await axios.get(`http://localhost:8000/shopping/api/orders/search`, {
+                    params: { keyword, code },
+                });
+                setOrderData(response.data);
+                // 검색 결과를 화면에 표시하거나 다른 작업 수행
+            }
         } catch (error) {
             console.error("검색 요청 중 오류 발생:", error);
         }

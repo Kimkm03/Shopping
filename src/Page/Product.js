@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import './Product.css';
+import { height } from '@fortawesome/free-regular-svg-icons/faAddressBook';
 
 function Product() {
     const { productId } = useParams(); // URL에서 productId를 추출합니다.
@@ -218,7 +219,7 @@ function Product() {
                         포장 : <span>{rev.takeoutreply === 'careful' ? '꼼꼼해요' : rev.takeoutreply === 'bad' ? '아쉬워요' : rev.takeoutreply}</span>
                     </p>
                     <p className="rev_usertxt">{rev.content}</p><br />
-                    <img src={`http://localhost:8000/shopping/api/review/${rev.id}/picture`} alt={'리뷰 이미지'} />
+                    <img src={`http://localhost:8000/shopping/api/review/${rev.id}/picture`} alt={'리뷰 이미지'} style={{ height: '15em' }} />
                 </td>
                 <td className="product_review_table_buyoption">
                     <div>
@@ -343,11 +344,11 @@ function Product() {
                     <div className="product_review">
                         <p className='prd_revtit'> review </p>
                         <table className="product_review_table">
-                            <thead className="product_review_table_thead">
+                            {/* <thead className="product_review_table_thead">
                                 <tr className="product_review_table_tr">
                                     <th><button>최신순</button> <button>별점순</button></th>
                                 </tr>
-                            </thead>
+                            </thead> */}
                             <tbody>
                                 {renderReviews}
                                 {/* {Array.isArray(review) && review.length > 0 ? (

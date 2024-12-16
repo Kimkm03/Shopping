@@ -89,7 +89,7 @@ function Board_style() {
                                 <th style={{ width: "10%" }}>일시</th>
                                 {/* <th style={{width: "20%"}}>아이디</th> */}
                                 <th style={{ width: "50%" }}>스타일코디링크</th>
-                                <th style={{ width: "10%" }}>-</th>
+                                {/* <th style={{ width: "10%" }}>-</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -101,9 +101,9 @@ function Board_style() {
                                         <Link to={`/stylecodidetail/${data.id}`}>바로가기</Link>
                                             {/* <Link to="/StylecodiRegister">링크란</Link> */}
                                         </td>
-                                        <td>
+                                        {/* <td>
                                             <button className="board_delbtn">삭제하기</button>
-                                        </td>
+                                        </td> */}
                                     </tr>
                                 ))
                             ) : (

@@ -89,7 +89,7 @@ function Mg_Review() {
                         <h2>리뷰 관리</h2>
                     </div>
                     <div>
-                        <table className="total_review">
+                        {/* <table className="total_review">
                             <tbody>
                                 <tr>
                                     <td>누적 리뷰</td>
@@ -104,10 +104,10 @@ function Mg_Review() {
                                     <td><span>1</span>건</td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> */}
                     </div>
                     <div className="">
-                        <div className="middle_main2">
+                        {/* <div className="middle_main2">
                             <table className="search_table">
                                 <tbody>
                                     <tr>
@@ -127,7 +127,7 @@ function Mg_Review() {
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> */}
                         <table className="reviewmg_table">
                             <thead>
                                 <tr>
@@ -140,7 +140,7 @@ function Mg_Review() {
                                     <th className="wid100">회원명</th>
                                     <th className="wid100">등록일</th>
                                     <th className="wid50">이미지</th>
-                                    <th className="wid50">기타</th>
+                                    {/* <th className="wid50">기타</th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -166,7 +166,7 @@ function Mg_Review() {
                                             <td>{memberData[index].memname}</td>
                                             <td>{formatDate(review.createDate)}</td>
                                             <td>{review.picture ? "유" : "무"}</td>
-                                            <td><button className="board_delbtn">삭제</button></td>
+                                            {/* <td><button className="board_delbtn">삭제</button></td> */}
                                         </tr>
                                     ))
                                 ) : (
